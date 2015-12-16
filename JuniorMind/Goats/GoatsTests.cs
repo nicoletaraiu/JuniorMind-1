@@ -20,6 +20,13 @@ namespace Goats
             Assert.AreEqual(8, resultedKilos);
         }
 
+        [TestMethod]
+        public void AnotherScenario()
+        {
+            int resultedKilos = CalculateHayAmount(13, 24, 3, 5, 1);
+            Assert.AreEqual(3, resultedKilos);
+        }
+
         int CalculateHayAmount(int InitialGoats, int initialKilos, int initialDays, int newGoats, int newDays)
         {
             return (newGoats * initialKilos * newDays) / (InitialGoats * initialDays);
