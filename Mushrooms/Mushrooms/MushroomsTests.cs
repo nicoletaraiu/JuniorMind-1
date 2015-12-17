@@ -4,11 +4,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Mushrooms
 {
     [TestClass]
-    public class UnitTest1
+    public class MushroomsTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void RedMushrooms()
         {
+            int redMushrooms = CalculateRedMushrooms(99, 2);
+            Assert.AreEqual(66, redMushrooms);
+        }
+        int CalculateRedMushrooms(int total, int ratio)
+        {
+
+            return (total / (ratio + 1)) * ratio;
         }
     }
 }
