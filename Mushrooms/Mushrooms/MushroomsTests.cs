@@ -12,6 +12,14 @@ namespace Mushrooms
             int redMushrooms = CalculateRedMushrooms(99, 2);
             Assert.AreEqual(66, redMushrooms);
         }
+
+        [TestMethod]
+        public void MoreRedMushrooms()
+        {
+            int redMushrooms = CalculateRedMushrooms(453, 7);
+            Assert.AreEqual(392, redMushrooms);
+        }
+
         int CalculateRedMushrooms(int total, int ratio)
         {
             int white = total / (ratio + 1);
