@@ -14,8 +14,8 @@ namespace Mushrooms
         }
         int CalculateRedMushrooms(int total, int ratio)
         {
-
-            return (total / (ratio + 1)) * ratio;
+            int white = total / (ratio + 1);
+            return white * ratio;
         }
     }
 }
