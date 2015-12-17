@@ -13,10 +13,16 @@ namespace PublicSquare
             Assert.AreEqual(4, cubicalStone);
         }
         [TestMethod]
-        public void NotPerfectSquareTest()
+        public void NotPerfectTest()
         {
             int cubicalStone = CalculateCubicalStoneQuantity(5, 5, 2, 2);
             Assert.AreEqual(9, cubicalStone);
+        }
+        [TestMethod]
+        public void NotPerfectSquareTest()
+        {
+            int cubicalStone = CalculateCubicalStoneQuantity(9, 4, 3, 3);
+            Assert.AreEqual(6, cubicalStone);
         }
 
       
