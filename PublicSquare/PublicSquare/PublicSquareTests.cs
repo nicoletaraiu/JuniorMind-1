@@ -9,11 +9,26 @@ namespace PublicSquare
         [TestMethod]
         public void PerfectSquareTest()
         {
-            float cubicalStone = CalculateCubicalStoneQuantity(4, 4, 2, 2);
+            int cubicalStone = CalculateCubicalStoneQuantity(4, 4, 2, 2);
             Assert.AreEqual(4, cubicalStone);
         }
-        float CalculateCubicalStoneQuantity(int publicSquareLength, int publicSquareWidth, int stoneLength, int stoneWidth)
+        [TestMethod]
+        public void NotPerfectSquareTest()
         {
+            int cubicalStone = CalculateCubicalStoneQuantity(5, 5, 2, 2);
+            Assert.AreEqual(9, cubicalStone);
+        }
+
+      
+            int CalculateCubicalStoneQuantity(int publicSquareLength, int publicSquareWidth, int stoneLength, int stoneWidth)
+        {
+            if ((publicSquareLength % stoneLength) != 0) {
+                publicSquareLength = publicSquareLength + stoneLength;
+            }
+            if ((publicSquareWidth % stoneWidth) != 0)
+            {
+                publicSquareWidth = publicSquareWidth + stoneWidth;
+            }
             return (publicSquareLength / stoneLength) * (publicSquareWidth / stoneWidth);
         }
     }
