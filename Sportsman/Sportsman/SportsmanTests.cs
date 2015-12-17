@@ -18,6 +18,12 @@ namespace Sportsman
             int repetitionsNumber = CalculateRepetitionsNumber(6);
             Assert.AreEqual(36, repetitionsNumber);
         }
+        [TestMethod]
+        public void FourHundredRepetitions()
+        {
+            int repetitionsNumber = CalculateRepetitionsNumber(20);
+            Assert.AreEqual(400, repetitionsNumber);
+        }
         int CalculateRepetitionsNumber(int top)
         {
             return top * top;
