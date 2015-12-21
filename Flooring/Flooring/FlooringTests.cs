@@ -16,11 +16,11 @@ namespace Flooring
         {
             int roomArea = roomLength * roomWidth;
             int pieceArea = pieceLength * pieceWidth;
-            int principalNumberOfNeededPieces = roomArea / pieceArea;
-            float loss = (15 / 100) * principalNumberOfNeededPieces;
-            float finalNumberOfNeededPieces = principalNumberOfNeededPieces + loss;
-            Math.Ceiling(finalNumberOfNeededPieces);
-            return (finalNumberOfNeededPieces);
+            int smallerNumberOfNeededPieces = roomArea / pieceArea;
+            float loss = ((float)(0.15)) * smallerNumberOfNeededPieces;
+            float notRoundedNumberOfNeededPieces = (float)(smallerNumberOfNeededPieces + loss);
+            double finalNumberOfNeededPieces = Math.Ceiling(notRoundedNumberOfNeededPieces);
+            return (float)finalNumberOfNeededPieces;
         }
     }
 }
