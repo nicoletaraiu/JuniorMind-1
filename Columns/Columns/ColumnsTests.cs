@@ -12,10 +12,17 @@ namespace Columns
         float area = CalculateArea(1, 1, 1, 1, 1, 1);
         Assert.AreEqual(0, area);
         }
+        [TestMethod]
+        public void SecondArea()
+        {
+            float area = CalculateArea(2, 2, 3, 3, 1, 2);
+            Assert.AreEqual(0.5, area);
+        }
          float CalculateArea(float Xa, float Ya, float Xb, float Yb, float Xc, float Yc)
         {
             float determinant = Xa * Yb + Xb * Yc + Ya * Xc - Yb * Xc - Yc * Xa - Ya * Xb;
-            return determinant;
-        }
+            float area = 0.5f * determinant;
+            return area;
+        } 
     }
 }
