@@ -18,6 +18,12 @@ namespace Flooring
             float neededPieces = CalculateFloorPieces(2, 1, 1, 1);
             Assert.AreEqual(3, neededPieces);
         }
+        [TestMethod]
+        public void FiveByThreeRoom()
+        {
+            float neededPieces = CalculateFloorPieces(5, 3, 2, 1);
+            Assert.AreEqual(9, neededPieces);
+        }
         float CalculateFloorPieces(int roomLength, int roomWidth, int pieceLength, int pieceWidth)
         {
             int roomArea = roomLength * roomWidth;
