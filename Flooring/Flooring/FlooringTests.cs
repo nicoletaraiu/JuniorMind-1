@@ -12,6 +12,12 @@ namespace Flooring
             float neededPieces = CalculateFloorPieces(1, 1, 1, 1);
             Assert.AreEqual(2, neededPieces);
         }
+        [TestMethod]
+        public void TwoByOneRoom()
+        {
+            float neededPieces = CalculateFloorPieces(2, 1, 1, 1);
+            Assert.AreEqual(3, neededPieces);
+        }
         float CalculateFloorPieces(int roomLength, int roomWidth, int pieceLength, int pieceWidth)
         {
             int roomArea = roomLength * roomWidth;
