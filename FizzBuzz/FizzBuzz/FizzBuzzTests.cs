@@ -4,11 +4,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FizzBuzz
 {
     [TestClass]
-    public class UnitTest1
+    public class FizzBuzzTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Fizz()
         {
+            int result = VerifyFizz(3);
+            Assert.AreEqual(0, result);
         }
+        int VerifyFizz(int n)
+        {
+            return (n%3);
+        }
+
+        
     }
 }
