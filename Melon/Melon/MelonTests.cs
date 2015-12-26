@@ -16,6 +16,11 @@ namespace Melon
         {
             Assert.AreEqual("NU", VerifyDivisibility(9));
         }
+        [TestMethod]
+        public void FifteenKilosMelon()
+        {
+            Assert.AreEqual("NU", VerifyDivisibility(15));
+        }
         string VerifyDivisibility(int n)
         {
             string output = "";
