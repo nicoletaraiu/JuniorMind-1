@@ -7,16 +7,18 @@ namespace FizzBuzz
     public class FizzBuzzTests
     {
         [TestMethod]
-        public void Fizz()
+        public void FizzBuzz()
         {
-            int result = VerifyFizz(3);
-            Assert.AreEqual(0, result);
+            Assert.AreEqual("Fizz", VerifyFizz(3));
         }
-        int VerifyFizz(int n)
+        string VerifyFizz(int n)
         {
-            return (n%3);
+            string output = "";
+            if (n % 3 == 0) output = "Fizz";
+            return output;
+            ///else if (n % 5 == 0) output = "Buzz";
+            
         }
-
-        
+        }
     }
-}
+
