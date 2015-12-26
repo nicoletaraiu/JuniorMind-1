@@ -21,10 +21,15 @@ namespace Melon
         {
             Assert.AreEqual("NU", VerifyDivisibility(15));
         }
-        string VerifyDivisibility(int n)
+        [TestMethod]
+        public void SmallerThanFourWeight()
+        {
+            Assert.AreEqual("NU", VerifyDivisibility(3));
+        }
+        string VerifyDivisibility(int weight)
         {
             string output = "";
-            if ((n >= 4) && (n % 2 == 0)) output = "DA";
+            if ((weight >= 4) && (weight % 2 == 0)) output = "DA";
             else output = "NU"; 
             return output;
         }
