@@ -18,6 +18,12 @@ namespace Field
             float initialArea = CalculateInitialArea(3, 40);
             Assert.AreEqual(5, initialArea);
         }
+        [TestMethod]
+        public void InitialAreaForTheGivenScenario()
+        {
+            float initialArea = CalculateInitialArea(230, 770000);
+            Assert.AreEqual(770, initialArea);
+        }
         float CalculateInitialArea (int newWidth, int finalArea)
         {
             
