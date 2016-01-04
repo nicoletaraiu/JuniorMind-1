@@ -12,11 +12,16 @@ namespace Field
             float initialArea = CalculateInitialArea(1, 6);
             Assert.AreEqual(2, initialArea);
         }
+        [TestMethod]
+        public void InitialAreaForASecondScenario()
+        {
+            float initialArea = CalculateInitialArea(3, 40);
+            Assert.AreEqual(5, initialArea);
+        }
         float CalculateInitialArea (int newWidth, int finalArea)
         {
             
             double solution1 = 0;
-            /// finalArea = initialWidth * initialWidth + newWidth * initialWidth;
             int discriminant = newWidth * newWidth + 4 * finalArea;
             if (discriminant > 0)
             {
