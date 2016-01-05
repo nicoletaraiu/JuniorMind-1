@@ -7,17 +7,23 @@ namespace Taxi
     public class TaxiTests
     {
         [TestMethod]
-        public void FirstSimpleTest()
+        public void FirstDayTest()
         {
             int cost = CalculateCost(8, 15);
             Assert.AreEqual(75, cost);
         }
         [TestMethod]
-        public void SecondSimpleTest()
+        public void SecondDayTest()
         {
             int cost = CalculateCost(10, 35);
             Assert.AreEqual(280, cost);
         }
+       [TestMethod]
+        public void ImpossibleScenarioTest()
+        {
+            int cost = CalculateCost(25, 10);
+            Assert.AreEqual(0, cost);
+        }  
         [TestMethod]
         public void FirstNightTest()
         {
@@ -44,12 +50,14 @@ namespace Taxi
                 if ((distance >= 1) && (distance <= 20)) cost = 5;
                 else if ((distance >= 21) && (distance <= 60)) cost = 8;
                 else if ((distance >= 60)) cost = 6;
-            } 
-            else {
+            }
+            else if (((daytime < 8) || ((daytime) >= 22) && (daytime <= 24)))
+            {
                 if ((distance >= 1) && (distance <= 20)) cost = 7;
                 else if ((distance >= 21) && (distance <= 60)) cost = 10;
                 else if ((distance >= 60)) cost = 8;
-             }
+            }
+            else return 0;
             return cost * distance;
         }
     }
