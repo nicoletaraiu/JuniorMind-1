@@ -50,19 +50,27 @@ namespace Taxi
             else b = false;
             return b;
         }
+        bool IsInDistanceRange (int distance, int smallestLimit, int highestLimit)
+        {
+            bool b = true;
+            if ((distance >= smallestLimit) && (distance <= highestLimit))
+                b = true;
+            else b = false;
+            return b;
+        }
         int CalculateCost(int daytime, int distance)
         {
             int cost = 0;
             if ((IsInRange(daytime, 8, 21) == true)) 
                 {
-                    if ((distance >= 1) && (distance <= 20)) cost = 5;
-                    else if ((distance >= 21) && (distance <= 60)) cost = 8;
+                    if ((IsInDistanceRange (distance, 1, 20) == true)) cost = 5;
+                    else if ((IsInDistanceRange (distance, 21, 60))) cost = 8;
                     else if ((distance >= 60)) cost = 6;
                 } 
             else if ((IsInRange (daytime, 1, 7) == true) || ((IsInRange (daytime, 21, 24) == true)))
             {
-                if ((distance >= 1) && (distance <= 20)) cost = 7;
-                else if ((distance >= 21) && (distance <= 60)) cost = 10;
+                if ((IsInDistanceRange (distance, 1, 20))) cost = 7;
+                else if ((IsInDistanceRange (distance, 21, 60))) cost = 10;
                 else if ((distance >= 60)) cost = 8;
             }
             else return 0;
