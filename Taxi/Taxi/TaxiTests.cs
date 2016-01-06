@@ -44,19 +44,11 @@ namespace Taxi
         }
         bool IsInRange (int daytime, int smallestLimit, int highestLimit)
         {
-            bool b = true;
-            if ((daytime >= smallestLimit) && (daytime <= highestLimit))
-                b = true;
-            else b = false;
-            return b;
+        return ((daytime >= smallestLimit) && (daytime <= highestLimit));
         }
         bool IsInDistanceRange (int distance, int smallestLimit, int highestLimit)
         {
-            bool b = true;
-            if ((distance >= smallestLimit) && (distance <= highestLimit))
-                b = true;
-            else b = false;
-            return IsInDistanceRange (distance, smallestLimit, highestLimit);
+            return ((distance >= smallestLimit) && (distance <= highestLimit));
         }
         int CalculateCost(int daytime, int distance)
         {
