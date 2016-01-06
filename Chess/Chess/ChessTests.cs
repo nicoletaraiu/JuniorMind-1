@@ -18,6 +18,12 @@ namespace Chess
             int squaresNumber = CalculateSquaresNumber(4);
             Assert.AreEqual(30, squaresNumber);
         }
+        [TestMethod]
+        public void EightByEightTable()
+        {
+            int squaresNumber = CalculateSquaresNumber(8);
+            Assert.AreEqual(204, squaresNumber);
+        }
         int CalculateSquaresNumber (int side)
         {
             int squaresNumber = 0;
