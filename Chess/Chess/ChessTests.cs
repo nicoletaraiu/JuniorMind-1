@@ -20,7 +20,7 @@ namespace Chess
                 squaresNumber = squaresNumber + side * side;
                 side = side - 1;
             }
-            return 0;
+            return squaresNumber;
         }
     }
 }
