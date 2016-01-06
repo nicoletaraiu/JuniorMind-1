@@ -36,12 +36,13 @@ namespace RentalCosts
             float totalCost = CalculatePenalty(100, 45);
             Assert.AreEqual(0, totalCost);
         }
-       bool IsInRange (int additionalDays, 1, 10)
+       bool IsInRange (int additionalDays, int smallestLimit, int highestLimit)
         {
             bool b = false;
-            if ((additionalDays >= 1) && (additionalDays <= 10))
+            if ((additionalDays >= smallestLimit) && (additionalDays <= highestLimit))
                 b = true;
             else b = false;
+            return b;
         }
 
 
@@ -51,11 +52,11 @@ namespace RentalCosts
             float mediumPenalty = 0.05f * monthlyCost * additionalDays;
             float highPenalty = 0.1f * monthlyCost * additionalDays;
             float penaltyPercentage = 0;
-            if ((additionalDays >= 1) && (additionalDays <= 10))
-                penaltyPercentage = 0.02f;
-            else if ((additionalDays >= 11) && (additionalDays <= 30))
+            if (IsInRange(additionalDays, 1, 10) == true)
+                penaltyPercentage = 0.02f; 
+            else if (IsInRange(additionalDays, 11, 30) == true)
                 penaltyPercentage = 0.05f;
-            else if ((additionalDays >= 31) && (additionalDays <= 40))
+            else if (IsInRange(additionalDays, 31, 40) == true)
                 penaltyPercentage = 0.1f;
             else return 0;
             float penalty = monthlyCost * additionalDays * penaltyPercentage;
