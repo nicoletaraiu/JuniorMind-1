@@ -48,9 +48,6 @@ namespace RentalCosts
 
         float CalculatePenalty(float monthlyCost, int additionalDays)
         {
-            float smallPenalty = 0.02f * monthlyCost * additionalDays;
-            float mediumPenalty = 0.05f * monthlyCost * additionalDays;
-            float highPenalty = 0.1f * monthlyCost * additionalDays;
             float penaltyPercentage = 0;
             if (IsInRange(additionalDays, 1, 10) == true)
                 penaltyPercentage = 0.02f; 
