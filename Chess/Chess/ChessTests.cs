@@ -12,6 +12,12 @@ namespace Chess
             int squaresNumber = CalculateSquaresNumber(2);
             Assert.AreEqual(5, squaresNumber);
         }
+        [TestMethod]
+        public void FourByFourTable()
+        {
+            int squaresNumber = CalculateSquaresNumber(4);
+            Assert.AreEqual(30, squaresNumber);
+        }
         int CalculateSquaresNumber (int side)
         {
             int squaresNumber = 0;
