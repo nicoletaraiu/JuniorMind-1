@@ -42,6 +42,11 @@ namespace Taxi
             int cost = CalculateCost(1, 80);
             Assert.AreEqual(640, cost);
         }
+        bool IsInRange (int daytime, int smallestLimit, int highestLimit)
+        {
+            bool b = true;
+            if ((additional ))
+        }
         int CalculateCost(int daytime, int distance)
         {
             int cost = 0;
