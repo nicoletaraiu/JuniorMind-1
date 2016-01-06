@@ -4,11 +4,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Chess
 {
     [TestClass]
-    public class UnitTest1
+    public class ChessTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TwoByTwoTable()
         {
+            int squaresNumber = CalculateSquaresNumber(2);
+            Assert.AreEqual(5, squaresNumber);
+        }
+        int CalculateSquaresNumber (int side)
+        {
+            int squaresNumber = 0;
+            while (side != 0)
+            {
+                squaresNumber = squaresNumber + side * side;
+                side = side - 1;
+            }
+            return 0;
         }
     }
 }
