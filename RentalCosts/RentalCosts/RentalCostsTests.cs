@@ -36,13 +36,9 @@ namespace RentalCosts
             float totalCost = CalculatePenalty(100, 45);
             Assert.AreEqual(0, totalCost);
         }
-       bool IsInRange (int additionalDays, int smallestLimit, int highestLimit)
+        bool IsInRange(int additionalDays, int smallestLimit, int highestLimit)
         {
-            bool b = false;
-            if ((additionalDays >= smallestLimit) && (additionalDays <= highestLimit))
-                b = true;
-            else b = false;
-            return b;
+            return ((additionalDays >= smallestLimit) && (additionalDays <= highestLimit));
         }
 
 
