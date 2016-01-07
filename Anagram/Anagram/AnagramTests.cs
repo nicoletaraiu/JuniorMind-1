@@ -7,18 +7,20 @@ namespace Anagram
     public class AnagramTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ThreeLettersWord()
         {
+            Assert.AreEqual(6, (CalculateAnagramsNumber("abc")));
         }
         int CalculateAnagramsNumber(string word)
         {
             int anagramsNumber = 0;
-            int lettersNumber = 0;
-            for (int i = 0; i < word.Length; i++)
+            int lettersNumber = 1;
+            for (int i = 0; i <= word.Length; i++)
             {
-                lettersNumber++;
+                anagramsNumber += lettersNumber * i;
             }
-            anagramsNumber = 
+            return anagramsNumber;
         }
+        
     }
 }
