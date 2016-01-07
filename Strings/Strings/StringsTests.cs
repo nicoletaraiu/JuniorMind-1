@@ -12,18 +12,32 @@ namespace Strings
             string prefix = StringComparison("aaab", "aaaabbaa");
             Assert.AreEqual("aaa", prefix);
         }
-        string StringComparison(string firstString, string secondString) {
+        [TestMethod]
+        public void SecondTest()
+        {
+            string prefix = StringComparison("abcdefgh", "abceefgh");
+            Assert.AreEqual("abc", prefix);
+        }
+        [TestMethod]
+        public void ThirdTest()
+        {
+            string prefix = StringComparison("animalemici", "animalemari");
+            Assert.AreEqual("animalem", prefix);
+        }
+        string StringComparison(string firstString, string secondString)
+        {
             string prefix = "";
-            while ((firstString.Length != 0) && (secondString.Length != 0))
-                for (int i = 0; i < firstString.Length; ++i)
+            for (int i = 0; i < firstString.Length; i++)
+            {
+                if (firstString[i] == secondString[i])
                 {
-                    for (int j = 0; j < secondString.Length; ++j)
-                    {
-                        if (firstString[i] == secondString[j])
-                            prefix = prefix + firstString[i];
-                    } 
+
+                    prefix = prefix + firstString[i];
                 }
+                else break;
+            }
             return prefix;
         }
     }
 }
+
