@@ -9,17 +9,17 @@ namespace Cube
         [TestMethod]
         public void lastThreeDigitsCheckPass()
         {
-            Assert.AreEqual(true, IsEightEightEight(45888));
+            Assert.AreEqual(true, EndsWithEightEightEight(45888));
         }
         [TestMethod]
         public void lastThreeDigitsCheckFail()
         {
-            Assert.AreEqual(false, IsEightEightEight(45788));
+            Assert.AreEqual(false, EndsWithEightEightEight(45788));
         }
         [TestMethod]
         public void lastThreeDigitsCheckFail2()
         {
-            Assert.AreEqual(false, IsEightEightEight(88));
+            Assert.AreEqual(false, EndsWithEightEightEight(88));
         }
         [TestMethod]
         public void ExtractOurNumber()
@@ -45,9 +45,9 @@ namespace Cube
             int number = ourNumber(4);
             Assert.AreEqual(942, number);
         }
-        bool IsEightEightEight (int number)
+        bool EndsWithEightEightEight (int number)
         {
-            return ((((number % 1000) / 100) == 8) && (((number % 100) / 10) == 8) && ((number % 10) == 8));      
+            return (number % 1000 == 888);      
         }
         int ourNumber (int k)
         {
@@ -56,7 +56,7 @@ namespace Cube
             while (allNumbers < k)
             {
                 number++;
-                if (IsEightEightEight(number * number * number))
+                if (EndsWithEightEightEight(number * number * number))
                     allNumbers++;
             }
             return number;
