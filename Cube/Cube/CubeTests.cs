@@ -7,9 +7,14 @@ namespace Cube
     public class CubeTests
     {
         [TestMethod]
-        public void lastThreeDigitsCheck()
+        public void lastThreeDigitsCheck1()
         {
             Assert.AreEqual(true, IsEightEightEight(45888));
+        }
+        [TestMethod]
+        public void lastThreeDigitsCheckFail()
+        {
+            Assert.AreEqual(false, IsEightEightEight(45788));
         }
         
         bool IsEightEightEight (int result)
