@@ -27,7 +27,12 @@ namespace Cube
             int number = ourNumber(1);
             Assert.AreEqual(192, number);
         }
-        
+        [TestMethod]
+        public void ExtractTheSecondNumber()
+        {
+            int number = ourNumber(2);
+            Assert.AreEqual(442, number);
+        }
         bool IsEightEightEight (int number)
         {
             return ((((number % 1000) / 100) == 8) && (((number % 100) / 10) == 8) && ((number % 10) == 8));      
