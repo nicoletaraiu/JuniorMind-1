@@ -21,11 +21,29 @@ namespace Cube
         {
             Assert.AreEqual(false, IsEightEightEight(88));
         }
-        
-        bool IsEightEightEight (int result)
+        [TestMethod]
+        public void ExtractOurNumber()
         {
-            return (bool)((((result % 1000) / 100) == 8) && (((result % 100) / 10) == 8) && ((result % 10) == 8));      
+            int number = ourNumber(1);
+            Assert.AreEqual(192, number);
         }
-
+        
+        bool IsEightEightEight (int number)
+        {
+            return ((((number % 1000) / 100) == 8) && (((number % 100) / 10) == 8) && ((number % 10) == 8));      
+        }
+        int ourNumber (int k)
+        {
+            int number = 0;
+            int allNumbers = 0;
+            while (allNumbers < k)
+            {
+                number++;
+                if (IsEightEightEight(number * number * number))
+                    allNumbers++;
+            }
+            return number;
+        }
+        
     }
 }
