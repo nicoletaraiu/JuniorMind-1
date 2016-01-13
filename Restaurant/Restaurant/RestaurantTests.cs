@@ -16,28 +16,24 @@ namespace Restaurant
         {
             Assert.AreEqual(2, FindMeetingDay(1, 1));
         }
+        [TestMethod]
+        public void TestForGCD()
+        {
+            Assert.AreEqual(2, GreatCommonDivisor(4, 6));
+        }
+        int GreatCommonDivisor(int whenMyFriendGoes, int whenIGo)
+        {
+            while (whenIGo != 0)
+            {
+                int aux = whenIGo;
+                whenIGo = whenMyFriendGoes % whenIGo;
+                whenMyFriendGoes = aux;
+            }
+            return whenMyFriendGoes;
+        }
         int FindMeetingDay(int whenMyFriendGoes, int whenIGo)
         {
-            int auxiliar1, auxiliar2;
-            if (whenMyFriendGoes > whenIGo)
-            {
-                auxiliar1 = whenMyFriendGoes;
-                auxiliar2 = whenIGo;
-            }
-            else
-            {
-                auxiliar1 = whenIGo;
-                auxiliar2 = whenMyFriendGoes;
-            }
-
-            for (int i = 1; i <= auxiliar2; i++)
-            {
-                if ((auxiliar1 * i) % auxiliar2 == 0)
-                {
-                    return i * auxiliar1 + 1;
-                }
-            }
-            return auxiliar2 + 1;
+            return (whenMyFriendGoes * whenIGo) / GreatCommonDivisor(whenMyFriendGoes, whenIGo) + 1;
         }
     }
 }
