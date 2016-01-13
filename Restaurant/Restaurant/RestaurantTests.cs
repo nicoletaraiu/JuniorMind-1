@@ -21,19 +21,19 @@ namespace Restaurant
         {
             Assert.AreEqual(2, GreatCommonDivisor(4, 6));
         }
-        int GreatCommonDivisor(int whenMyFriendGoes, int whenIGo)
+        int GreatCommonDivisor(int a, int b)
         {
-            while (whenIGo != 0)
+            while (b != 0)
             {
-                int aux = whenIGo;
-                whenIGo = whenMyFriendGoes % whenIGo;
-                whenMyFriendGoes = aux;
+                int aux = b;
+                b = a % b;
+                a = aux;
             }
-            return whenMyFriendGoes;
+            return a;
         }
-        int FindMeetingDay(int whenMyFriendGoes, int whenIGo)
+        int FindMeetingDay(int a, int b)
         {
-            return (whenMyFriendGoes * whenIGo) / GreatCommonDivisor(whenMyFriendGoes, whenIGo) + 1;
+            return (a * b) / GreatCommonDivisor(a, b) + 1;
         }
     }
 }
