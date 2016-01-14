@@ -22,6 +22,12 @@ namespace Loto
             double odds = CalculateOdds(1, 1, 4);
             Assert.AreEqual(0.25, odds);
         }
+        [TestMethod]
+        public void SecondOddsTest()
+        {
+            double odds = CalculateOdds(3, 3, 6);
+            Assert.AreEqual(0.05, odds);
+        }
         int CalculateFactorial(int number)
         {
             int factorial = 1;
