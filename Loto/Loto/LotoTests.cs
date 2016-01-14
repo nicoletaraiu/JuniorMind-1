@@ -29,14 +29,19 @@ namespace Loto
             Assert.AreEqual(0.05, odds);
         }
         [TestMethod]
+        public void FactorialZero()
+        {
+            Assert.AreEqual(1, CalculateFactorial(0));
+        }
+        [TestMethod]
         public void SixOutOfFortyNine()
         {
             double odds = CalculateOdds(6, 6, 49);
             Assert.AreEqual(0.0000000715, odds);
         }
-        int CalculateFactorial(int number)
+        double CalculateFactorial(int number)
         {
-            int factorial = 1;
+            double factorial = 1;
             while (number > 0)
             {
                 factorial *= number;
@@ -44,9 +49,9 @@ namespace Loto
             }
             return factorial;
         }
-        float CalculateCombinations(int firstNumber, int secondNumber)
+        double CalculateCombinations(int firstNumber, int secondNumber)
         {
-            int combinations = (CalculateFactorial(firstNumber) / (CalculateFactorial(secondNumber) * (CalculateFactorial(firstNumber - secondNumber))));
+            double combinations = (CalculateFactorial(firstNumber) / (CalculateFactorial(secondNumber) * (CalculateFactorial(firstNumber - secondNumber))));
             return combinations;
         }
         double CalculateOdds(int matchingNumbers, int numbersOnTicket, int totalNumbers)
