@@ -16,6 +16,12 @@ namespace Loto
         {
             Assert.AreEqual(4, CalculateCombinations(4, 3));
         }
+        [TestMethod]
+        public void OddsTest()
+        {
+            double odds = CalculateOdds(1, 1, 4);
+            Assert.AreEqual(0.25, odds);
+        }
         int CalculateFactorial(int number)
         {
             int factorial = 1;
@@ -30,6 +36,11 @@ namespace Loto
         {
             int combinations = (CalculateFactorial(firstNumber) / (CalculateFactorial(secondNumber) * (CalculateFactorial(firstNumber - secondNumber))));
             return combinations;
+        }
+        double CalculateOdds(int matchingNumbers, int numbersOnTicket, int totalNumbers)
+        {
+            double odds = ((CalculateCombinations(numbersOnTicket, matchingNumbers) * CalculateCombinations((totalNumbers - numbersOnTicket), (numbersOnTicket - matchingNumbers))) / CalculateCombinations(totalNumbers, numbersOnTicket));
+            return odds;
         }
     }
 }
