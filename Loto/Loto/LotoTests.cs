@@ -45,6 +45,12 @@ namespace Loto
             double odds = CalculateOdds(5, 6, 49);
             Assert.AreEqual(0.0000184, odds, 0.0000001);
         }
+        [TestMethod]
+        public void ThirdCategory()
+        {
+            double odds = CalculateOdds(4, 6, 49);
+            Assert.AreEqual(0.00096861, odds, 0.0000001);
+        }
         double CalculateFactorial(int number)
         {
             double factorial = 1;
