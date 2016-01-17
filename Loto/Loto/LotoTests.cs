@@ -37,7 +37,13 @@ namespace Loto
         public void SixOutOfFortyNine()
         {
             double odds = CalculateOdds(6, 6, 49);
-            Assert.AreEqual(0.0000000715, odds);
+            Assert.AreEqual(0.0000000715, odds, 0.0000000001);
+        }
+        [TestMethod]
+        public void SecondCategory()
+        {
+            double odds = CalculateOdds(5, 6, 49);
+            Assert.AreEqual(0.0000184, odds, 0.0000001);
         }
         double CalculateFactorial(int number)
         {
