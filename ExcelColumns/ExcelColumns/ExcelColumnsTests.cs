@@ -41,7 +41,7 @@ namespace ExcelColumns
             while (columnNumber > 0)
             {
                 columnNumber = columnNumber - 1;
-                column += WantedColumn((columnNumber % 26));
+                column = WantedColumn((columnNumber % 26)) + column;
                 columnNumber /= 26;
             }
             return column;
