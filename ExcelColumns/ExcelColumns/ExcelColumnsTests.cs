@@ -21,9 +21,24 @@ namespace ExcelColumns
         {
             Assert.AreEqual("Z", WantedColumn(26));
         }
+        [TestMethod]
+        public void Column27Test()
+        {
+            Assert.AreEqual("AA", WantedColumn(27));
+        }
         string WantedColumn (int position)
         {
             return ((char)('A' + position - 1)).ToString();
+        }
+        string FinalColumn(int columnNumber)
+        {
+            string column = "";
+            while (columnNumber > 0)
+            {   
+                column += WantedColumn((columnNumber % 26));
+                columnNumber /= 26;
+            }
+            return column;
         }
     }
 }
