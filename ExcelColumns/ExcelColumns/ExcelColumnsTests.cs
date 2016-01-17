@@ -16,6 +16,11 @@ namespace ExcelColumns
         {
             Assert.AreEqual("D", WantedColumn(4));
         }
+        [TestMethod]
+        public void LastColumnOfTheFirstSetTest()
+        {
+            Assert.AreEqual("Z", WantedColumn(26));
+        }
         string WantedColumn (int position)
         {
             return ((char)('A' + position - 1)).ToString();
