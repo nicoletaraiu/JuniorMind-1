@@ -31,6 +31,16 @@ namespace ExcelColumns
         {
             Assert.AreEqual("AZ", FinalColumn(52));
         }
+        [TestMethod]
+        public void Column78Test()
+        {
+            Assert.AreEqual("BZ", FinalColumn(78));
+        }
+        [TestMethod]
+        public void Column103()
+        {
+            Assert.AreEqual("CY", FinalColumn(103));
+        }
         string WantedColumn (int position)
         {
             return ((char)('A' + position)).ToString();
