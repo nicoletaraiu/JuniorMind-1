@@ -12,9 +12,14 @@ namespace BinaryOperations
             Assert.AreEqual(6, (CalculateNeededArrayLength(49)));
         }
         [TestMethod]
-        public void ToByteArrayTest()
+        public void FirstToBinaryTest()
         {
-            CollectionAssert.AreEqual(new byte[] {1, 1, 0, 0, 0, 1}, (ToBinary(49)));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 0, 0, 1 }, ToBinary(49));
+        }
+        [TestMethod]
+        public void SecondToBinaryTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 1, 1, 0 }, ToBinary(38));
         }
         byte[] ToBinary(int number)
         {
