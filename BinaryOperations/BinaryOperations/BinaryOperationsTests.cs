@@ -12,21 +12,21 @@ namespace BinaryOperations
             Assert.AreEqual(6, (CalculateNeededArrayLength(49)));
         }
         [TestMethod]
-        public void TransformIntoByteArrayTest()
+        public void ToByteArrayTest()
         {
-            Assert.AreEqual(110001, (TransformIntoByteArray(49)));
+            CollectionAssert.AreEqual(new byte[] {1, 1, 0, 0, 0, 1}, (ToBinary(49)));
         }
-         byte[] TransformIntoByteArray(byte number)
-       {
-           byte[] binaryVersion = new byte[CalculateNeededArrayLength(number)];
-           while (number > 0)
-           {
-               binaryVersion[CalculateNeededArrayLength(number) - 1] = (byte)(number % 2);
-               number = (byte)(number / 2);
-           }
-           return binaryVersion;
+        byte[] ToBinary(int number)
+        {
+            byte[] binaryVersion = new byte[CalculateNeededArrayLength(number)];
+            while (number > 0)
+            {
+                binaryVersion[CalculateNeededArrayLength(number) - 1] = (byte)(number % 2);
+                number = number / 2;
+            }
+            return binaryVersion;
 
-       } 
+        }
 
         int CalculateNeededArrayLength(int number)
         {
