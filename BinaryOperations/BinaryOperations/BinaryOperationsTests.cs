@@ -22,6 +22,11 @@ namespace BinaryOperations
             CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 1, 1, 0 }, ToBinary(38));
         }
         [TestMethod]
+        public void ThirdToBinaryTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, ToBinary(123456));
+        }
+        [TestMethod]
         public void FirstNotOperatorTest()
         {
             CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1, 1, 0 }, NotOperator(49));
@@ -30,6 +35,11 @@ namespace BinaryOperations
         public void SecondNotOperatorTest()
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0, 0, 1 }, NotOperator(38));
+        }
+        [TestMethod]
+        public void ThirdNotOperatorTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 }, NotOperator(123456));
         }
 
         byte[] NotOperator(int number)
