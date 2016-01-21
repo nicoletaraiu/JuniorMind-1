@@ -51,11 +51,29 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, ToBinary(3));
         }
-
         [TestMethod]
         public void SecondOrOperatorTest()
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 1}, OrOperator(5, 3));
+        }
+        [TestMethod]
+        public void FirstAndOperatorTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, AndOperator(49, 38));
+        }
+
+        byte[] AndOperator(int firstNumber, int SecondNumber)
+        {
+            byte[] firstByte = ToBinary(firstNumber);
+            byte[] secondByte = ToBinary(SecondNumber);
+            byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
+            for (int i = 0; i < secondByte.Length; i++)
+            {
+                if ((firstByte[i] == 1) && (secondByte[i] == 1))
+                    wantedByte[i] = 1;
+                else wantedByte[i] = 0;
+            }
+            return wantedByte;
         }
 
         byte[] OrOperator(int firstNumber, int secondNumber)
