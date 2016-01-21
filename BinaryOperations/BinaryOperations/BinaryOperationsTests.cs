@@ -41,19 +41,33 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 }, NotOperator(123456));
         }
+        [TestMethod]
+        public void FirstOrOperatorTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 0, 1, 1, 1 }, OrOperator(49, 38));
+        }
+        [TestMethod]
+        public void ToBinary()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, ToBinary(3));
+        }
+
+        [TestMethod]
+        public void SecondOrOperatorTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 1}, OrOperator(5, 3));
+        }
 
         byte[] OrOperator(int firstNumber, int secondNumber)
         {
             byte[] firstByte = ToBinary(firstNumber);
             byte[] secondByte = ToBinary(secondNumber);
             byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
-            for (int i = 0; i < firstByte.Length; i++)
+            for (int i = 0; i < secondByte.Length; i++)
             {
-                for (int j = 0; j < secondByte.Length; j++)
-                {
-                    if (firstByte[i] == secondByte[j]) wantedByte[i] = 0;
+                    if ((firstByte[i] == 0) && (secondByte[i] == 0))
+                        wantedByte[i] = 0;
                     else wantedByte[i] = 1;
-                }
             }
             return wantedByte;
         }
@@ -77,7 +91,6 @@ namespace BinaryOperations
                 number = number / 2;
             }
             return binaryVersion;
-
         }
 
         int CalculateNeededArrayLength(int number)
