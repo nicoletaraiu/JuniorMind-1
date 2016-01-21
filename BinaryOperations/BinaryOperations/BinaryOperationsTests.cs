@@ -42,6 +42,22 @@ namespace BinaryOperations
             CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 }, NotOperator(123456));
         }
 
+        byte[] OrOperator(int firstNumber, int secondNumber)
+        {
+            byte[] firstByte = ToBinary(firstNumber);
+            byte[] secondByte = ToBinary(secondNumber);
+            byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
+            for (int i = 0; i < firstByte.Length; i++)
+            {
+                for (int j = 0; j < secondByte.Length; j++)
+                {
+                    if (firstByte[i] == secondByte[j]) wantedByte[i] = 0;
+                    else wantedByte[i] = 1;
+                }
+            }
+            return wantedByte;
+        }
+
         byte[] NotOperator(int number)
         {
             byte[] binaryVersion = ToBinary(number);
