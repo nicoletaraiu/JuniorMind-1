@@ -49,12 +49,12 @@ namespace BinaryOperations
         [TestMethod]
         public void ToBinary()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, ToBinary(3));
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, ToBinary(3));
         }
         [TestMethod]
         public void SecondOrOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 1}, OrOperator(5, 3));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1}, OrOperator(5, 3));
         }
         [TestMethod]
         public void FirstAndOperatorTest()
@@ -74,10 +74,8 @@ namespace BinaryOperations
             byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
             for (int i = 0; i < secondByte.Length; i++)
             {
-                if (((firstByte[i] == 1) && (secondByte[i] == 0)) || ((firstByte[i] == 0) && (secondByte[i] == 1)))
-                    wantedByte[i] = 1;
-                else wantedByte[i] = 0;
-            }
+                wantedByte[i] = (byte)((((firstByte[i] == 1) && (secondByte[i] == 0)) || ((firstByte[i] == 0) && (secondByte[i] == 1))) ? 1 : 0);
+            } 
             return wantedByte;
         }
 
@@ -88,10 +86,8 @@ namespace BinaryOperations
             byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
             for (int i = 0; i < secondByte.Length; i++)
             {
-                if ((firstByte[i] == 1) && (secondByte[i] == 1))
-                    wantedByte[i] = 1;
-                else wantedByte[i] = 0;
-            }
+                wantedByte[i] = (byte)(((firstByte[i] == 1) && (secondByte[i] == 1)) ? 1 : 0);
+            } 
             return wantedByte;
         }
 
@@ -102,10 +98,8 @@ namespace BinaryOperations
             byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
             for (int i = 0; i < secondByte.Length; i++)
             {
-                    if ((firstByte[i] == 0) && (secondByte[i] == 0))
-                        wantedByte[i] = 0;
-                    else wantedByte[i] = 1;
-            }
+                wantedByte[i] = (byte)(((firstByte[i] == 0) && (secondByte[i] == 0)) ? 0 : 1);
+            } 
             return wantedByte;
         }
 
@@ -114,13 +108,12 @@ namespace BinaryOperations
             byte[] binaryVersion = ToBinary(number);
             for (int i = 0; i < binaryVersion.Length; i++)
             {
-                if (binaryVersion[i] == 0) binaryVersion[i] = 1;
-                else binaryVersion[i] = 0;
+                binaryVersion[i] = (byte)((binaryVersion[i] == 0) ? 1 : 0); 
             }
             return binaryVersion;
         }
         byte[] ToBinary(int number)
-        {
+        {   
             byte[] binaryVersion = new byte[CalculateNeededArrayLength(number)];
             while (number > 0)
             {
