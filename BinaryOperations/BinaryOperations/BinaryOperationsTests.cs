@@ -69,14 +69,25 @@ namespace BinaryOperations
         [TestMethod]
         public void LeftShift()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0 }, ShiftLeft(1, 3));
+            CollectionAssert.AreEqual(new byte[] { 1 }, RightShift(2, 1));
         }
 
-        byte[] ShiftLeft(int number, int shiftingNumber )
+
+        byte[] RightShift(int number, int shiftingNumber)
         {
-            double newNumber = number * Math.Pow(2, shiftingNumber);
-            byte[] afterShifting = ToBinary(newNumber);
-            return afterShifting;
+            byte[] ourByte = ToBinary(number);
+            int length = CalculateNeededArrayLength(number) - 1;
+            byte[] secondByte = new byte[length];
+            while (shiftingNumber > 0)
+            {
+                for (int i = length - 1; i > 0; i--)
+                {
+                    secondByte[i] = secondByte[i - 1];
+                }
+                secondByte[0] = 0;
+                shiftingNumber--;
+            }
+            return secondByte;
         }
 
         byte[] XorOperator(int firstNumber, int secondNumber)
