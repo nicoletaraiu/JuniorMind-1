@@ -59,7 +59,7 @@ namespace BinaryOperations
         [TestMethod]
         public void FirstAndOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, AndOperator(49, 38));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, AndOperator((new byte[] { 1, 1, 0, 0, 0, 1 }), new byte[] { 1, 0, 0, 1, 1, 0 }));
         }
         [TestMethod]
         public void FirstXorOperatorTest()
@@ -102,11 +102,9 @@ namespace BinaryOperations
             return wantedByte;
         }
 
-        byte[] AndOperator(int firstNumber, int secondNumber)
+        byte[] AndOperator(byte[] firstByte, byte[] secondByte)
         {
-            byte[] firstByte = ToBinary(firstNumber);
-            byte[] secondByte = ToBinary(secondNumber);
-            byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
+            byte[] wantedByte = new byte[secondByte.Length];
             for (int i = 0; i < secondByte.Length; i++)
             {
                 wantedByte[i] = (byte)(((firstByte[i] == 1) && (secondByte[i] == 1)) ? 1 : 0);
