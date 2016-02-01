@@ -84,7 +84,7 @@ namespace BinaryOperations
         [TestMethod]
         public void LessThanTest()
         {
-            CollectionAssert.AreEqual(ToBinary(38), LessThan(ToBinary(49), ToBinary(38)));
+            CollectionAssert.AreEqual(ToBinary(8), LessThan(ToBinary(49), ToBinary(8)));
         }
 
         byte[] LessThan(byte[] firstByte, byte[] secondByte)
