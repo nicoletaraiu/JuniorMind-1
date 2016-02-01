@@ -59,12 +59,12 @@ namespace BinaryOperations
         [TestMethod]
         public void FirstAndOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, AndOperator((new byte[] { 1, 1, 0, 0, 0, 1 }), new byte[] { 1, 0, 0, 1, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, AndOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }));
         }
         [TestMethod]
         public void FirstXorOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1}, XorOperator(49, 38));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1}, XorOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }));
         }
         [TestMethod]
         public void RightShift()
@@ -90,11 +90,9 @@ namespace BinaryOperations
             return secondByte;
         }
 
-        byte[] XorOperator(int firstNumber, int secondNumber)
+        byte[] XorOperator(byte[] firstByte, byte[] secondByte)
         {
-            byte[] firstByte = ToBinary(firstNumber);
-            byte[] secondByte = ToBinary(secondNumber);
-            byte[] wantedByte = new byte[CalculateNeededArrayLength(firstNumber)];
+            byte[] wantedByte = new byte[secondByte.Length];
             for (int i = 0; i < secondByte.Length; i++)
             {
                 wantedByte[i] = (byte)((((firstByte[i] == 1) && (secondByte[i] == 0)) || ((firstByte[i] == 0) && (secondByte[i] == 1))) ? 1 : 0);
