@@ -69,18 +69,23 @@ namespace BinaryOperations
         [TestMethod]
         public void RightShift()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1 }, RightShift( new byte[] { 0, 1, 0 } , 1));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1 }, RightShift(new byte[] { 0, 1, 0 }, 1));
+        }
+        [TestMethod]
+        public void SecondRightShiftTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1 }, RightShift(new byte[] { 1, 1, 0 }, 2));
         }
 
 
         byte[] RightShift(byte[] firstByte, int shiftingNumber)
-        {
-            byte[] secondByte = new byte[firstByte.Length];
+        {   
+            byte[] secondByte = firstByte;
             while (shiftingNumber > 0)
             {
-                for (int i = 1; i < firstByte.Length; i++)
+                for (int i = secondByte.Length - 1; i > 0; i--)
                 {
-                    secondByte[i] = firstByte[i - 1];
+                    secondByte[i] = secondByte[i - 1];
                 }
                 secondByte[0] = 0;
                 shiftingNumber--;
