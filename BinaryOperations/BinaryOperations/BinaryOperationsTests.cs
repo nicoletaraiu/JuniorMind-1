@@ -78,9 +78,9 @@ namespace BinaryOperations
             byte[] secondByte = new byte[firstByte.Length];
             while (shiftingNumber > 0)
             {
-                for (int i = firstByte.Length - 1; i > 0; i--)
+                for (int i = 1; i < firstByte.Length; i++)
                 {
-                    secondByte[i] = secondByte[i - 1];
+                    secondByte[i] = firstByte[i - 1];
                 }
                 secondByte[0] = 0;
                 shiftingNumber--;
