@@ -29,17 +29,17 @@ namespace BinaryOperations
         [TestMethod]
         public void FirstNotOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1, 1, 0 }, NotOperator(49));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1, 1, 0 }, NotOperator(new byte[] { 1, 1, 0, 0, 0, 1 }));
         }
         [TestMethod]
         public void SecondNotOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0, 0, 1 }, NotOperator(38));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1, 0, 0, 1 }, NotOperator(new byte[] { 1, 0, 0, 1, 1, 0 }));
         }
         [TestMethod]
         public void ThirdNotOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 }, NotOperator(123456));
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1 }, NotOperator(new byte[] { 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0 }));
         }
         [TestMethod]
         public void FirstOrOperatorTest()
@@ -124,14 +124,14 @@ namespace BinaryOperations
             return wantedByte;
         }
 
-        byte[] NotOperator(int number)
+        byte[] NotOperator(byte[] firstByte)
         {
-            byte[] binaryVersion = ToBinary(number);
-            for (int i = 0; i < binaryVersion.Length; i++)
+            byte[] wantedByte = new byte[firstByte.Length];
+            for (int i = 0; i < firstByte.Length; i++)
             {
-                binaryVersion[i] = (byte)((binaryVersion[i] == 0) ? 1 : 0); 
+                wantedByte[i] = (byte)((firstByte[i] == 0) ? 1 : 0); 
             }
-            return binaryVersion;
+            return wantedByte;
         }
         byte[] ToBinary(int number)
         {   
