@@ -91,6 +91,28 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(38), LessThan(ToBinary(49), ToBinary(38)));
         }
+        [TestMethod]
+        public void GreaterThanTest()
+        {
+            CollectionAssert.AreEqual(ToBinary(49), GreaterThan(ToBinary(49), ToBinary(48)));
+        }
+
+
+        byte[] GreaterThan(byte[] firstByte, byte[] secondByte)
+        {
+            if (firstByte.Length == secondByte.Length)
+            {
+                for (int i = 1; i < firstByte.Length; i++)
+                {
+                    if (firstByte[i] > secondByte[i])
+                        return firstByte;
+                    else return secondByte;
+                }
+            }
+            if (firstByte.Length > secondByte.Length)
+                return firstByte;
+            else return secondByte;
+        }
 
         byte[] LessThan(byte[] firstByte, byte[] secondByte)
         {   
