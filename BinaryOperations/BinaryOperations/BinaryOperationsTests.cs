@@ -101,7 +101,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(49), GreaterThan(ToBinary(49), ToBinary(38)));
         }
-
+        [TestMethod]
+        public void ThirdGreaterThanTest()
+        {
+            CollectionAssert.AreEqual(ToBinary(49), GreaterThan(ToBinary(49), ToBinary(48)));
+        }
 
         byte[] GreaterThan(byte[] firstByte, byte[] secondByte)
         {
