@@ -94,7 +94,7 @@ namespace BinaryOperations
         [TestMethod]
         public void GreaterThanTest()
         {
-            CollectionAssert.AreEqual(ToBinary(49), GreaterThan(ToBinary(49), ToBinary(48)));
+            CollectionAssert.AreEqual(ToBinary(49), GreaterThan(ToBinary(49), ToBinary(13)));
         }
 
 
@@ -130,6 +130,7 @@ namespace BinaryOperations
             else return firstByte;
         }
         /// 49 -> 110001
+        /// 48 -> 110000
         /// 38 -> 100110
 
         byte[] LeftShift(byte[] firstByte, int shiftingNumber)
