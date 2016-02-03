@@ -117,6 +117,12 @@ namespace BinaryOperations
             CollectionAssert.AreEqual(ToBinary(49), GreaterThan(ToBinary(49), ToBinary(48)));
         }
 
+        byte GetAt(byte[] byteArray, int i)
+        {
+            if (i >= byteArray.Length) return 0;
+            else return byteArray[byteArray.Length - 1 - i];
+        }
+
         byte[] GreaterThan(byte[] firstByte, byte[] secondByte)
         {
             if (firstByte.Length == secondByte.Length)
