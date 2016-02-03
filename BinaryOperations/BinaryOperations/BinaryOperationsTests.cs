@@ -128,6 +128,12 @@ namespace BinaryOperations
             byte[] byteArray = { 3, 2, 1 };
             Assert.AreEqual(2, GetAt(byteArray, 1));
         }
+        [TestMethod]
+        public void GetAt2()
+        {
+            byte[] byteArray = { 3, 2, 1 };
+            Assert.AreEqual(3, GetAt(byteArray, 2));
+        }
 
         byte GetAt(byte[] byteArray, int i)
         {
