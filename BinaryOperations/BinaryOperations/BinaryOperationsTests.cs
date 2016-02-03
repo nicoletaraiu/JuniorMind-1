@@ -116,6 +116,12 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(49), GreaterThan(ToBinary(49), ToBinary(48)));
         }
+        [TestMethod]
+        public void GetAt0()
+        {
+            byte[] byteArray = { 3, 2, 1 };
+            Assert.AreEqual(1, GetAt(byteArray, 0));
+        }
 
         byte GetAt(byte[] byteArray, int i)
         {
