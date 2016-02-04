@@ -149,7 +149,7 @@ namespace BinaryOperations
         byte GetAt(byte[] byteArray, int i)
         {
             if (i >= byteArray.Length) return 0;
-            else return byteArray[byteArray.Length - 1 - i];
+            return byteArray[byteArray.Length - 1 - i];
         }
 
         bool GreaterThan(byte[] firstByte, byte[] secondByte)
