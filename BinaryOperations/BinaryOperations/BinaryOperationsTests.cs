@@ -117,6 +117,11 @@ namespace BinaryOperations
             Assert.AreEqual(true, GreaterThan(ToBinary(49), ToBinary(48)));
         }
         [TestMethod]
+        public void FifthGreaterThanTest()
+        {
+            Assert.AreEqual(false, GreaterThan(ToBinary(1124), ToBinary(5)));
+        }
+        [TestMethod]
         public void GetAt0()
         {
             byte[] byteArray = { 3, 2, 1 };
