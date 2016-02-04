@@ -84,17 +84,17 @@ namespace BinaryOperations
         [TestMethod]
         public void LessThanTest()
         {
-            CollectionAssert.AreEqual(ToBinary(8), LessThan(ToBinary(49), ToBinary(8)));
+            Assert.AreEqual(false, LessThan(ToBinary(49), ToBinary(8)));
         }
         [TestMethod]
         public void SecondLessThanTest()
         {
-            CollectionAssert.AreEqual(ToBinary(38), LessThan(ToBinary(49), ToBinary(38)));
+            Assert.AreEqual(false, LessThan(ToBinary(49), ToBinary(38)));
         }
         [TestMethod]
         public void ThirdLessThanTest()
         {
-            CollectionAssert.AreEqual(ToBinary(48), LessThan(ToBinary(48), ToBinary(49)));
+            Assert.AreEqual(true, LessThan(ToBinary(48), ToBinary(49)));
         }
         [TestMethod]
         public void GreaterThanTest()
@@ -119,7 +119,7 @@ namespace BinaryOperations
         [TestMethod]
         public void FifthGreaterThanTest()
         {
-            Assert.AreEqual(false, GreaterThan(ToBinary(1124), ToBinary(5)));
+            Assert.AreEqual(true, GreaterThan(ToBinary(1124), ToBinary(5)));
         }
         [TestMethod]
         public void GetAt0()
@@ -154,18 +154,18 @@ namespace BinaryOperations
 
         bool GreaterThan(byte[] firstByte, byte[] secondByte)
         {
-            byte[] thirdByte = LessThan(firstByte, secondByte);
-            return (thirdByte == secondByte);
+            if (LessThan(firstByte, secondByte) == false) return true;
+            return false;
         }
 
-        byte[] LessThan(byte[] firstByte, byte[] secondByte)
+        bool LessThan(byte[] firstByte, byte[] secondByte)
         {
             for (int i = 0; i < Math.Max(firstByte.Length, secondByte.Length); i++)
             {
                 if (GetAt(firstByte, i) > GetAt(secondByte, i))
-                    return secondByte;
+                    return false;
             }
-            return firstByte;
+            return true;
         }
         /// 49 -> 110001
         /// 48 -> 110000
