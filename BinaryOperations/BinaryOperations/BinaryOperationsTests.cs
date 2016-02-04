@@ -164,19 +164,13 @@ namespace BinaryOperations
         }
 
         byte[] LessThan(byte[] firstByte, byte[] secondByte)
-        {   
-            if (firstByte.Length == secondByte.Length)
-                {
-                 for (int i = 1; i < firstByte.Length; i++)
-                {
-                    if (firstByte[i] > secondByte[i])
-                        return secondByte;
-                    else return firstByte;
-                }
-                }
-            if (firstByte.Length > secondByte.Length)
-                return secondByte;
-            else return firstByte;
+        {
+            for (int i = 0; i < Math.Max(firstByte.Length, secondByte.Length); i++)
+            {
+                if (GetAt(firstByte, i) > GetAt(secondByte, i))
+                    return secondByte;
+            }
+            return firstByte;
         }
         /// 49 -> 110001
         /// 48 -> 110000
