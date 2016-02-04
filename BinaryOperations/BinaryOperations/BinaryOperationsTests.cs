@@ -160,7 +160,11 @@ namespace BinaryOperations
         {
             Assert.AreEqual(false, Equal(ToBinary(3), ToBinary(5)));
         }
-
+        [TestMethod]
+        public void SevenPlusOne()
+        {
+            CollectionAssert.AreEqual(ToBinary(8), Summation(ToBinary(7), ToBinary(1)));
+        }
 
         byte[] Summation(byte[] firstByteArray, byte[] secondByteArray)
         {
@@ -172,6 +176,8 @@ namespace BinaryOperations
                 else remainder = 0;
                 resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)(GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder);
             }
+            if (GetAt(firstByteArray, 0) + GetAt(secondByteArray, 0) > 1) RightShift(resultedByteArray, 1);
+            resultedByteArray[0] = 1;
             return resultedByteArray;
         }
 
