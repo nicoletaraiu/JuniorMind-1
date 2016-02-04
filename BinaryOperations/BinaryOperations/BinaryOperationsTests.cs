@@ -209,27 +209,27 @@ namespace BinaryOperations
 
         byte[] XorOperator(byte[] firstByte, byte[] secondByte)
         {
-            byte[] wantedByte = new byte[secondByte.Length];
-            for (int i = 0; i < secondByte.Length; i++)
+            byte[] wantedByte = new byte[Math.Max(firstByte.Length, secondByte.Length)];
+            for (int i = 0; i < Math.Max(firstByte.Length, secondByte.Length); i++)
             {
-                wantedByte[i] = (byte)((((firstByte[i] == 1) && (secondByte[i] == 0)) || ((firstByte[i] == 0) && (secondByte[i] == 1))) ? 1 : 0);
+                wantedByte[wantedByte.Length - 1 - i] = (byte)((((GetAt(firstByte, i) == 1) && (GetAt(secondByte, i) == 0)) || ((GetAt(firstByte, i) == 0) && (GetAt(secondByte, i) == 1))) ? 1 : 0);
             } 
             return wantedByte;
         }
 
         byte[] AndOperator(byte[] firstByte, byte[] secondByte)
         {
-            byte[] wantedByte = new byte[secondByte.Length];
-            for (int i = 0; i < secondByte.Length; i++)
+            byte[] wantedByte = new byte[Math.Max(firstByte.Length, secondByte.Length)];
+            for (int i = 0; i < Math.Max(firstByte.Length, secondByte.Length); i++)
             {
-                wantedByte[i] = (byte)(((firstByte[i] == 1) && (secondByte[i] == 1)) ? 1 : 0);
+                wantedByte[wantedByte.Length - 1 - i] = (byte)(((GetAt(firstByte, i) == 1) && (GetAt(secondByte, i) == 1)) ? 1 : 0);
             } 
             return wantedByte;
         }
 
         byte[] OrOperator(byte[] firstByte, byte[] secondByte)
         {
-            byte[] wantedByte = new byte[firstByte.Length];
+            byte[] wantedByte = new byte[Math.Max(firstByte.Length, secondByte.Length)];
             for (int i = 0; i < firstByte.Length; i++)
             {
                 wantedByte[i] = (byte)((((GetAt(firstByte, i) == 0) && ((GetAt(secondByte, i) == 0)) ? 0 : 1)));
@@ -242,7 +242,7 @@ namespace BinaryOperations
             byte[] wantedByte = new byte[firstByte.Length];
             for (int i = 0; i < firstByte.Length; i++)
             {
-                wantedByte[i] = (byte)((firstByte[i] == 0) ? 1 : 0); 
+                wantedByte[wantedByte.Length - 1 - i] = (byte)((GetAt(firstByte, i) == 0) ? 1 : 0); 
             }
             return wantedByte;
         }
