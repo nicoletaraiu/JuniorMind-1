@@ -97,29 +97,34 @@ namespace BinaryOperations
             Assert.AreEqual(true, LessThan(ToBinary(48), ToBinary(49)));
         }
         [TestMethod]
-        public void FirstIsGreaterThanSecond()
+        public void MyTestMethod()
         {
-            Assert.AreEqual(true, GreaterThan(ToBinary(49), ToBinary(13)));
-        }
-        [TestMethod]
-        public void FirstIsGReaterThanSecond()
-        {
-            Assert.AreEqual(true, GreaterThan(ToBinary(49), ToBinary(38)));
+            Assert.AreEqual(true, LessThan(ToBinary(3), ToBinary(4)));
         }
         [TestMethod]
         public void FirstIsNotGreaterThanSecond()
         {
-            Assert.AreEqual(false, GreaterThan(ToBinary(48), ToBinary(49)));
+            Assert.AreEqual(true, GreaterThan(ToBinary(13), ToBinary(49)));
+        }
+        [TestMethod]
+        public void FirstIsGReaterThanSecond()
+        {
+            Assert.AreEqual(false, GreaterThan(ToBinary(49), ToBinary(38)));
+        }
+        [TestMethod]
+        public void FirstIsNotGReaterThanSecond()
+        {
+            Assert.AreEqual(true, GreaterThan(ToBinary(48), ToBinary(49)));
         }
         [TestMethod]
         public void FirstIsGREaterThanSecond()
         {
-            Assert.AreEqual(true, GreaterThan(ToBinary(49), ToBinary(48)));
+            Assert.AreEqual(true, GreaterThan(ToBinary(48), ToBinary(49)));
         }
         [TestMethod]
         public void FirstIsGREAterThanSecond()
         {
-            Assert.AreEqual(true, GreaterThan(ToBinary(1124), ToBinary(5)));
+            Assert.AreEqual(true, GreaterThan(ToBinary(5), ToBinary(1124)));
         }
         [TestMethod]
         public void GetAt0()
@@ -169,16 +174,21 @@ namespace BinaryOperations
         byte[] Summation(byte[] firstByteArray, byte[] secondByteArray)
         {
             byte[] resultedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
+            int remainder = 0;
             for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
             {
-                int remainder = 0;
+                resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)((GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder) % 2);
                 if ((byte)GetAt(firstByteArray, i) + GetAt(secondByteArray, i) > 1) remainder = 1;
-                else remainder = 0;
-                resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)(GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder);
+                else remainder = 0;   
             }
-            if (GetAt(firstByteArray, 0) + GetAt(secondByteArray, 0) > 1) RightShift(resultedByteArray, 1);
-            resultedByteArray[0] = 1;
+            if (GetAt(firstByteArray, 0) + GetAt(secondByteArray, 0) > 1)
+            {
+                Array.Resize(ref resultedByteArray, 1);
+                RightShift(resultedByteArray, 1);
+                resultedByteArray[0] = 1;
+            }
             return resultedByteArray;
+                
         }
 
         bool Equal(byte[] firstByteArray, byte[] secondByteArray)
@@ -194,7 +204,7 @@ namespace BinaryOperations
 
         bool GreaterThan(byte[] firstByteArray, byte[] secondByteArray)
         {
-            if (LessThan(firstByteArray, secondByteArray) == false) return true;
+            if (LessThan(secondByteArray, firstByteArray) == false) return true;
             return false;
         }
 
