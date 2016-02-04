@@ -150,6 +150,16 @@ namespace BinaryOperations
         {
             Assert.AreEqual(true, Equal(ToBinary(5), ToBinary(5)));
         }
+        [TestMethod]
+        public void TwentyEqualsTwenty()
+        {
+            Assert.AreEqual(true, Equal(ToBinary(20), ToBinary(20)));
+        }
+        [TestMethod]
+        public void ThreeIsNotEqualToFive()
+        {
+            Assert.AreEqual(false, Equal(ToBinary(3), ToBinary(5)));
+        }
 
         bool Equal(byte[] firstByteArray, byte[] secondByteArray)
         {
