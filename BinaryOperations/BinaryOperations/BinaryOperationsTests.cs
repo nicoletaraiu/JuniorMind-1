@@ -161,6 +161,11 @@ namespace BinaryOperations
             Assert.AreEqual(false, Equal(ToBinary(3), ToBinary(5)));
         }
 
+        byte[] Summation(byte[] firstByteArray, byte[] secondByteArray)
+        {
+
+        }
+
         bool Equal(byte[] firstByteArray, byte[] secondByteArray)
         {
             return (((LessThan(firstByteArray, secondByteArray) == true) && (GreaterThan(firstByteArray, secondByteArray) == false)) || (((LessThan(firstByteArray, secondByteArray) == false) && ((GreaterThan(firstByteArray, secondByteArray) == true)))));
@@ -172,17 +177,17 @@ namespace BinaryOperations
             return byteArray[byteArray.Length - 1 - i];
         }
 
-        bool GreaterThan(byte[] firstByte, byte[] secondByte)
+        bool GreaterThan(byte[] firstByteArray, byte[] secondByteArray)
         {
-            if (LessThan(firstByte, secondByte) == false) return true;
+            if (LessThan(firstByteArray, secondByteArray) == false) return true;
             return false;
         }
 
-        bool LessThan(byte[] firstByte, byte[] secondByte)
+        bool LessThan(byte[] firstByteArray, byte[] secondByteArray)
         {
-            for (int i = 0; i < Math.Max(firstByte.Length, secondByte.Length); i++)
+            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
             {
-                if (GetAt(firstByte, i) > GetAt(secondByte, i))
+                if (GetAt(firstByteArray, i) > GetAt(secondByteArray, i))
                     return false;
             }
             return true;
@@ -191,19 +196,19 @@ namespace BinaryOperations
         /// 48 -> 110000
         /// 38 -> 100110
 
-        byte[] LeftShift(byte[] firstByte, int shiftingNumber)
+        byte[] LeftShift(byte[] byteArray, int shiftingNumber)
         {
-            byte[] secondByte = new byte[firstByte.Length + shiftingNumber];
-            for (int i = 0; i < firstByte.Length; i++)
+            byte[] secondByte = new byte[byteArray.Length + shiftingNumber];
+            for (int i = 0; i < byteArray.Length; i++)
             {
-                secondByte[i] = firstByte[i];
+                secondByte[i] = byteArray[i];
             }
             return secondByte;
         }
 
-        byte[] RightShift(byte[] firstByte, int shiftingNumber)
+        byte[] RightShift(byte[] firstByteArray, int shiftingNumber)
         {   
-            byte[] secondByte = firstByte;
+            byte[] secondByte = firstByteArray;
             while (shiftingNumber > 0)
             {
                 for (int i = secondByte.Length - 1; i > 0; i--)
@@ -216,44 +221,44 @@ namespace BinaryOperations
             return secondByte;
         }
 
-        byte[] XorOperator(byte[] firstByte, byte[] secondByte)
+        byte[] XorOperator(byte[] firstByteArray, byte[] secondByteArray)
         {
-            byte[] wantedByte = new byte[Math.Max(firstByte.Length, secondByte.Length)];
-            for (int i = 0; i < Math.Max(firstByte.Length, secondByte.Length); i++)
+            byte[] wantedByte = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
+            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
             {
-                wantedByte[wantedByte.Length - 1 - i] = (byte)((((GetAt(firstByte, i) == 1) && (GetAt(secondByte, i) == 0)) || ((GetAt(firstByte, i) == 0) && (GetAt(secondByte, i) == 1))) ? 1 : 0);
+                wantedByte[wantedByte.Length - 1 - i] = (byte)((((GetAt(firstByteArray, i) == 1) && (GetAt(secondByteArray, i) == 0)) || ((GetAt(firstByteArray, i) == 0) && (GetAt(secondByteArray, i) == 1))) ? 1 : 0);
             } 
             return wantedByte;
         }
 
-        byte[] AndOperator(byte[] firstByte, byte[] secondByte)
+        byte[] AndOperator(byte[] firstByteArray, byte[] secondByteArray)
         {
-            byte[] wantedByte = new byte[Math.Max(firstByte.Length, secondByte.Length)];
-            for (int i = 0; i < Math.Max(firstByte.Length, secondByte.Length); i++)
+            byte[] wantedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
+            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
             {
-                wantedByte[wantedByte.Length - 1 - i] = (byte)(((GetAt(firstByte, i) == 1) && (GetAt(secondByte, i) == 1)) ? 1 : 0);
+                wantedByteArray[wantedByteArray.Length - 1 - i] = (byte)(((GetAt(firstByteArray, i) == 1) && (GetAt(secondByteArray, i) == 1)) ? 1 : 0);
             } 
-            return wantedByte;
+            return wantedByteArray;
         }
 
-        byte[] OrOperator(byte[] firstByte, byte[] secondByte)
+        byte[] OrOperator(byte[] firstByteArray, byte[] secondByteArray)
         {
-            byte[] wantedByte = new byte[Math.Max(firstByte.Length, secondByte.Length)];
-            for (int i = 0; i < firstByte.Length; i++)
+            byte[] wantedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
+            for (int i = 0; i < firstByteArray.Length; i++)
             {
-                wantedByte[i] = (byte)((((GetAt(firstByte, i) == 0) && ((GetAt(secondByte, i) == 0)) ? 0 : 1)));
+                wantedByteArray[i] = (byte)((((GetAt(firstByteArray, i) == 0) && ((GetAt(secondByteArray, i) == 0)) ? 0 : 1)));
             } 
-            return wantedByte;
+            return wantedByteArray;
         }
 
-        byte[] NotOperator(byte[] firstByte)
+        byte[] NotOperator(byte[] byteArray)
         {
-            byte[] wantedByte = new byte[firstByte.Length];
-            for (int i = 0; i < firstByte.Length; i++)
+            byte[] wantedByteArray = new byte[byteArray.Length];
+            for (int i = 0; i < byteArray.Length; i++)
             {
-                wantedByte[wantedByte.Length - 1 - i] = (byte)((GetAt(firstByte, i) == 0) ? 1 : 0); 
+                wantedByteArray[wantedByteArray.Length - 1 - i] = (byte)((GetAt(byteArray, i) == 0) ? 1 : 0); 
             }
-            return wantedByte;
+            return wantedByteArray;
         }
         byte[] ToBinary(int number)
         {   
