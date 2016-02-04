@@ -161,9 +161,18 @@ namespace BinaryOperations
             Assert.AreEqual(false, Equal(ToBinary(3), ToBinary(5)));
         }
 
+
         byte[] Summation(byte[] firstByteArray, byte[] secondByteArray)
         {
-
+            byte[] resultedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
+            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
+            {
+                int remainder = 0;
+                if ((byte)GetAt(firstByteArray, i) + GetAt(secondByteArray, i) > 1) remainder = 1;
+                else remainder = 0;
+                resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)(GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder);
+            }
+            return resultedByteArray;
         }
 
         bool Equal(byte[] firstByteArray, byte[] secondByteArray)
