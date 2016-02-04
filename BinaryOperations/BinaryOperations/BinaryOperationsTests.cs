@@ -54,7 +54,7 @@ namespace BinaryOperations
         [TestMethod]
         public void SecondOrOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1, 1}, OrOperator(ToBinary(5), ToBinary(3)));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1 }, OrOperator(ToBinary(5), ToBinary(3)));
         }
         [TestMethod]
         public void FirstAndOperatorTest()
@@ -64,7 +64,7 @@ namespace BinaryOperations
         [TestMethod]
         public void FirstXorOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1}, XorOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1 }, XorOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }));
         }
         [TestMethod]
         public void RightShift()
@@ -82,42 +82,42 @@ namespace BinaryOperations
             CollectionAssert.AreEqual(ToBinary(2), LeftShift(ToBinary(1), 1));
         }
         [TestMethod]
-        public void LessThanTest()
+        public void FirstIsNotSmallerThanSecond()
         {
             Assert.AreEqual(false, LessThan(ToBinary(49), ToBinary(8)));
         }
         [TestMethod]
-        public void SecondLessThanTest()
+        public void FirstIsNotSMallerThanSecond()
         {
             Assert.AreEqual(false, LessThan(ToBinary(49), ToBinary(38)));
         }
         [TestMethod]
-        public void ThirdLessThanTest()
+        public void FirstIsSmallerThanSecond()
         {
             Assert.AreEqual(true, LessThan(ToBinary(48), ToBinary(49)));
         }
         [TestMethod]
-        public void GreaterThanTest()
+        public void FirstIsGreaterThanSecond()
         {
             Assert.AreEqual(true, GreaterThan(ToBinary(49), ToBinary(13)));
         }
         [TestMethod]
-        public void SecondGreaterThanTest()
+        public void FirstIsGReaterThanSecond()
         {
             Assert.AreEqual(true, GreaterThan(ToBinary(49), ToBinary(38)));
         }
         [TestMethod]
-        public void ThirdGreaterThanTest()
+        public void FirstIsNotGreaterThanSecond()
         {
             Assert.AreEqual(false, GreaterThan(ToBinary(48), ToBinary(49)));
         }
         [TestMethod]
-        public void FourthGreaterThanTest()
+        public void FirstIsGREaterThanSecond()
         {
             Assert.AreEqual(true, GreaterThan(ToBinary(49), ToBinary(48)));
         }
         [TestMethod]
-        public void FifthGreaterThanTest()
+        public void FirstIsGREAterThanSecond()
         {
             Assert.AreEqual(true, GreaterThan(ToBinary(1124), ToBinary(5)));
         }
@@ -144,6 +144,16 @@ namespace BinaryOperations
         {
             byte[] byteArray = { 3, 2, 1 };
             Assert.AreEqual(0, GetAt(byteArray, 3));
+        }
+        [TestMethod]
+        public void FiveEqualsFive()
+        {
+            Assert.AreEqual(true, Equal(ToBinary(5), ToBinary(5)));
+        }
+
+        bool Equal(byte[] firstByteArray, byte[] secondByteArray)
+        {
+            return (((LessThan(firstByteArray, secondByteArray) == true) && (GreaterThan(firstByteArray, secondByteArray) == false)) || (((LessThan(firstByteArray, secondByteArray) == false) && ((GreaterThan(firstByteArray, secondByteArray) == true)))));
         }
 
         byte GetAt(byte[] byteArray, int i)
