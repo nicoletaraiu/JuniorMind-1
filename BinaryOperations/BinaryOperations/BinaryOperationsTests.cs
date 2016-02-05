@@ -97,7 +97,7 @@ namespace BinaryOperations
             Assert.AreEqual(true, LessThan(ToBinary(48), ToBinary(49)));
         }
         [TestMethod]
-        public void MyTestMethod()
+        public void ThreeIsSmallerThanFour()
         {
             Assert.AreEqual(true, LessThan(ToBinary(3), ToBinary(4)));
         }
@@ -210,10 +210,10 @@ namespace BinaryOperations
 
         bool LessThan(byte[] firstByteArray, byte[] secondByteArray)
         {
-            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
+            for (int i = Math.Max(firstByteArray.Length, secondByteArray.Length); i >= 0 ; i--)
             {
-                if (GetAt(firstByteArray, i) > GetAt(secondByteArray, i))
-                    return false;
+                if (GetAt(firstByteArray, i) != GetAt(secondByteArray, i))
+                    return GetAt(firstByteArray, i) < GetAt(secondByteArray, i);
             }
             return true;
         }
