@@ -185,6 +185,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1 }, Substract(ToBinary(2), ToBinary(1)));
         }
+        [TestMethod]
+        public void EightMinusFive()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1 }, Substract(ToBinary(8), ToBinary(5)));
+        }
 
         byte[] Substract(byte[] firstByteArray, byte[] secondByteArray)
         {
