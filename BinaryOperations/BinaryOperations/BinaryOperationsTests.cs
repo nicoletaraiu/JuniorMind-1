@@ -180,6 +180,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(125), Add(ToBinary(83), ToBinary(42)));
         }
+        [TestMethod]
+        public void TwoMinusOne()
+        {
+            CollectionAssert.AreEqual(ToBinary(1), Substract(ToBinary(2), ToBinary(1)));
+        }
 
         byte[] Substract(byte[] firstByteArray, byte[] secondByteArray)
         {
@@ -187,10 +192,13 @@ namespace BinaryOperations
             int remainder = 0;
             for (int i = 0; i < firstByteArray.Length; i++)
             {
-                int basePlusDigitMinusDigit = (byte)(2 + GetAt(firstByteArray, i) - GetAt(secondByteArray, i));
+                int basePlusDigitMinusDigit = (byte)(2 + GetAt(firstByteArray, i) - GetAt(secondByteArray, i) - remainder);
                 resultedByteArray[resultedByteArray.Length - i - 1] = (byte)(basePlusDigitMinusDigit % 2);
+
+                if (basePlusDigitMinusDigit < 2) remainder = 1;
+                else remainder = 0;
             }
-            
+            return resultedByteArray;
         }
 
         byte[] Add(byte[] firstByteArray, byte[] secondByteArray)
