@@ -175,6 +175,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(3), Summation(ToBinary(1), ToBinary(2)));
         }
+        [TestMethod]
+        public void AddingGreaterNumbers()
+        {
+            CollectionAssert.AreEqual(ToBinary(125), Summation(ToBinary(83), ToBinary(42)));
+        }
 
         byte[] Summation(byte[] firstByteArray, byte[] secondByteArray)
         {
