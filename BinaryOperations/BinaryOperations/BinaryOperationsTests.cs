@@ -166,9 +166,9 @@ namespace BinaryOperations
             Assert.AreEqual(false, Equal(ToBinary(3), ToBinary(5)));
         }
         [TestMethod]
-        public void SevenPlusOne()
+        public void FivePlusOne()
         {
-            CollectionAssert.AreEqual(ToBinary(8), Summation(ToBinary(7), ToBinary(1)));
+            CollectionAssert.AreEqual(ToBinary(5), Summation(ToBinary(4), ToBinary(1)));
         }
         [TestMethod]
         public void OnePlusTwo()
@@ -183,13 +183,13 @@ namespace BinaryOperations
             for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
             {
                 resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)((GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder) % 2);
-                if ((byte)GetAt(firstByteArray, i) + GetAt(secondByteArray, i) > 1) remainder = 1;
+                if (GetAt(firstByteArray, i) + GetAt(secondByteArray, i) > 1) remainder = 1;
                 else remainder = 0;   
             }
-            if (GetAt(firstByteArray, firstByteArray.Length - 1) + GetAt(secondByteArray, secondByteArray.Length - 1) > 0)
+            if (GetAt(firstByteArray, firstByteArray.Length - 1) + GetAt(secondByteArray, secondByteArray.Length - 1) > 1)
             {
                 Array.Resize(ref resultedByteArray, resultedByteArray.Length + 1);
-                RightShift(resultedByteArray, 1);
+                resultedByteArray = RightShift(resultedByteArray, 1);
                 resultedByteArray[0] = 1;
             }
             return resultedByteArray;
