@@ -186,7 +186,7 @@ namespace BinaryOperations
                 if (GetAt(firstByteArray, i) + GetAt(secondByteArray, i) > 1) remainder = 1;
                 else remainder = 0;   
             }
-            if (GetAt(firstByteArray, firstByteArray.Length - 1) + GetAt(secondByteArray, secondByteArray.Length - 1) > 1)
+            if (remainder > 1)
             {
                 Array.Resize(ref resultedByteArray, resultedByteArray.Length + 1);
                 resultedByteArray = RightShift(resultedByteArray, 1);
