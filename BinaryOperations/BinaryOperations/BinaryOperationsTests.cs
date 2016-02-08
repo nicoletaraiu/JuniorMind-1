@@ -170,6 +170,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(8), Summation(ToBinary(7), ToBinary(1)));
         }
+        [TestMethod]
+        public void OnePlusTwo()
+        {
+            CollectionAssert.AreEqual(ToBinary(3), Summation(ToBinary(1), ToBinary(2)));
+        }
 
         byte[] Summation(byte[] firstByteArray, byte[] secondByteArray)
         {
@@ -181,9 +186,9 @@ namespace BinaryOperations
                 if ((byte)GetAt(firstByteArray, i) + GetAt(secondByteArray, i) > 1) remainder = 1;
                 else remainder = 0;   
             }
-            if (GetAt(firstByteArray, 0) + GetAt(secondByteArray, 0) > 1)
+            if (GetAt(firstByteArray, firstByteArray.Length - 1) + GetAt(secondByteArray, secondByteArray.Length - 1) > 0)
             {
-                Array.Resize(ref resultedByteArray, 1);
+                Array.Resize(ref resultedByteArray, resultedByteArray.Length + 1);
                 RightShift(resultedByteArray, 1);
                 resultedByteArray[0] = 1;
             }
