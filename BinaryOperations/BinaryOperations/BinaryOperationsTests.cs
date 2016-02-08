@@ -168,20 +168,32 @@ namespace BinaryOperations
         [TestMethod]
         public void FivePlusOne()
         {
-            CollectionAssert.AreEqual(ToBinary(5), Summation(ToBinary(4), ToBinary(1)));
+            CollectionAssert.AreEqual(ToBinary(5), Add(ToBinary(4), ToBinary(1)));
         }
         [TestMethod]
         public void OnePlusTwo()
         {
-            CollectionAssert.AreEqual(ToBinary(3), Summation(ToBinary(1), ToBinary(2)));
+            CollectionAssert.AreEqual(ToBinary(3), Add(ToBinary(1), ToBinary(2)));
         }
         [TestMethod]
         public void AddingGreaterNumbers()
         {
-            CollectionAssert.AreEqual(ToBinary(125), Summation(ToBinary(83), ToBinary(42)));
+            CollectionAssert.AreEqual(ToBinary(125), Add(ToBinary(83), ToBinary(42)));
         }
 
-        byte[] Summation(byte[] firstByteArray, byte[] secondByteArray)
+        byte[] Substract(byte[] firstByteArray, byte[] secondByteArray)
+        {
+            byte[] resultedByteArray = new byte[firstByteArray.Length];
+            int remainder = 0;
+            for (int i = 0; i < firstByteArray.Length; i++)
+            {
+                int basePlusDigitMinusDigit = (byte)(2 + GetAt(firstByteArray, i) - GetAt(secondByteArray, i));
+                resultedByteArray[resultedByteArray.Length - i - 1] = (byte)(basePlusDigitMinusDigit % 2);
+            }
+            
+        }
+
+        byte[] Add(byte[] firstByteArray, byte[] secondByteArray)
         {
             byte[] resultedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
             int remainder = 0;
@@ -227,9 +239,6 @@ namespace BinaryOperations
             }
             return true;
         }
-        /// 49 -> 110001
-        /// 48 -> 110000
-        /// 38 -> 100110
 
         byte[] LeftShift(byte[] byteArray, int shiftingNumber)
         {
