@@ -190,6 +190,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1 }, Substract(ToBinary(8), ToBinary(5)));
         }
+        [TestMethod]
+        public void LeftShift()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1 , 0 , 0, 0 }, LeftShift(new byte[] { 1 }, 3));
+        }
 
         byte[] Substract(byte[] firstByteArray, byte[] secondByteArray)
         {
@@ -203,13 +208,7 @@ namespace BinaryOperations
                 if (basePlusDigitMinusDigit < 2) remainder = 1;
                 else remainder = 0;
             }
-            /*for (int i = resultedByteArray.Length - 1; i > 0; i--)
-            {
-                if (resultedByteArray[i] == 0)
-                    Array.Resize(ref resultedByteArray, resultedByteArray.Length - 1);
-
-            }*/
-            return resultedByteArray;
+                return resultedByteArray;
         }
 
         byte[] Add(byte[] firstByteArray, byte[] secondByteArray)
@@ -261,12 +260,12 @@ namespace BinaryOperations
 
         byte[] LeftShift(byte[] byteArray, int shiftingNumber)
         {
-            byte[] secondByte = new byte[byteArray.Length + shiftingNumber];
+            byte[] resultedByteArray = new byte[byteArray.Length + shiftingNumber];
             for (int i = 0; i < byteArray.Length; i++)
             {
-                secondByte[i] = byteArray[i];
+                resultedByteArray[i] = byteArray[i];
             }
-            return secondByte;
+            return resultedByteArray;
         }
 
         byte[] RightShift(byte[] firstByteArray, int shiftingNumber)
