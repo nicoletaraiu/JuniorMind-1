@@ -196,6 +196,32 @@ namespace BinaryOperations
             CollectionAssert.AreEqual(new byte[] { 1 , 0 , 0, 0 }, LeftShift(new byte[] { 1 }, 3));
         }
 
+        [TestMethod]
+        public void FourMinusOne()
+        {
+            CollectionAssert.AreEqual(ToBinary(3), Substract(ToBinary(4), ToBinary(1)));
+        }
+        [TestMethod]
+        public void MirrorArray()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 1 }, MirrorArray(new byte[] { 1, 1, 0 , 1}));
+        }
+        [TestMethod]
+        public void SecondMirrorArrayTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 0, 1 }, MirrorArray(new byte[] { 1, 0, 0, 1, 0 }));
+        }
+
+        byte[] MirrorArray(byte[] byteArray)
+        {
+            byte[] resultedByteArray = new byte[byteArray.Length];
+            for (int i = 0; i < byteArray.Length; i++)
+            {
+                resultedByteArray[i] = byteArray[byteArray.Length - 1 - i];
+            }
+            return resultedByteArray;
+        }
+
         byte[] Substract(byte[] firstByteArray, byte[] secondByteArray)
         {
             byte[] resultedByteArray = new byte[firstByteArray.Length];
@@ -207,10 +233,14 @@ namespace BinaryOperations
 
                 if (basePlusDigitMinusDigit < 2) remainder = 1;
                 else remainder = 0;
+
+                resultedByteArray = LeftShift(resultedByteArray, 1);
+                resultedByteArray = MirrorArray(resultedByteArray);
+                Array.Resize(ref resultedByteArray, resultedByteArray.Length - 1);
             }
                 return resultedByteArray;
-        }
-
+            }
+        
         byte[] Add(byte[] firstByteArray, byte[] secondByteArray)
         {
             byte[] resultedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
