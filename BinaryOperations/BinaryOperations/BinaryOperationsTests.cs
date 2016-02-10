@@ -69,12 +69,12 @@ namespace BinaryOperations
         [TestMethod]
         public void RightShift()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1 }, RightShift(new byte[] { 0, 1, 0 }, 1));
+            CollectionAssert.AreEqual(new byte[] { 0, 1 }, RightShift(new byte[] { 0, 1, 0 }, 1));
         }
         [TestMethod]
         public void SecondRightShiftTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1 }, RightShift(new byte[] { 1, 1, 0 }, 2));
+            CollectionAssert.AreEqual(new byte[] { 1 }, RightShift(new byte[] { 1, 1, 0 }, 2));
         }
         [TestMethod]
         public void ThirdRightShiftTest()
@@ -312,19 +312,10 @@ namespace BinaryOperations
             return resultedByteArray;
         }
 
-        byte[] RightShift(byte[] firstByteArray, int shiftingNumber)
-        {   
-            byte[] secondByte = firstByteArray;
-            while (shiftingNumber > 0)
-            {
-                for (int i = secondByte.Length - 1; i > 0; i--)
-                {
-                    secondByte[i] = secondByte[i - 1];
-                }
-                secondByte[0] = 0;
-                shiftingNumber--;
-            }
-            return secondByte;
+        byte[] RightShift(byte[] byteArray, int shiftingNumber)
+        {
+            Array.Resize(ref byteArray, byteArray.Length - shiftingNumber);
+            return byteArray;
         }
 
         byte[] XorOperator(byte[] firstByteArray, byte[] secondByteArray)
