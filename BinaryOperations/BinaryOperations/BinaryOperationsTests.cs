@@ -183,12 +183,12 @@ namespace BinaryOperations
         [TestMethod]
         public void TwoMinusOne()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1 }, Substract(ToBinary(2), ToBinary(1)));
+            CollectionAssert.AreEqual(new byte[] { 1 }, Subtract(ToBinary(2), ToBinary(1)));
         }
         [TestMethod]
         public void EightMinusFive()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 0, 1, 1 }, Substract(ToBinary(8), ToBinary(5)));
+            CollectionAssert.AreEqual(new byte[] { 1, 1 }, Subtract(ToBinary(8), ToBinary(5)));
         }
         [TestMethod]
         public void LeftShift()
@@ -198,7 +198,7 @@ namespace BinaryOperations
         [TestMethod]
         public void FourMinusOne()
         {
-            CollectionAssert.AreEqual(ToBinary(3), Substract(ToBinary(4), ToBinary(1)));
+            CollectionAssert.AreEqual(ToBinary(3), Subtract(ToBinary(4), ToBinary(1)));
         }
         [TestMethod]
         public void MirrorArray()
@@ -235,6 +235,12 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 1, 0, 1 }, RemoveZeroes(new byte[] { 0, 0, 0, 1, 0, 1 }));
         }
+        [TestMethod]
+        public void ThreePlusSeven()
+        {
+            CollectionAssert.AreEqual(ToBinary(10), Add(ToBinary(3), ToBinary(7)));
+        }
+   
         byte[] MirrorArray(byte[] byteArray)
         {
             byte[] resultedByteArray = new byte[byteArray.Length];
@@ -245,7 +251,7 @@ namespace BinaryOperations
             return resultedByteArray;
         }
 
-        byte[] Substract(byte[] firstByteArray, byte[] secondByteArray)
+        byte[] Subtract(byte[] firstByteArray, byte[] secondByteArray)
         {
             byte[] resultedByteArray = new byte[firstByteArray.Length];
             int remainder = 0;
@@ -267,10 +273,12 @@ namespace BinaryOperations
             int remainder = 0;
             for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
             {
-                resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)((GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder) % 2);
-                if (GetAt(firstByteArray, i) + GetAt(secondByteArray, i) > 1) remainder = 1;
+                byte bitsAdder = (byte)(GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder + 2);
+                resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)(bitsAdder % 2);
+                if (bitsAdder > 1) remainder = 1;
                 else remainder = 0;   
-            }
+            }                          
+
             if (remainder > 1)
             {
                 Array.Resize(ref resultedByteArray, resultedByteArray.Length + 1);
