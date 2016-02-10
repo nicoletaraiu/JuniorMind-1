@@ -44,7 +44,7 @@ namespace BinaryOperations
         [TestMethod]
         public void FirstOrOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1, 1 }, OrOperator(new byte[] { 1, 0, 1 }, new byte[] { 1, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1 }, ImplementALogicOperator(new byte[] { 1, 0, 1 }, new byte[] { 1, 1, 0 }, "OR"));
         }
         [TestMethod]
         public void ToBinary()
@@ -54,17 +54,17 @@ namespace BinaryOperations
         [TestMethod]
         public void SecondOrOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 1, 1 }, OrOperator(ToBinary(5), ToBinary(3)));
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1 }, ImplementALogicOperator(ToBinary(5), ToBinary(3), "OR"));
         }
         [TestMethod]
         public void FirstAndOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, AndOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, ImplementALogicOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }, "AND"));
         }
         [TestMethod]
         public void FirstXorOperatorTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1 }, XorOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1 }, ImplementALogicOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }, "XOR"));
         }
         [TestMethod]
         public void RightShift()
@@ -248,13 +248,9 @@ namespace BinaryOperations
 
                 if (basePlusDigitMinusDigit < 2) remainder = 1;
                 else remainder = 0;
-
-                resultedByteArray = LeftShift(resultedByteArray, 1);
-                resultedByteArray = MirrorArray(resultedByteArray);
-                Array.Resize(ref resultedByteArray, resultedByteArray.Length - 1);
             }
-                return resultedByteArray;
-            }
+            return resultedByteArray;
+        }
         
         byte[] Add(byte[] firstByteArray, byte[] secondByteArray)
         {
