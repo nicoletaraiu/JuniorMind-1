@@ -271,22 +271,20 @@ namespace BinaryOperations
         {
             byte[] resultedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
             int remainder = 0;
-            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
+            for (int i = 0; i < resultedByteArray.Length; i++)
             {
-                byte bitsAdder = (byte)(GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder + 2);
+                byte bitsAdder = (byte)(GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder);
                 resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)(bitsAdder % 2);
-                if (bitsAdder > 1) remainder = 1;
-                else remainder = 0;   
+                remainder = (bitsAdder > 1) ? 1 : 0; 
             }                          
 
-            if (remainder > 1)
+            if (remainder == 1)
             {
                 Array.Resize(ref resultedByteArray, resultedByteArray.Length + 1);
-                resultedByteArray = RightShift(resultedByteArray, 1);
+                ShiftRightKeepZeroes(resultedByteArray, 1);
                 resultedByteArray[0] = 1;
             }
             return resultedByteArray;
-                
         }
 
         bool Equal(byte[] firstByteArray, byte[] secondByteArray)
@@ -353,6 +351,19 @@ namespace BinaryOperations
                 }
                 counter--;
                 Array.Resize<byte>(ref byteArray, byteArray.Length - 1);
+            }
+            return byteArray;
+        }
+        byte[] ShiftRightKeepZeroes(byte[] byteArray, int shiftingNumber)
+        {
+            while (shiftingNumber > 0)
+            {
+                for (int i = byteArray.Length - 1; i > 0; i--)
+                {
+                    byteArray[i] = byteArray[i - 1];
+
+                }
+                shiftingNumber--;
             }
             return byteArray;
         }
