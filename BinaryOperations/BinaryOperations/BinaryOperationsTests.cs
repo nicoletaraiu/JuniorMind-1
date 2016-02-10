@@ -314,36 +314,6 @@ namespace BinaryOperations
             return byteArray;
         }
 
-        byte[] XorOperator(byte[] firstByteArray, byte[] secondByteArray)
-        {
-            byte[] wantedByte = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
-            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
-            {
-                wantedByte[wantedByte.Length - 1 - i] = (byte)((((GetAt(firstByteArray, i) == 1) && (GetAt(secondByteArray, i) == 0)) || ((GetAt(firstByteArray, i) == 0) && (GetAt(secondByteArray, i) == 1))) ? 1 : 0);
-            } 
-            return wantedByte;
-        }
-
-        byte[] AndOperator(byte[] firstByteArray, byte[] secondByteArray)
-        {
-            byte[] wantedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
-            for (int i = 0; i < Math.Max(firstByteArray.Length, secondByteArray.Length); i++)
-            {
-                wantedByteArray[wantedByteArray.Length - 1 - i] = (byte)(((GetAt(firstByteArray, i) == 1) && (GetAt(secondByteArray, i) == 1)) ? 1 : 0);
-            } 
-            return wantedByteArray;
-        }
-
-        byte[] OrOperator(byte[] firstByteArray, byte[] secondByteArray)
-        {
-            byte[] wantedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
-            for (int i = 0; i < firstByteArray.Length; i++)
-            {
-                wantedByteArray[i] = (byte)((((GetAt(firstByteArray, i) == 0) && ((GetAt(secondByteArray, i) == 0)) ? 0 : 1)));
-            } 
-            return wantedByteArray;
-        }
-
         byte[] ImplementALogicOperator(byte[] firstByteArray, byte[] secondByteArray, string choice)
         {
             byte[] wantedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
