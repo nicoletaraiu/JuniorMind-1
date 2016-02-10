@@ -289,8 +289,7 @@ namespace BinaryOperations
 
         bool GreaterThan(byte[] firstByteArray, byte[] secondByteArray)
         {
-            if (LessThan(secondByteArray, firstByteArray) == false) return true;
-            return false;
+            return LessThan(firstByteArray, secondByteArray);
         }
 
         bool LessThan(byte[] firstByteArray, byte[] secondByteArray)
