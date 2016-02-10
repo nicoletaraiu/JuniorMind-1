@@ -163,7 +163,7 @@ namespace BinaryOperations
         [TestMethod]
         public void ThreeIsNotEqualToFive()
         {
-            Assert.AreEqual(false, Equal(ToBinary(3), ToBinary(5)));
+            Assert.AreEqual(true, Equal(ToBinary(3), ToBinary(5)));
         }
         [TestMethod]
         public void FivePlusOne()
@@ -278,7 +278,7 @@ namespace BinaryOperations
 
         bool Equal(byte[] firstByteArray, byte[] secondByteArray)
         {
-            return (((LessThan(firstByteArray, secondByteArray) == true) && (GreaterThan(firstByteArray, secondByteArray) == false)) || (((LessThan(firstByteArray, secondByteArray) == false) && ((GreaterThan(firstByteArray, secondByteArray) == true)))));
+            return ((GreaterThan(firstByteArray, secondByteArray)) && (LessThan(firstByteArray, secondByteArray)));
         }
 
         byte GetAt(byte[] byteArray, int i)
