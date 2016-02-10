@@ -69,12 +69,12 @@ namespace BinaryOperations
         [TestMethod]
         public void RightShift()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1 }, RightShift(new byte[] { 0, 1, 0 }, 1));
+            CollectionAssert.AreEqual(ToBinary(2 >> 2), RightShift(ToBinary(2), 2));
         }
         [TestMethod]
         public void SecondRightShiftTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1 }, RightShift(new byte[] { 1, 1, 0 }, 2));
+            CollectionAssert.AreEqual(ToBinary(5 >> 2), RightShift(ToBinary(5), 2));
         }
         [TestMethod]
         public void ThirdRightShiftTest()
@@ -193,9 +193,8 @@ namespace BinaryOperations
         [TestMethod]
         public void LeftShift()
         {
-            CollectionAssert.AreEqual(new byte[] { 1 , 0 , 0, 0 }, LeftShift(new byte[] { 1 }, 3));
+            CollectionAssert.AreEqual(ToBinary(1 << 3), LeftShift(ToBinary(1), 3));
         }
-
         [TestMethod]
         public void FourMinusOne()
         {
@@ -226,7 +225,16 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1 }, ImplementALogicOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }, "XOR"));
         }
-
+        [TestMethod]
+        public void CountZeroes()
+        {
+            Assert.AreEqual(2, CountZeroes(new byte[] { 0, 0, 1, 1, 0 }));
+        }
+        [TestMethod]
+        public void RemoveZeroes()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1 }, RemoveZeroes(new byte[] { 0, 0, 0, 1, 0, 1 }));
+        }
         byte[] MirrorArray(byte[] byteArray)
         {
             byte[] resultedByteArray = new byte[byteArray.Length];
@@ -249,6 +257,7 @@ namespace BinaryOperations
                 if (basePlusDigitMinusDigit < 2) remainder = 1;
                 else remainder = 0;
             }
+            resultedByteArray = RemoveZeroes(resultedByteArray);
             return resultedByteArray;
         }
         
@@ -312,8 +321,34 @@ namespace BinaryOperations
         {
             Array.Resize(ref byteArray, byteArray.Length - shiftingNumber);
             return byteArray;
+        }    
+        
+        int CountZeroes(byte[] byteArray)
+        {
+            int counter = 0;
+            for (int i = 0; i < byteArray.Length; i++)
+            {
+                if (byteArray[i] == 0) counter++;
+                if (byteArray[i] == 1) break;
+            }
+            return counter;
         }
 
+        byte[] RemoveZeroes(byte[] byteArray)
+        {
+            int counter = CountZeroes(byteArray);
+            while (counter > 0)
+            {
+                for (int i = 0; i < byteArray.Length - 1; i++)
+                {
+                    byteArray[i] = byteArray[i + 1];
+                }
+                counter--;
+                Array.Resize<byte>(ref byteArray, byteArray.Length - 1);
+            }
+            return byteArray;
+        }
+        
         byte[] ImplementALogicOperator(byte[] firstByteArray, byte[] secondByteArray, string choice)
         {
             byte[] wantedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
