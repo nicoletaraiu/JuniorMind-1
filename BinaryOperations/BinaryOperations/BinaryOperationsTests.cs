@@ -211,6 +211,21 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 0, 1 }, MirrorArray(new byte[] { 1, 0, 0, 1, 0 }));
         }
+        [TestMethod]
+        public void ImplementLogicOperatorOR()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 1, 1 }, ImplementALogicOperator(new byte[] { 1, 0, 1 }, new byte[] { 1, 1, 0 }, "OR"));
+        }
+        [TestMethod]
+        public void ImplementLogicOperatorAND()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0, 0, 0, 0 }, ImplementALogicOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }, "AND"));
+        }
+        [TestMethod]
+        public void ImplementLogicOperatorXOR()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 1, 1 }, ImplementALogicOperator(new byte[] { 1, 1, 0, 0, 0, 1 }, new byte[] { 1, 0, 0, 1, 1, 0 }, "XOR"));
+        }
 
         byte[] MirrorArray(byte[] byteArray)
         {
@@ -342,6 +357,27 @@ namespace BinaryOperations
             } 
             return wantedByteArray;
         }
+
+        byte[] ImplementALogicOperator(byte[] firstByteArray, byte[] secondByteArray, string choice)
+        {
+            byte[] wantedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
+            for (int i = 0; i < wantedByteArray.Length; i++)
+            {
+                switch (choice)
+            {
+                    case "AND":
+                        wantedByteArray[wantedByteArray.Length - 1 - i] = (byte)(((GetAt(firstByteArray, i) == 1) && (GetAt(secondByteArray, i) == 1)) ? 1 : 0);
+                        break;
+                    case "OR":
+                        wantedByteArray[wantedByteArray.Length - 1 - i] = (byte)((((GetAt(firstByteArray, i) == 0) && ((GetAt(secondByteArray, i) == 0)) ? 0 : 1)));
+                        break;
+                    case "XOR":
+                        wantedByteArray[wantedByteArray.Length - 1 - i] = (byte)((((GetAt(firstByteArray, i) == 1) && (GetAt(secondByteArray, i) == 0)) || ((GetAt(firstByteArray, i) == 0) && (GetAt(secondByteArray, i) == 1))) ? 1 : 0);
+                        break;
+                }
+            }
+            return wantedByteArray;
+        } 
 
         byte[] NotOperator(byte[] byteArray)
         {
