@@ -255,8 +255,29 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(30), Multiply(ToBinary(5), ToBinary(6)));
         }
+        [TestMethod]
+        public void TenDividedByTwo()
+        {
+            CollectionAssert.AreEqual(ToBinary(5), Divide(ToBinary(10), ToBinary(2)));
+        }
+        [TestMethod]
+        public void FifteenDividedByTwo()
+        {
+            CollectionAssert.AreEqual(ToBinary(3), Divide(ToBinary(15), ToBinary(5)));
+        }
    
-        byte[] Multiply(byte[] firstByteArray, byte[]secondByteArray)
+        byte[] Divide(byte[] firstByteArray, byte[] secondByteArray)
+        {
+            byte[] resultedByteArray = { 0 };
+            while (!Equal(firstByteArray, new byte[] { 0 }))
+            {
+                resultedByteArray = Add(resultedByteArray, new byte[] { 1 });
+                firstByteArray = Subtract(firstByteArray, secondByteArray);
+            }
+            return resultedByteArray;
+        }
+
+        byte[] Multiply(byte[] firstByteArray, byte[] secondByteArray)
         {
             byte[] resultedByteArray = { 0 };
             while (!Equal(secondByteArray, new byte[] { 0 }))
