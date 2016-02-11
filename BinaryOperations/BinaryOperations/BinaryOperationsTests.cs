@@ -240,7 +240,34 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(10), Add(ToBinary(3), ToBinary(7)));
         }
+        [TestMethod]
+        public void TwoMultipliedTwoTimes()
+        {
+            CollectionAssert.AreEqual(ToBinary(4), Multiply(ToBinary(2), ToBinary(2)));
+        }
+        [TestMethod]
+        public void TwoMultipliedThreeTimes()
+        {
+            CollectionAssert.AreEqual(ToBinary(6), Multiply(ToBinary(2), ToBinary(3)));
+        }
+        [TestMethod]
+        public void FiveMultipliedSixTimes()
+        {
+            CollectionAssert.AreEqual(ToBinary(30), Multiply(ToBinary(5), ToBinary(6)));
+        }
    
+        byte[] Multiply(byte[] firstByteArray, byte[]secondByteArray)
+        {
+            byte[] resultedByteArray = { 0 };
+            while (!Equal(secondByteArray, new byte[] { 0 }))
+            {
+                resultedByteArray = Add(resultedByteArray, firstByteArray);
+                secondByteArray = Subtract(secondByteArray, new byte[] { 1 });
+                
+            }
+            return resultedByteArray;
+        }
+
         byte[] MirrorArray(byte[] byteArray)
         {
             byte[] resultedByteArray = new byte[byteArray.Length];
