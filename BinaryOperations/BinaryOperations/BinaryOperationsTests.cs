@@ -280,6 +280,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 3, 2, 4 }, ConvertIntoAnyBase(89, 5));
         }
+        [TestMethod]
+        public void MultiplicationInBaseFour()
+        {
+            CollectionAssert.AreEqual(new byte[] { 2, 2, 3, 3 }, Multiply(ConvertIntoAnyBase(35, 4), ConvertIntoAnyBase(5, 4), 4));
+        }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
         {
