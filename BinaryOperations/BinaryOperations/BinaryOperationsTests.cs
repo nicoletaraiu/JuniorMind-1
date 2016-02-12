@@ -265,7 +265,44 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(3), Divide(ToBinary(15), ToBinary(5), 2));
         }
-   
+        [TestMethod]
+        public void TwentyInBaseThree()
+        {
+            CollectionAssert.AreEqual(new byte[] { 2, 0, 2 }, ConvertIntoAnyBase(20, 3));
+        }
+        [TestMethod]
+        public void FiftyInBaseThree()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 2, 1, 2 }, ConvertIntoAnyBase(50, 3));
+        }
+        [TestMethod]
+        public void EightyNineInBaseFive()
+        {
+            CollectionAssert.AreEqual(new byte[] { 3, 2, 4 }, ConvertIntoAnyBase(89, 5));
+        }
+
+        int CalculateNeededArrayLengthForAnyBase(int number, int Base)
+        {
+            int length = 0;
+            while (number > 0)
+            {
+                number /= Base;
+                length += 1;
+            }
+            return length;
+        }
+
+        byte[] ConvertIntoAnyBase(int number, int Base)
+        { 
+            byte[] resultedNumber = new byte[CalculateNeededArrayLengthForAnyBase(number, Base)];
+            while (number > 0)
+            {
+                resultedNumber[CalculateNeededArrayLengthForAnyBase(number, Base) - 1] = (byte)(number % Base);
+                number = number / Base;
+            }
+            return resultedNumber;
+        }
+
         byte[] Divide(byte[] firstByteArray, byte[] secondByteArray, byte Base)
         {
             byte[] resultedByteArray = { 0 };
