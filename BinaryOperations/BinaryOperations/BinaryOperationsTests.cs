@@ -323,7 +323,12 @@ namespace BinaryOperations
         [TestMethod]
         public void MultiplyInBaseSeven()
         {
-            CollectionAssert.AreEqual(ConvertIntoAnyBase((125*17), 7), Multiply(ConvertIntoAnyBase(125, 7), ConvertIntoAnyBase(17, 7), 7));
+            CollectionAssert.AreEqual(ConvertIntoAnyBase((125 * 17), 7), Multiply(ConvertIntoAnyBase(125, 7), ConvertIntoAnyBase(17, 7), 7));
+        }
+        [TestMethod]
+        public void DivideInBaseFour()
+        {
+            CollectionAssert.AreEqual(ConvertIntoAnyBase((400 / 20), 4), Divide(ConvertIntoAnyBase(400, 4), ConvertIntoAnyBase(20, 4), 4));
         }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
