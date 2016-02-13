@@ -320,6 +320,11 @@ namespace BinaryOperations
         {
             Assert.AreEqual(0, CountZeroes(new byte[] { 2, 0 }));
         }
+        [TestMethod]
+        public void MultiplyInBaseSeven()
+        {
+            CollectionAssert.AreEqual(ConvertIntoAnyBase((125*17), 7), Multiply(ConvertIntoAnyBase(125, 7), ConvertIntoAnyBase(17, 7), 7));
+        }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
         {
