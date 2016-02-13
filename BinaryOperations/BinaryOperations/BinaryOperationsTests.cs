@@ -203,7 +203,7 @@ namespace BinaryOperations
         [TestMethod]
         public void MirrorArray()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 1 }, MirrorArray(new byte[] { 1, 1, 0 , 1}));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1, 1 }, MirrorArray(new byte[] { 1, 1, 0, 1 }));
         }
         [TestMethod]
         public void SecondMirrorArrayTest()
@@ -285,6 +285,28 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ConvertIntoAnyBase(4 - 1, 4), Subtract(ConvertIntoAnyBase(4, 4), ConvertIntoAnyBase(1, 4), 4));
         }
+        [TestMethod]
+        public void SubtractInBaseSix()
+        {
+            CollectionAssert.AreEqual(ConvertIntoAnyBase(15 - 3, 6), SubtractInAnyBase(ConvertIntoAnyBase(15, 6), ConvertIntoAnyBase(3, 6), 6));
+        }
+
+
+
+        byte[] SubtractInAnyBase(byte[] firstByteArray, byte[] secondByteArray, byte Base)
+        {
+            byte[] resultedByteArray = new byte[firstByteArray.Length];
+            int remainder = 0;
+            for (int i = 0; i < firstByteArray.Length; i++)
+            {
+                int basePlusDigitMinusDigit = (byte)(Base + (GetAt(firstByteArray, i) - GetAt(secondByteArray, i) - remainder));
+                resultedByteArray[resultedByteArray.Length - i - 1] = (byte)(basePlusDigitMinusDigit % Base);
+
+                if (basePlusDigitMinusDigit < Base) remainder = 1;
+                else remainder = 0;
+            }
+            return resultedByteArray;
+        }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
         {
@@ -356,7 +378,7 @@ namespace BinaryOperations
             resultedByteArray = RemoveZeroes(resultedByteArray);
             return resultedByteArray;
         }
-        
+
         byte[] Add(byte[] firstByteArray, byte[] secondByteArray, byte Base)
         {
             byte[] resultedByteArray = new byte[Math.Max(firstByteArray.Length, secondByteArray.Length)];
