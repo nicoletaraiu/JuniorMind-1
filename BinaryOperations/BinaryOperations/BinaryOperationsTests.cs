@@ -340,6 +340,15 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ConvertIntoAnyBase(5040, 6), Factorial(ConvertIntoAnyBase(7, 6), 6));
         }
+        [TestMethod]
+        public void FactorialFortyNine()
+        {
+            byte radix = 128;
+            var fortyNine = ConvertIntoAnyBase(49, radix);
+            var fortyNineFactorial = Factorial(fortyNine, radix);
+            var fortyEightFactorial = Factorial(ConvertIntoAnyBase(48, radix), radix);
+            CollectionAssert.AreEqual(fortyNine, Divide(fortyNineFactorial, fortyEightFactorial, radix));
+        }
 
         byte[] Factorial(byte[] byteArray, byte Base)
         {
