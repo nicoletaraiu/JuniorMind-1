@@ -315,6 +315,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(new byte[] { 2, 0, 1 }, RemoveZeroes(ConvertIntoAnyBase(73, 6)));
         }
+        [TestMethod]
+        public void CountingZeroes()
+        {
+            Assert.AreEqual(0, CountZeroes(new byte[] { 2, 0 }));
+        }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
         {
@@ -455,7 +460,7 @@ namespace BinaryOperations
             for (int i = 0; i < byteArray.Length; i++)
             {
                 if (byteArray[i] == 0) counter++;
-                if (byteArray[i] == 1) break;
+                if (byteArray[i] != 0) break;
             }
             return counter;
         }
