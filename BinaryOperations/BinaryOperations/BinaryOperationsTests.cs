@@ -305,6 +305,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ConvertIntoAnyBase((280 + 45), 8), Add(ConvertIntoAnyBase(280, 8), ConvertIntoAnyBase(45, 8), 8));
         }
+        [TestMethod]
+        public void SubtractInBaseSeven()
+        {
+            CollectionAssert.AreEqual(ConvertIntoAnyBase((67 - 42), 7), Subtract(ConvertIntoAnyBase(67, 7), ConvertIntoAnyBase(42, 7), 7));
+        }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
         {
