@@ -330,6 +330,22 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ConvertIntoAnyBase((400 / 20), 4), Divide(ConvertIntoAnyBase(400, 4), ConvertIntoAnyBase(20, 4), 4));
         }
+        [TestMethod]
+        public void Factorial()
+        {
+            CollectionAssert.AreEqual(ToBinary(6), Factorial(ToBinary(3), 2));
+        }
+
+        byte[] Factorial(byte[] byteArray, byte Base)
+        {
+            byte[] factorial = { 1 };
+            while (!Equal(byteArray, new byte[] { 0 }))
+            {
+                factorial = Multiply(factorial, byteArray, Base);
+                byteArray = Subtract(byteArray, new byte[] { 1 }, Base);
+            }
+            return factorial;
+        }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
         {
