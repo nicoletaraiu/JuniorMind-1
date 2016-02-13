@@ -281,9 +281,9 @@ namespace BinaryOperations
             CollectionAssert.AreEqual(new byte[] { 3, 2, 4 }, ConvertIntoAnyBase(89, 5));
         }
         [TestMethod]
-        public void MultiplicationInBaseFour()
+        public void SubtractionInBaseFour()
         {
-            CollectionAssert.AreEqual(new byte[] { 2, 2, 3, 3 }, Multiply(ConvertIntoAnyBase(35, 4), ConvertIntoAnyBase(5, 4), 4));
+            CollectionAssert.AreEqual(ConvertIntoAnyBase(4 - 1, 4), Subtract(ConvertIntoAnyBase(4, 4), ConvertIntoAnyBase(1, 4), 4));
         }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
@@ -350,7 +350,7 @@ namespace BinaryOperations
                 int basePlusDigitMinusDigit = (byte)(Base + (GetAt(firstByteArray, i) - GetAt(secondByteArray, i) - remainder));
                 resultedByteArray[resultedByteArray.Length - i - 1] = (byte)(basePlusDigitMinusDigit % Base);
 
-                if (basePlusDigitMinusDigit < 2) remainder = 1;
+                if (basePlusDigitMinusDigit < Base) remainder = 1;
                 else remainder = 0;
             }
             resultedByteArray = RemoveZeroes(resultedByteArray);
