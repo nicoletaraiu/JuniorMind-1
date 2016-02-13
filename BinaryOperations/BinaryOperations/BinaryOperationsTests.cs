@@ -335,6 +335,11 @@ namespace BinaryOperations
         {
             CollectionAssert.AreEqual(ToBinary(6), Factorial(ToBinary(3), 2));
         }
+        [TestMethod]
+        public void FactorialInBaseFour()
+        {
+            CollectionAssert.AreEqual(ConvertIntoAnyBase(5040, 6), Factorial(ConvertIntoAnyBase(7, 6), 6));
+        }
 
         byte[] Factorial(byte[] byteArray, byte Base)
         {
