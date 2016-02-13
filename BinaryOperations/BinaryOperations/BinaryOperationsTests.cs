@@ -288,7 +288,7 @@ namespace BinaryOperations
         [TestMethod]
         public void SubtractInBaseSix()
         {
-            CollectionAssert.AreEqual(ConvertIntoAnyBase(15 - 3, 6), Subtract(ConvertIntoAnyBase(15, 6), ConvertIntoAnyBase(3, 6), 6));
+            CollectionAssert.AreEqual(ConvertIntoAnyBase(255 - 182, 6), Subtract(ConvertIntoAnyBase(255, 6), ConvertIntoAnyBase(182, 6), 6));
         }
         [TestMethod]
         public void SubtractInBaseFive()
@@ -309,6 +309,11 @@ namespace BinaryOperations
         public void SubtractInBaseSeven()
         {
             CollectionAssert.AreEqual(ConvertIntoAnyBase((67 - 42), 7), Subtract(ConvertIntoAnyBase(67, 7), ConvertIntoAnyBase(42, 7), 7));
+        }
+        [TestMethod]
+        public void RemovingZeroes()
+        {
+            CollectionAssert.AreEqual(new byte[] { 2, 0, 1 }, RemoveZeroes(ConvertIntoAnyBase(73, 6)));
         }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
