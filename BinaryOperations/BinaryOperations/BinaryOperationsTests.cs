@@ -288,24 +288,22 @@ namespace BinaryOperations
         [TestMethod]
         public void SubtractInBaseSix()
         {
-            CollectionAssert.AreEqual(ConvertIntoAnyBase(15 - 3, 6), SubtractInAnyBase(ConvertIntoAnyBase(15, 6), ConvertIntoAnyBase(3, 6), 6));
+            CollectionAssert.AreEqual(ConvertIntoAnyBase(15 - 3, 6), Subtract(ConvertIntoAnyBase(15, 6), ConvertIntoAnyBase(3, 6), 6));
         }
-
-
-
-        byte[] SubtractInAnyBase(byte[] firstByteArray, byte[] secondByteArray, byte Base)
+        [TestMethod]
+        public void SubtractInBaseFive()
         {
-            byte[] resultedByteArray = new byte[firstByteArray.Length];
-            int remainder = 0;
-            for (int i = 0; i < firstByteArray.Length; i++)
-            {
-                int basePlusDigitMinusDigit = (byte)(Base + (GetAt(firstByteArray, i) - GetAt(secondByteArray, i) - remainder));
-                resultedByteArray[resultedByteArray.Length - i - 1] = (byte)(basePlusDigitMinusDigit % Base);
-
-                if (basePlusDigitMinusDigit < Base) remainder = 1;
-                else remainder = 0;
-            }
-            return resultedByteArray;
+            CollectionAssert.AreEqual(ConvertIntoAnyBase(99 - 13, 5), Subtract(ConvertIntoAnyBase(99, 5), ConvertIntoAnyBase(13, 5), 5));
+        }
+        [TestMethod]
+        public void AddInBaseSix()
+        {
+            CollectionAssert.AreEqual(ConvertIntoAnyBase((75 + 35), 3), Add(ConvertIntoAnyBase(75, 3), ConvertIntoAnyBase(35, 3), 3));
+        }
+        [TestMethod]
+        public void AddInBaseEight()
+        {
+            CollectionAssert.AreEqual(ConvertIntoAnyBase((280 + 45), 8), Add(ConvertIntoAnyBase(280, 8), ConvertIntoAnyBase(45, 8), 8));
         }
 
         int CalculateNeededArrayLengthForAnyBase(int number, int Base)
@@ -387,7 +385,7 @@ namespace BinaryOperations
             {
                 byte bitsAdder = (byte)(GetAt(firstByteArray, i) + GetAt(secondByteArray, i) + remainder);
                 resultedByteArray[resultedByteArray.Length - 1 - i] = (byte)(bitsAdder % Base);
-                remainder = (bitsAdder > 1) ? 1 : 0; 
+                remainder = (bitsAdder > (Base - 1)) ? 1 : 0; 
             }                          
 
             if (remainder == 1)
