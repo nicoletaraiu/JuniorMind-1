@@ -12,6 +12,12 @@ namespace Shopping
             var prices = new Cart[] { new Cart("milk", 2), new Cart("bread", 1) };
             Assert.AreEqual(3, CalculateTheTotalPrice(prices));
         }
+        [TestMethod]
+        public void ShouldReturnCheapestProduc()
+        {
+            var products = new Cart[] { new Cart("milk", 2), new Cart("bread", 1), new Cart("eggs", 4) };
+            Assert.AreEqual(1, FindTheCheapestProduct(products));
+        }
         public struct Cart
         {
             public string name;
@@ -23,12 +29,24 @@ namespace Shopping
                 this.price = price;
             }
         }
-        static int CalculateTheTotalPrice(Cart[] goods)
+        static int CalculateTheTotalPrice(Cart[] products)
         {
             int total = 0;
-            for (int i = 0; i < goods.Length; i++)
-                total += goods[i].price;
+            for (int i = 0; i < products.Length; i++)
+                total += products[i].price;
             return total;
+        }
+        static int FindTheCheapestProduct(Cart[] products)
+        {
+            int cheapestProduct = products[0].price;
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].price < cheapestProduct)
+                {
+                    cheapestProduct = products[i].price;
+                }
+            }
+            return cheapestProduct;
         }
     }
 }
