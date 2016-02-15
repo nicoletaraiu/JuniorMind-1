@@ -24,6 +24,12 @@ namespace Shopping
             var products = new Cart[] { new Cart("milk", 2), new Cart("bread", 1), new Cart("eggs", 4), new Cart("chocolate", 5) };
             Assert.AreEqual(3, CalculateTheAveragePrice(products));
         }
+        [TestMethod]
+        public void ShouldReturnTheMostExpensiveProduct()
+        {
+            var products = new Cart[] { new Cart("milk", 2), new Cart("bread", 1), new Cart("eggs", 4), new Cart("chocolate", 5) };
+            Assert.AreEqual(5, FindAndRemoveTheMostExpensiveProduct(products));
+        }
 
         public struct Cart
         {
@@ -36,6 +42,7 @@ namespace Shopping
                 this.price = price;
             }
         }
+
         static int CalculateTheTotalPrice(Cart[] products)
         {
             int total = 0;
@@ -43,6 +50,7 @@ namespace Shopping
                 total += products[i].price;
             return total;
         }
+
         static int FindTheCheapestProduct(Cart[] products)
         {
             int cheapestProduct = products[0].price;
@@ -55,12 +63,26 @@ namespace Shopping
             }
             return cheapestProduct;
         }
+
         static int CalculateTheAveragePrice(Cart[] products)
         {
             int total = 0;
             for (int i = 0; i < products.Length; i++)
                 total += products[i].price;
             return total / products.Length;
+        }
+
+        static int FindAndRemoveTheMostExpensiveProduct(Cart[] products)
+        {
+            int mostExpensive = 0;
+            for (int i = 0; i < products.Length; i++)
+            {
+                if (products[i].price > mostExpensive)
+                {
+                    mostExpensive = products[i].price;
+                }
+            }
+            return mostExpensive;
         }
     }
 }
