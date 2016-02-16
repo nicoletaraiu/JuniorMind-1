@@ -9,51 +9,51 @@ namespace Shopping
         [TestMethod]
         public void ShouldCalculateTheTotalPrice()
         {
-            var products = new Cart[] { new Cart("milk", 2), new Cart("bread", 1) };
+            var products = new Product[] { new Product("milk", 2), new Product("bread", 1) };
             Assert.AreEqual(3, CalculateTheTotalPrice(products));
         }
         [TestMethod]
         public void ShouldReturnCheapestProduc()
         {
-            var products = new Cart[] { new Cart("milk", 2), new Cart("bread", 1), new Cart("eggs", 4) };
+            var products = new Product[] { new Product("milk", 2), new Product("bread", 1), new Product("eggs", 4) };
             Assert.AreEqual(1, FindTheCheapestProduct(products));
         }
         [TestMethod]
         public void ShouldReturnTheAveragePrice()
         {
-            var products = new Cart[] { new Cart("milk", 2), new Cart("bread", 1), new Cart("eggs", 4), new Cart("chocolate", 5) };
+            var products = new Product[] { new Product("milk", 2), new Product("bread", 1), new Product("eggs", 4), new Product("chocolate", 5) };
             Assert.AreEqual(3, CalculateTheAveragePrice(products));
         }
         [TestMethod]
         public void ShouldReturnTheMostExpensiveProduct()
         {
-            var products = new Cart[] { new Cart("milk", 2), new Cart("bread", 1), new Cart("eggs", 4), new Cart("chocolate", 5) };
-            Assert.AreEqual(5, FindAndRemoveTheMostExpensiveProduct(products));
+            var products = new Product[] { new Product("milk", 2), new Product("bread", 1), new Product("eggs", 4), new Product("chocolate", 5) };
+            Assert.AreEqual(new Product("chocolate", 5), FindAndRemoveTheMostExpensiveProduct(products));
         }
 
-        public struct Cart
+        public struct Product
         {
             public string name;
             public int price;
 
-            public Cart(string name, int price)
+            public Product(string name, int price)
             {
                 this.name = name;
                 this.price = price;
             }
         }
 
-        static int CalculateTheTotalPrice(Cart[] products)
+        static decimal CalculateTheTotalPrice(Product[] products)
         {
-            int total = 0;
+            decimal total = 0;
             for (int i = 0; i < products.Length; i++)
                 total += products[i].price;
             return total;
         }
 
-        static int FindTheCheapestProduct(Cart[] products)
+        static decimal FindTheCheapestProduct(Product[] products)
         {
-            int cheapestProduct = products[0].price;
+            decimal cheapestProduct = products[0].price;
             for (int i = 0; i < products.Length; i++)
             {
                 if (products[i].price < cheapestProduct)
@@ -64,25 +64,27 @@ namespace Shopping
             return cheapestProduct;
         }
 
-        static int CalculateTheAveragePrice(Cart[] products)
+        static decimal CalculateTheAveragePrice(Product[] products)
         {
-            int total = 0;
+            decimal total = 0;
             for (int i = 0; i < products.Length; i++)
                 total += products[i].price;
             return total / products.Length;
         }
 
-        static int FindAndRemoveTheMostExpensiveProduct(Cart[] products)
+        static Product FindAndRemoveTheMostExpensiveProduct(Product[] products)
         {
-            int mostExpensive = 0;
+            decimal mostExpensive = 0;
+            int reminder = 0;
             for (int i = 0; i < products.Length; i++)
             {
                 if (products[i].price > mostExpensive)
                 {
                     mostExpensive = products[i].price;
+                    reminder = i;
                 }
             }
-            return mostExpensive;
+            return products[reminder];
         }
     }
 }
