@@ -39,7 +39,8 @@ namespace Shopping
         [TestMethod]
         public void ShouldAddAProduct()
         {
-
+            var products = new Product[] { new Product("milk", 2), new Product("bread", 1) };
+            CollectionAssert.AreEqual(new Product[] { new Product("milk", 2), new Product("bread", 1), new Product("sugar", 14) }, AddNewProduct(products));
         }
 
         public struct Product
@@ -104,9 +105,8 @@ namespace Shopping
         }
         static Product[] AddNewProduct(Product[] products)
         {
-            var product = new Product("sugar", 14);
             Array.Resize(ref products, products.Length + 1);
-            products[products.Length] = product;
+            products[products.Length - 1] = new Product("sugar", 14); 
             return products;
         }
     }
