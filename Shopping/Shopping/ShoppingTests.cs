@@ -34,6 +34,12 @@ namespace Shopping
         public void ShouldRemoveMostExpensiveProduct()
         {
             var products = new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product ("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2) };
+            CollectionAssert.AreEqual(new Product[] { new Product("milk", 2), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2) }, FindAndRemoveTheMostExpensiveProduct(products));
+        }
+        [TestMethod]
+        public void ShouldAddAProduct()
+        {
+
         }
 
         public struct Product
@@ -94,6 +100,13 @@ namespace Shopping
                 products[i] = products[i + 1];
             }
             Array.Resize(ref products, products.Length - 1);
+            return products;
+        }
+        static Product[] AddNewProduct(Product[] products)
+        {
+            var product = new Product("sugar", 14);
+            Array.Resize(ref products, products.Length + 1);
+            products[products.Length] = product;
             return products;
         }
     }
