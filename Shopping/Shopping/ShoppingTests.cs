@@ -42,6 +42,12 @@ namespace Shopping
             var products = new Product[] { new Product("milk", 2), new Product("bread", 1) };
             CollectionAssert.AreEqual(new Product[] { new Product("milk", 2), new Product("bread", 1), new Product("sugar", 14) }, AddNewProduct(products));
         }
+        [TestMethod]
+        public void ShouldAddAPRoduct()
+        {
+            var products = new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2) };
+            CollectionAssert.AreEqual(new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2), new Product("sugar", 14) }, AddNewProduct(products));
+        }
 
         public struct Product
         {
