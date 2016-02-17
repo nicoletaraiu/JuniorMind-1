@@ -119,21 +119,18 @@ namespace Shopping
 
         static Product[] RemoveTheMostExpensiveProduct(Product[] products)
         {
-            if (products.Length > 0)
-            {
-                int position = FindTheMostExpensiveProduct(products);
-                for (int i = position; i < products.Length - 1; i++)
-                {
-                    products[i] = products[i + 1];
-                }
-                products = RemoveAProduct(products);
+            if (products.Length == 0)
                 return products;
-            }
-            return new Product[] { };
+            return RemoveAProduct(products, FindTheMostExpensiveProduct(products));
         }
 
-        static Product[] RemoveAProduct(Product[] products)
+        static Product[] RemoveAProduct(Product[] products, int position)
         {
+            position = FindTheMostExpensiveProduct(products);
+            for (int i = position; i < products.Length - 1; i++)
+            {
+                products[i] = products[i + 1];
+            }
             Array.Resize(ref products, products.Length - 1);
             return products;
         }
