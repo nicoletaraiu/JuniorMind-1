@@ -54,6 +54,12 @@ namespace Shopping
             var products = new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2) };
             CollectionAssert.AreEqual(new Product[] { new Product("milk", 2), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2) }, RemoveTheMostExpensiveProduct(products));
         }
+        [TestMethod]
+        public void EmptyArray()
+        {
+            var products = new Product[] { };
+            CollectionAssert.AreEqual(new Product[] { }, RemoveTheMostExpensiveProduct(products));
+        }
 
         public struct Product
         {
@@ -113,12 +119,17 @@ namespace Shopping
 
         static Product[] RemoveTheMostExpensiveProduct(Product[] products)
         {
-            int position = FindTheMostExpensiveProduct(products);
-            for (int i = position; i < products.Length - 1; i++) {
-                products[i] = products[i + 1];
+            if (products.Length > 0)
+            {
+                int position = FindTheMostExpensiveProduct(products);
+                for (int i = position; i < products.Length - 1; i++)
+                {
+                    products[i] = products[i + 1];
+                }
+                products = RemoveAProduct(products);
+                return products;
             }
-            products = RemoveAProduct(products);
-            return products;
+            return new Product[] { };
         }
 
         static Product[] RemoveAProduct(Product[] products)
