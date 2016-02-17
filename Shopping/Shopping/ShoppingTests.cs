@@ -110,13 +110,19 @@ namespace Shopping
             }
             return reminder;
         }
+
         static Product[] RemoveTheMostExpensiveProduct(Product[] products)
         {
             int position = FindTheMostExpensiveProduct(products);
-            for (int i = position; i < products.Length - 1; i++)
-            {
+            for (int i = position; i < products.Length - 1; i++) {
                 products[i] = products[i + 1];
             }
+            products = RemoveAProduct(products);
+            return products;
+        }
+
+        static Product[] RemoveAProduct(Product[] products)
+        {
             Array.Resize(ref products, products.Length - 1);
             return products;
         }
