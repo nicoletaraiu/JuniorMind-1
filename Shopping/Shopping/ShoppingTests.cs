@@ -60,6 +60,34 @@ namespace Shopping
             var products = new Product[] { };
             CollectionAssert.AreEqual(new Product[] { }, RemoveTheMostExpensiveProduct(products));
         }
+        [TestMethod]
+        public void ShouldRemoveTheThirdProduct()
+        {
+            var products = new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2) };
+            CollectionAssert.AreEqual(new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2) }, RemoveChosenProduct(products, 3));
+        }
+        [TestMethod]
+        public void ShouldRemoveTheFifthProduct()
+        {
+            var products = new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2), new Product("ginger", 1), new Product("tomatoes", 3) };
+            CollectionAssert.AreEqual(new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2), new Product("ginger", 1), new Product("tomatoes", 3) }, RemoveChosenProduct(products, 5));
+        }
+        [TestMethod]
+        public void ShouldRemoveTheFirstProduct()
+        {
+            var products = new Product[] { new Product("milk", 2), new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2), new Product("ginger", 1), new Product("tomatoes", 3) };
+            CollectionAssert.AreEqual(new Product[] { new Product("oil", 10), new Product("bread", 1), new Product("eggs", 4), new Product("pencil", 8), new Product("chocolate", 5), new Product("water", 3), new Product("oranges", 9), new Product("flowers", 2), new Product("ginger", 1), new Product("tomatoes", 3) }, RemoveChosenProduct(products, 1));
+        }
+
+        static Product[] RemoveChosenProduct(Product[] products, int position)
+        {
+            for (int i = position - 1; i < products.Length - 1; i++)
+            {
+                products[i] = products[i + 1];
+            }
+            Array.Resize(ref products, products.Length - 1);
+            return products;
+        }
 
         public struct Product
         {
@@ -133,7 +161,6 @@ namespace Shopping
             Array.Resize(ref products, products.Length - 1);
             return products;
         }
-
 
         static Product[] AddNewProduct(Product[] products)
         {
