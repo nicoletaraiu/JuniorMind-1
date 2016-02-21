@@ -7,7 +7,7 @@ namespace Alarm
     public class AlarmTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void SimpleCheck()
         {
             Assert.AreEqual(1, CheckAlarmStatus(new Alarm(Days.Monday, 8, 0)));
         }
@@ -30,11 +30,11 @@ namespace Alarm
         {
             Monday = 1,
             Tuesday = 2,
-            Wednesday = 3,
-            Thursday = 4,
-            Friday = 5,
-            Saturday = 6,
-            Sunday = 7
+            Wednesday = 4,
+            Thursday = 8,
+            Friday = 16,
+            Saturday = 32,
+            Sunday = 64
         }
 
         static int CheckAlarmStatus(Alarm alarms)
