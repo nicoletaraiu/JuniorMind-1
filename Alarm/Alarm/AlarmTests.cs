@@ -9,36 +9,40 @@ namespace Alarm
         [TestMethod]
         public void TestMethod1()
         {
+            Assert.AreEqual(1, CheckAlarmStatus(new Alarm(Days.Monday, 8, 0)));
         }
 
         struct Alarm
         {
-            public Day day;
+            public Days day;
             public int hour;
             public int minute;
 
-            public Alarm(Day day, int hour, int minute)
+            public Alarm(Days day, int hour, int minute)
             {
                 this.day = day;
                 this.hour = hour;
                 this.minute = minute;
             }
         }
-
-        enum Day
+        [Flags]
+        public enum Days
         {
-            Monday,
-            Tuesday,
-            Wednesday,
-            Thursday,
-            Friday,
-            Saturday,
-            Sunday
+            Monday = 1,
+            Tuesday = 2,
+            Wednesday = 3,
+            Thursday = 4,
+            Friday = 5,
+            Saturday = 6,
+            Sunday = 7
         }
 
-        /*static bool CheckAlarmStatus(Alarm alarm)
+        static int CheckAlarmStatus(Alarm alarms)
         {
-            
-        }*/
+            int status = 0;
+            if (alarms.day != 0) status = 1;
+
+            return status;
+        }
     }
 }
