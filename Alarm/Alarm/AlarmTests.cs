@@ -9,17 +9,18 @@ namespace Alarm
         [TestMethod]
         public void SimpleCheck()
         {
-            Assert.AreEqual(1, CheckAlarmStatus(new Alarm(Days.Monday, 6, 0)));
-            Assert.AreEqual(0, CheckAlarmStatus(new Alarm(Days.Saturday, 6, 0)));
-            Assert.AreEqual(0, CheckAlarmStatus(new Alarm(Days.Tuesday, 8, 0)));
+            var alarms = new Alarm[]
+            { new Alarm(Days.Monday, 6, 0),
+              new Alarm(Days.Tuesday, 6, 0),
+              new Alarm(Days.Wednesday, 6, 0),
+              new Alarm(Days.Thursday, 6, 0),
+              new Alarm(Days.Friday, 6, 0),
+              new Alarm(Days.Saturday, 6, 0),
+              new Alarm(Days.Sunday, 6, 0) };
+            var alarmToBeChecked = new Alarm(Days.Wednesday, 6, 0);
+            Assert.AreEqual(1, CheckAlarmStatus(alarms, alarmToBeChecked));
         }
-        [TestMethod]
-        public void WeekendCheck()
-        {
-            Assert.AreEqual(1, CheckAlarmStatus(new Alarm(Days.Saturday, 8, 0)));
-            Assert.AreEqual(0, CheckAlarmStatus(new Alarm(Days.Sunday, 7, 0)));
-            Assert.AreEqual(0, CheckAlarmStatus(new Alarm(Days.Sunday, 8, 45)));
-        }
+
 
         struct Alarm
         {
@@ -46,15 +47,14 @@ namespace Alarm
             Sunday = 64
         }
 
-        static int CheckAlarmStatus(Alarm alarms)
+        static int CheckAlarmStatus(Alarm[] alarms, Alarm alarmToBeChecked)
         {
             int status = 0;
-            if
-                (((alarms.day == Days.Monday) || (alarms.day == Days.Tuesday) || (alarms.day == Days.Wednesday) || (alarms.day == Days.Thursday) || (alarms.day == Days.Friday)) && (alarms.hour == 6) && (alarms.minute == 0))
+            for (int i = 0; i < alarms.Length; i++)
+            {
+                if ((alarms[i].day == alarmToBeChecked.day) && (alarms[i].hour == alarmToBeChecked.hour) && (alarms[i].minute == alarmToBeChecked.minute))
                     status = 1;
-            if (((alarms.day == Days.Saturday) || (alarms.day == Days.Sunday)) && (alarms.hour == 8) && (alarms.minute == 0))
-                status = 1;
-
+            }
             return status;
         }
     }
