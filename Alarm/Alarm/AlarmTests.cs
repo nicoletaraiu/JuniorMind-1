@@ -34,7 +34,34 @@ namespace Alarm
             var alarmToBeChecked = new Alarm(Days.Wednesday, 15, 0);
             Assert.AreEqual(0, CheckAlarmStatus(alarms, alarmToBeChecked));
         }
-
+        [TestMethod]
+        public void ThirdCheck()
+        {
+            var alarms = new Alarm[]
+            { new Alarm(Days.Monday, 6, 0),
+              new Alarm(Days.Tuesday, 6, 0),
+              new Alarm(Days.Wednesday, 6, 0),
+              new Alarm(Days.Thursday, 6, 0),
+              new Alarm(Days.Friday, 6, 0),
+              new Alarm(Days.Saturday, 8, 0),
+              new Alarm(Days.Sunday, 8, 0) };
+            var alarmToBeChecked = new Alarm(Days.Sunday, 8, 0);
+            Assert.AreEqual(1, CheckAlarmStatus(alarms, alarmToBeChecked));
+        }
+        [TestMethod]
+        public void FourthCheck()
+        {
+            var alarms = new Alarm[]
+             { new Alarm(Days.Monday, 6, 0),
+              new Alarm(Days.Tuesday, 6, 0),
+              new Alarm(Days.Wednesday, 6, 0),
+              new Alarm(Days.Thursday, 6, 0),
+              new Alarm(Days.Friday, 6, 0),
+              new Alarm(Days.Saturday, 8, 0),
+              new Alarm(Days.Sunday, 8, 0) };
+            var alarmToBeChecked = new Alarm(Days.Saturday, 6, 0);
+            Assert.AreEqual(0, CheckAlarmStatus(alarms, alarmToBeChecked));
+        }
 
         struct Alarm
         {
