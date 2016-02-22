@@ -7,8 +7,9 @@ namespace Password
     public class PasswordTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CheckTheLength()
         {
+            Assert.AreEqual(true, CheckTheLength(ReturnNeededPassword(3), 3));
         }
 
         public struct Password
@@ -33,13 +34,20 @@ namespace Password
             return letter;
         }
 
-        static Password ReturnNeededPassword(int number)
+        static char[] ReturnNeededPassword(int number)
         {
-            string[] neededPassword = new string[10]; ;
+            char[] neededPassword = new char[number]; ;
             for (int i = 0; i < neededPassword.Length; i++)
             {
-                neededPassword[i].lowercaseLetters = ReturnRandomLowercaseLetter;
+                neededPassword[i] = ReturnRandomLowercaseLetter();
             }
+            return neededPassword;
         }
+        static bool CheckTheLength(char[] password, int number)
+        {
+            char[] neededPassword = ReturnNeededPassword(number);
+            return (neededPassword.Length == number);
+        }
+
     }
 }
