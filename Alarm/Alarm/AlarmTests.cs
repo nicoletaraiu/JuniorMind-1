@@ -9,29 +9,21 @@ namespace Alarm
         [TestMethod]
         public void FirstCheck()
         {
-            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
-            var weekendDays = Days.Saturday | Days.Sunday;
             Assert.AreEqual(true, CheckAlarmStatus(Days.Wednesday, 6, 0));
         }
         [TestMethod]
         public void SecondCheck()
         {
-            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
-            var weekendDays = Days.Saturday | Days.Sunday;
             Assert.AreEqual(false, CheckAlarmStatus(Days.Wednesday, 15, 0));
         }
         [TestMethod]
         public void ThirdCheck()
         {
-            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
-            var weekendDays = Days.Saturday | Days.Sunday;
             Assert.AreEqual(true, CheckAlarmStatus(Days.Sunday, 8, 0));
         }
         [TestMethod]
         public void FourthCheck()
         {
-            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
-            var weekendDays = Days.Saturday | Days.Sunday;
             Assert.AreEqual(false, CheckAlarmStatus(Days.Saturday, 6, 0));
         }
 
