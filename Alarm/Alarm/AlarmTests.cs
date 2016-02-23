@@ -9,38 +9,30 @@ namespace Alarm
         [TestMethod]
         public void FirstCheck()
         {
-            var alarms = new Alarm[]
-            { new Alarm(Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday, 6, 0),
-              new Alarm(Days.Saturday | Days.Sunday, 8, 0) };
-            var alarmToBeChecked = new Alarm(Days.Wednesday, 6, 0);
-            Assert.AreEqual(true, CheckAlarmStatus(alarms, alarmToBeChecked));
+            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
+            var weekendDays = Days.Saturday | Days.Sunday;
+            Assert.AreEqual(true, CheckAlarmStatus(Days.Wednesday, 6, 0));
         }
         [TestMethod]
         public void SecondCheck()
         {
-            var alarms = new Alarm[]
-            { new Alarm(Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday, 6, 0),
-              new Alarm(Days.Saturday | Days.Sunday, 8, 0) };
-            var alarmToBeChecked = new Alarm(Days.Wednesday, 15, 0);
-            Assert.AreEqual(false, CheckAlarmStatus(alarms, alarmToBeChecked));
+            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
+            var weekendDays = Days.Saturday | Days.Sunday;
+            Assert.AreEqual(false, CheckAlarmStatus(Days.Wednesday, 15, 0));
         }
         [TestMethod]
         public void ThirdCheck()
         {
-            var alarms = new Alarm[]
-            { new Alarm(Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday, 6, 0),
-              new Alarm(Days.Saturday | Days.Sunday, 8, 0) };
-            var alarmToBeChecked = new Alarm(Days.Sunday, 8, 0);
-            Assert.AreEqual(true, CheckAlarmStatus(alarms, alarmToBeChecked));
+            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
+            var weekendDays = Days.Saturday | Days.Sunday;
+            Assert.AreEqual(true, CheckAlarmStatus(Days.Sunday, 8, 0));
         }
         [TestMethod]
         public void FourthCheck()
         {
-            var alarms = new Alarm[]
-            { new Alarm(Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday, 6, 0),
-              new Alarm(Days.Saturday | Days.Sunday, 8, 0) };
-            var alarmToBeChecked = new Alarm(Days.Saturday, 6, 0);
-            Assert.AreEqual(false, CheckAlarmStatus(alarms, alarmToBeChecked));
+            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
+            var weekendDays = Days.Saturday | Days.Sunday;
+            Assert.AreEqual(false, CheckAlarmStatus(Days.Saturday, 6, 0));
         }
 
         struct Alarm
@@ -68,15 +60,14 @@ namespace Alarm
             Sunday = 64
         }
 
-        static bool CheckAlarmStatus(Alarm[] alarms, Alarm alarmToBeChecked)
+        static bool CheckAlarmStatus(Days day, int hour, int minute)
         {
-            bool status = false;
-            for (int i = 0; i < alarms.Length; i++)
-            {
-                if ((alarms[i].day == alarmToBeChecked.day) && (alarms[i].hour == alarmToBeChecked.hour) && (alarms[i].minute == alarmToBeChecked.minute))
-                    return status;
-            }
-            return status;
+            var workingDays = Days.Monday | Days.Tuesday | Days.Wednesday | Days.Thursday | Days.Friday;
+            var weekendDays = Days.Saturday | Days.Sunday;
+
+            if (((workingDays & day) == day) && (hour == 6) && (minute == 0))
+                return true;
+            return (((weekendDays & day) == day) && (hour == 8) && (minute == 0));
         }
     }
 }
