@@ -9,7 +9,7 @@ namespace Password
         [TestMethod]
         public void CheckTheLength()
         {
-            Assert.AreEqual(true, CheckTheLength(ReturnNeededPassword(3), 3));
+            Assert.AreEqual(true, CheckTheLength(ReturnNeededPassword(15, 10), 15, 10));
         }
 
         public struct Password
@@ -34,18 +34,38 @@ namespace Password
             return letter;
         }
 
-        static string ReturnNeededPassword(int chosenLength)
+        public static char ReturnRandomLowerCaseLetter()
         {
-            string neededPassword = string.Empty; 
-            for (int i = 0; i < chosenLength; i++)
-            {
-                neededPassword += ReturnRandomUppercaseLetter();
+            int number = random.Next(0, 26);
+            char letter = (char)('a' + number);
+            return letter;
+        }
+
+        public static int ReturnRandomDigit()
+        {
+            int digit = random.Next(0, 9);
+            return digit;
+        }
+
+        static string ReturnNeededPassword(int chosenLength, int howManyUppercaseLetters)
+        {
+            int howManyLowercaseLetters = chosenLength - howManyUppercaseLetters;
+            string neededPassword = string.Empty;
+                for (int i = 0; i < chosenLength; i++)
+                {
+                    neededPassword += ReturnRandomUppercaseLetter();
+                }
+                while (howManyLowercaseLetters > 0)
+            { 
+                    neededPassword += ReturnRandomLowerCaseLetter();
+                howManyLowercaseLetters--;
             }
             return neededPassword;
         }
-        static bool CheckTheLength(string password, int chosenLength)
+
+        static bool CheckTheLength(string password, int chosenLength, int howManyUppercaseLetters)
         {
-            string neededPassword = ReturnNeededPassword(chosenLength);
+            string neededPassword = ReturnNeededPassword(chosenLength, howManyUppercaseLetters);
             return (neededPassword.Length == chosenLength);
         }
 
