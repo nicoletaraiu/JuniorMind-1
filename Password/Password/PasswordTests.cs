@@ -14,11 +14,11 @@ namespace Password
 
         public struct Password
         {
-            public string lowercaseLetters;
-            public string uppercaseLetters;
-            public string digits;
+            public int lowercaseLetters;
+            public int uppercaseLetters;
+            public int digits;
 
-            public Password(string lowercaseLetters, string uppercaseLetters, string digits)
+            public Password(int lowercaseLetters, int uppercaseLetters, int digits)
             {
                 this.lowercaseLetters = lowercaseLetters;
                 this.uppercaseLetters = uppercaseLetters;
@@ -27,26 +27,26 @@ namespace Password
         }
 
         static Random random = new Random();
-        public static char ReturnRandomLowercaseLetter()
+        public static char ReturnRandomUppercaseLetter()
         {   
             int number = random.Next(0, 26);
-            char letter = (char)('a' + number);
+            char letter = (char)('A' + number);
             return letter;
         }
 
-        static char[] ReturnNeededPassword(int number)
+        static string ReturnNeededPassword(int chosenLength)
         {
-            char[] neededPassword = new char[number]; ;
-            for (int i = 0; i < neededPassword.Length; i++)
+            string neededPassword = string.Empty; 
+            for (int i = 0; i < chosenLength; i++)
             {
-                neededPassword[i] = ReturnRandomLowercaseLetter();
+                neededPassword += ReturnRandomUppercaseLetter();
             }
             return neededPassword;
         }
-        static bool CheckTheLength(char[] password, int number)
+        static bool CheckTheLength(string password, int chosenLength)
         {
-            char[] neededPassword = ReturnNeededPassword(number);
-            return (neededPassword.Length == number);
+            string neededPassword = ReturnNeededPassword(chosenLength);
+            return (neededPassword.Length == chosenLength);
         }
 
     }
