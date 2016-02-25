@@ -9,7 +9,7 @@ namespace Password
         [TestMethod]
         public void CheckTheLength()
         {
-            Assert.AreEqual(true, CheckTheLength(ReturnNeededPassword(15, 10), 15, 10));
+            Assert.AreEqual(true, CheckTheLength(ReturnNeededPassword(15), 15));
         }
 
         public struct Password
@@ -47,25 +47,19 @@ namespace Password
             return digit;
         }
 
-        static string ReturnNeededPassword(int chosenLength, int howManyUppercaseLetters)
+        static string ReturnNeededPassword(int chosenLength)
         {
-            int howManyLowercaseLetters = chosenLength - howManyUppercaseLetters;
             string neededPassword = string.Empty;
                 for (int i = 0; i < chosenLength; i++)
                 {
                     neededPassword += ReturnRandomUppercaseLetter();
                 }
-                while (howManyLowercaseLetters > 0)
-            { 
-                    neededPassword += ReturnRandomLowerCaseLetter();
-                howManyLowercaseLetters--;
-            }
             return neededPassword;
         }
 
-        static bool CheckTheLength(string password, int chosenLength, int howManyUppercaseLetters)
+        static bool CheckTheLength(string password, int chosenLength)
         {
-            string neededPassword = ReturnNeededPassword(chosenLength, howManyUppercaseLetters);
+            string neededPassword = ReturnNeededPassword(chosenLength);
             return (neededPassword.Length == chosenLength);
         }
 
