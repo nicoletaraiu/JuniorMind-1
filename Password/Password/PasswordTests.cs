@@ -9,18 +9,18 @@ namespace Password
         [TestMethod]
         public void CheckTheLength()
         {
-            Assert.AreEqual(true, CheckTheLength(ReturnNeededPassword(15), 15));
+            Assert.AreEqual(true, CheckTheLength(new Password(5, 2, 1), 5));
         }
 
         public struct Password
         {
-            public int lowercaseLetters;
+            public int chosenLength;
             public int uppercaseLetters;
             public int digits;
 
-            public Password(int lowercaseLetters, int uppercaseLetters, int digits)
+            public Password(int chosenLength, int uppercaseLetters, int digits)
             {
-                this.lowercaseLetters = lowercaseLetters;
+                this.chosenLength = chosenLength;
                 this.uppercaseLetters = uppercaseLetters;
                 this.digits = digits;
             }
@@ -47,20 +47,19 @@ namespace Password
             return digit;
         }
 
-        static string ReturnNeededPassword(int chosenLength)
+         string ReturnNeededPassword(Password password)
         {
             string neededPassword = string.Empty;
-                for (int i = 0; i < chosenLength; i++)
+                for (int i = 0; i < password.chosenLength; i++)
                 {
                     neededPassword += ReturnRandomUppercaseLetter();
                 }
             return neededPassword;
         }
 
-        static bool CheckTheLength(string password, int chosenLength)
+         bool CheckTheLength(Password password, int chosenLength)
         {
-            string neededPassword = ReturnNeededPassword(chosenLength);
-            return (neededPassword.Length == chosenLength);
+            return (password.chosenLength == chosenLength);
         }
 
     }
