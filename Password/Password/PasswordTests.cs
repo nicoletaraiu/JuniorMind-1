@@ -9,7 +9,8 @@ namespace Password
         [TestMethod]
         public void CheckTheLength()
         {
-            Assert.AreEqual(true, CheckTheLength(new Password(5, 2, 1), 5));
+            var password = ReturnNeededPassword(new Password(5, 2, 1));
+            Assert.AreEqual(true, CheckTheLength(password, 5));
         }
 
         public struct Password
@@ -57,9 +58,9 @@ namespace Password
             return neededPassword;
         }
 
-         bool CheckTheLength(Password password, int chosenLength)
+         bool CheckTheLength(string password, int chosenLength)
         {
-            return (password.chosenLength == chosenLength);
+            return (password.Length == chosenLength);
         }
 
     }
