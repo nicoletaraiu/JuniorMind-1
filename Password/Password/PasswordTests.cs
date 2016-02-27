@@ -7,19 +7,26 @@ namespace Password
     public class PasswordTests
     {
         [TestMethod]
-        public void CheckTheLength()
+        public void CheckTheLengthOfUppercasePassword()
         {
-            var password = ReturnNeededPassword(new Password(5, 2, 1));
+            var password = GetUppercase(new PasswordSettings(5, 2, 1));
             Assert.AreEqual(true, CheckTheLength(password, 5));
         }
+        [TestMethod]
+        public void CheckTheLengthOfDigitsString()
+        {
+            var password = GetDigits(new PasswordSettings(10, 5, 8));
+            Assert.AreEqual(true, CheckTheLength(password, 10));
+        }
+       
 
-        public struct Password
+        public struct PasswordSettings
         {
             public int chosenLength;
             public int uppercaseLetters;
             public int digits;
 
-            public Password(int chosenLength, int uppercaseLetters, int digits)
+            public PasswordSettings(int chosenLength, int uppercaseLetters, int digits)
             {
                 this.chosenLength = chosenLength;
                 this.uppercaseLetters = uppercaseLetters;
@@ -35,7 +42,7 @@ namespace Password
             return letter;
         }
 
-        public static char ReturnRandomLowerCaseLetter()
+        public static char ReturnRandomLowercaseLetter()
         {
             int number = random.Next(0, 26);
             char letter = (char)('a' + number);
@@ -48,20 +55,39 @@ namespace Password
             return digit;
         }
 
-         string ReturnNeededPassword(Password password)
+         string GetUppercase(PasswordSettings password)
         {
-            string neededPassword = string.Empty;
+            string uppercaseString = string.Empty;
                 for (int i = 0; i < password.chosenLength; i++)
                 {
-                    neededPassword += ReturnRandomUppercaseLetter();
+                    uppercaseString += ReturnRandomUppercaseLetter();
                 }
-            return neededPassword;
+            return uppercaseString;
         }
 
-         bool CheckTheLength(string password, int chosenLength)
+        string GetDigits(PasswordSettings password)
+        {
+            string digitString = string.Empty;
+            for (int i = 0; i < password.chosenLength; i++)
+            {
+                digitString += ReturnRandomDigit();
+            }
+            return digitString;
+        }
+
+        string GetLowercase(PasswordSettings password)
+        {
+            string lowercaseString = string.Empty;
+            for (int i = 0; i < password.chosenLength; i++)
+            {
+                lowercaseString += ReturnRandomLowercaseLetter();
+            }
+            return lowercaseString;
+        }
+
+        bool CheckTheLength(string password, int chosenLength)
         {
             return (password.Length == chosenLength);
         }
-
     }
 }
