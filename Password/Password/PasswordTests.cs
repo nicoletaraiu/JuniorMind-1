@@ -9,26 +9,32 @@ namespace Password
         [TestMethod]
         public void CheckTheNumberOfUppercaseCharacters()
         {
-            var password = GetUppercase(new PasswordSettings(5, 2, 2, 1));
+            var password = GetUppercase(new PasswordSettings(7, 2, 2, 1, 2));
             Assert.AreEqual(true, CheckTheLength(password, 2));
         }
         [TestMethod]
         public void CheckTheNumberOfDigits()
         {
-            var password = GetDigits(new PasswordSettings(18, 5, 5, 8));
+            var password = GetDigits(new PasswordSettings(21, 5, 5, 8, 3));
             Assert.AreEqual(true, CheckTheLength(password, 8));
         }
         [TestMethod]
         public void ChechTheNumberOfLowercaseCharacters()
         {
-            var password = GetLowercase(new PasswordSettings(17, 4, 12, 1));
+            var password = GetLowercase(new PasswordSettings(22, 4, 12, 1, 5));
             Assert.AreEqual(true, CheckTheLength(password, 12));
+        }
+        [TestMethod]
+        public void CheckTheNumberOfSymbols()
+        {
+            var password = GetSymbols(new PasswordSettings(20, 2, 2, 3, 13));
+            Assert.AreEqual(true, CheckTheLength(password, 13));
         }
         [TestMethod]
         public void CheckTheLengthOfThePassword()
         {
-            var password = GetPassword(new PasswordSettings(20, 10, 5, 5));
-            Assert.AreEqual(true, CheckTheLength(password, 20));
+            var password = GetPassword(new PasswordSettings(28, 10, 5, 5, 8));
+            Assert.AreEqual(true, CheckTheLength(password, 28));
         }
         
        
@@ -39,13 +45,15 @@ namespace Password
             public int lowercaseLetters;
             public int uppercaseLetters;
             public int digits;
+            public int symbols;
 
-            public PasswordSettings(int chosenLength, int uppercaseLetters, int lowercaseLetters, int digits)
+            public PasswordSettings(int chosenLength, int uppercaseLetters, int lowercaseLetters, int digits, int symbols)
             {
                 this.chosenLength = chosenLength;
                 this.lowercaseLetters = lowercaseLetters;
                 this.uppercaseLetters = uppercaseLetters;
                 this.digits = digits;
+                this.symbols = symbols;
             }
         }
 
@@ -62,6 +70,12 @@ namespace Password
             int number = random.Next(0, 26);
             char letter = (char)('a' + number);
             return letter;
+        }
+        public static char ReturnRandomSymbol()
+        {
+            string symbols = "!@#$%^&*()-=_+[{}];:'<,>.?/";
+            int i = random.Next(0, symbols.Length - 1);
+            return symbols[i];
         }
 
         public static int ReturnRandomDigit()
@@ -100,10 +114,20 @@ namespace Password
             return lowercaseString;
         }
 
+        string GetSymbols(PasswordSettings password)
+        {
+            string symbols = string.Empty;
+            for (int i = 0; i < password.symbols; i++)
+            {
+                symbols += ReturnRandomSymbol();
+            }
+            return symbols;
+        }
+
         string GetPassword(PasswordSettings password)
         {
             string neededPassword = string.Empty;
-            neededPassword += GetUppercase(password) + GetLowercase(password) + GetDigits(password);
+            neededPassword += GetUppercase(password) + GetLowercase(password) + GetDigits(password) + GetSymbols(password);
             return neededPassword;
         }
 
