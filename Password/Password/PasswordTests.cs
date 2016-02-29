@@ -42,6 +42,19 @@ namespace Password
             var password = GetPassword(new PasswordSettings(15, 2, 1, 3));
             Assert.AreEqual(9, CountLowercase(password));
         }
+        [TestMethod]
+        public void MoreComplexTest()
+        {
+            var password = GetPassword(new PasswordSettings(50, 10, 20, 5));
+            Assert.AreEqual(true, Count(password, 50));
+            var uppercase = GetUppercase(new PasswordSettings(50, 10, 20, 5));
+            Assert.AreEqual(true, Count(uppercase,10));
+            var digits = GetDigits(new PasswordSettings(50, 10, 20, 5));
+            Assert.AreEqual(true, Count(digits, 20));
+            var symbols = GetSymbols(new PasswordSettings(50, 10, 20, 5));
+            Assert.AreEqual(true, Count(symbols, 5));
+            Assert.AreEqual(15, CountLowercase(password));
+        }
        
 
         public struct PasswordSettings
