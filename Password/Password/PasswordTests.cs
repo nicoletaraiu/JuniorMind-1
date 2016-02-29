@@ -114,17 +114,25 @@ namespace Password
             return digitString;
         }
 
-        string GetSymbols(PasswordSettings password)
+        string GetSymbols(PasswordSettings password, string ambiguous = "{}[]()/\'~,;.<>\"")
         {
             string symbols = string.Empty;
+            var doesContain = symbols.Contains(ambiguous);
             for (int i = 0; i < password.symbols; i++)
-            {
+            {   
                 symbols += ReturnRandomSymbol();
+            }
+            while (doesContain)
+            {
+                foreach (var c in ambiguous)
+                {
+                    symbols = symbols.Replace(c, ReturnRandomSymbol());
+                }
             }
             return symbols;
         }
 
-        string GetPassword(PasswordSettings password)
+        string GetPassword(PasswordSettings password, string ambiguous = "l1Io0O{}[]()/\'~,;.<>\"")
         {
             int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
             string neededPassword = string.Empty;
@@ -132,7 +140,7 @@ namespace Password
             {
                 neededPassword += (char)('a' + random.Next(0, 26));
             }
-            neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password);
+            neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password, ambiguous);
             return neededPassword;
         }
 
@@ -146,6 +154,7 @@ namespace Password
             }
             return counter;
         }
+
 
         bool Count(string password, int toBeCounted)
         {
