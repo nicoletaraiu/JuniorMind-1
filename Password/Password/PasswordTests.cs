@@ -30,7 +30,18 @@ namespace Password
             var password = GetPassword(new PasswordSettings(23, 10, 5, 8));
             Assert.AreEqual(true, Count(password, 23));
         }
-        
+        [TestMethod]
+        public void ShouldCountLowercaseCharacters()
+        {
+            var password = GetPassword(new PasswordSettings(25, 5, 4, 3));
+            Assert.AreEqual(13, CountLowercase(password));
+        }
+        [TestMethod]
+        public void ShouldCountLowercaseChars()
+        {
+            var password = GetPassword(new PasswordSettings(15, 2, 1, 3));
+            Assert.AreEqual(9, CountLowercase(password));
+        }
        
 
         public struct PasswordSettings
@@ -110,6 +121,17 @@ namespace Password
             }
             neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password);
             return neededPassword;
+        }
+
+        int CountLowercase(string password)
+        {
+            int counter = 0;
+            foreach (char c in password)
+            {
+                if (Char.IsLower(c))
+                    counter++;
+            }
+            return counter;
         }
 
         bool Count(string password, int toBeCounted)
