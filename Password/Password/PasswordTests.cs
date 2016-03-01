@@ -75,14 +75,14 @@ namespace Password
 
         static Random random = new Random();
 
-        public static int ReturnRandomLetter(int lowerBound, int upperBound)
+        public static int ReturnRandomCharacter(int lowerBound, int upperBound)
         {
             return random.Next(lowerBound, upperBound);
         }
 
         public static char ReturnRandomUppercaseLetter()
         {
-            return (char)(ReturnRandomLetter('A', 'Z'));
+            return (char)(ReturnRandomCharacter('A', 'Z'));
         }
 
         public static char ReturnRandomSymbol()
@@ -94,8 +94,7 @@ namespace Password
 
         public static int ReturnRandomDigit()
         {
-            int digit = random.Next(0, 9);
-            return digit;
+            return ReturnRandomCharacter(0, 9);
         }
 
          string GetUppercase(PasswordSettings password)
@@ -141,7 +140,7 @@ namespace Password
             string neededPassword = string.Empty;
             for (int i = 0; i < lowercase; i ++)
             {
-                neededPassword += (char)(ReturnRandomLetter('a', 'z'));
+                neededPassword += (char)(ReturnRandomCharacter('a', 'z'));
             }
             neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password);
             return neededPassword;
