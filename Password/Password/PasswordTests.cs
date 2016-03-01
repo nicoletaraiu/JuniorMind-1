@@ -74,11 +74,15 @@ namespace Password
         }
 
         static Random random = new Random();
+
+        public static int ReturnRandomLetter(int lowerBound, int upperBound)
+        {
+            return random.Next(lowerBound, upperBound);
+        }
+
         public static char ReturnRandomUppercaseLetter()
-        {   
-            int number = random.Next(0, 26);
-            char letter = (char)('A' + number);
-            return letter;
+        {
+            return (char)(ReturnRandomLetter('A', 'Z'));
         }
 
         public static char ReturnRandomSymbol()
@@ -131,15 +135,15 @@ namespace Password
             return symbols;
         }
 
-        string GetPassword(PasswordSettings password, string ambiguous = "l1Io0O{}[]()/\'~,;.<>\"")
+        string GetPassword(PasswordSettings password, string similar = "l1Io0O")
         {
             int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
             string neededPassword = string.Empty;
             for (int i = 0; i < lowercase; i ++)
             {
-                neededPassword += (char)('a' + random.Next(0, 26));
+                neededPassword += (char)(ReturnRandomLetter('a', 'z'));
             }
-            neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password, ambiguous);
+            neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password);
             return neededPassword;
         }
 
