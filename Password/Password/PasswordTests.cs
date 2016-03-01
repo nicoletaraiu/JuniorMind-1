@@ -45,13 +45,13 @@ namespace Password
         [TestMethod]
         public void MoreComplexTest()
         {
-            var password = GetPassword(new PasswordSettings(50, 10, 20, 5));
+            var password = GetPassword(new PasswordSettings(50, 10, 20, 5), "l1Io0O");
             Assert.AreEqual(true, Count(password, 50));
-            var uppercase = GetUppercase(new PasswordSettings(50, 10, 20, 5));
+            var uppercase = GetUppercase(new PasswordSettings(50, 10, 20, 5), "l1Io0O");
             Assert.AreEqual(true, Count(uppercase,10));
-            var digits = GetDigits(new PasswordSettings(50, 10, 20, 5));
+            var digits = GetDigits(new PasswordSettings(50, 10, 20, 5), "l1Io0O");
             Assert.AreEqual(true, Count(digits, 20));
-            var symbols = GetSymbols(new PasswordSettings(50, 10, 20, 5));
+            var symbols = GetSymbols(new PasswordSettings(50, 10, 20, 5), "{}[]()/\'~,;.<>\"");
             Assert.AreEqual(true, Count(symbols, 5));
             Assert.AreEqual(15, CountLowercase(password));
         }
