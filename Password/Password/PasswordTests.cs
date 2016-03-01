@@ -97,13 +97,24 @@ namespace Password
             return ReturnRandomCharacter(0, 9);
         }
 
-         string GetUppercase(PasswordSettings password)
+         string GetUppercase(PasswordSettings password, string similar = "l1Io0O")
         {
             string uppercaseString = string.Empty;
-                for (int i = 0; i < password.uppercaseLetters; i++)
+            int i = 0;
+            while (i < password.uppercaseLetters)
+            {
+                char randomUppercase = (char)ReturnRandomCharacter('A', 'Z');
+                var doesContain = similar.Contains(randomUppercase.ToString());
+                if (!doesContain)
+                {
+                    uppercaseString += randomUppercase;
+                    i++;
+                }
+            }
+                /*for (int i = 0; i < password.uppercaseLetters; i++)
                 {
                     uppercaseString += ReturnRandomUppercaseLetter();
-                }
+                }*/
             return uppercaseString;
         }
 
