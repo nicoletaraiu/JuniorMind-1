@@ -117,16 +117,15 @@ namespace Password
         string GetSymbols(PasswordSettings password, string ambiguous = "{}[]()/\'~,;.<>\"")
         {
             string symbols = string.Empty;
-            var doesContain = symbols.Contains(ambiguous);
-            for (int i = 0; i < password.symbols; i++)
-            {   
-                symbols += ReturnRandomSymbol();
-            }
-            while (doesContain)
+            int i = 0;
+            while (i < password.symbols)
             {
-                foreach (var c in ambiguous)
+                char randomSymbol = ReturnRandomSymbol();
+                var doesContain = ambiguous.Contains(randomSymbol.ToString());
+                if (!doesContain)
                 {
-                    symbols = symbols.Replace(c, ReturnRandomSymbol());
+                    symbols += randomSymbol;
+                    i++;
                 }
             }
             return symbols;
