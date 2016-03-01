@@ -138,9 +138,16 @@ namespace Password
         {
             int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
             string neededPassword = string.Empty;
-            for (int i = 0; i < lowercase; i ++)
+            int i = 0;
+            while (i < lowercase)
             {
-                neededPassword += (char)(ReturnRandomCharacter('a', 'z'));
+                char randomLowercase = (char)ReturnRandomCharacter('a', 'z');
+                var doesContain = similar.Contains(randomLowercase.ToString());
+                if (!doesContain)
+                {
+                    neededPassword += randomLowercase;
+                    i++;
+                }
             }
             neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password);
             return neededPassword;
