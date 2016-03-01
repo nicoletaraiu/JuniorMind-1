@@ -7,24 +7,43 @@ namespace Sections
     public class SectionsTests
     {
         [TestMethod]
-        public void TestMethod1()
-        {
+        public void EightSections() { 
+            var firstIntersection = new Section(0, 1);
+            var sections = new Section[] {
+             new Section(0, 1),
+             new Section(1, 0),
+             new Section(1, 0),
+             new Section(0, 1),
+             new Section(-1, 0),
+             new Section(0, 1),
+             new Section(-1, 0),
+             new Section(0, -1),
+             new Section(0, -1) };
+            Assert.AreEqual(firstIntersection, GetSection(sections));
         }
 
-        public struct Intersection
+        public struct Section
         {
-            public int up;
-            public int down;
-            public int right;
-            public int left;
-
-            public Intersection(int up, int down, int right, int left)
+            public int x;
+            public int y;
+          
+            public Section(int x, int y)
             {
-                this.up = up;
-                this.down = down;
-                this.right = right;
-                this.left = left;
+                this.x = x;
+                this.y = y;
             }
+        }
+
+        public Section GetSection(Section[] sections)
+        {
+            int totalX = 0;
+            int totalY = 0;
+            for (int i = 0; i < sections.Length; i++)
+            {
+                totalX += sections[i].x;
+                totalY += sections[i].y;
+            }
+            return new Section(totalX, totalY);
         }
 
     }
