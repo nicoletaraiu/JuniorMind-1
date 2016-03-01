@@ -111,19 +111,22 @@ namespace Password
                     i++;
                 }
             }
-                /*for (int i = 0; i < password.uppercaseLetters; i++)
-                {
-                    uppercaseString += ReturnRandomUppercaseLetter();
-                }*/
             return uppercaseString;
         }
 
-        string GetDigits(PasswordSettings password)
+        string GetDigits(PasswordSettings password, string similar = "l1Io0O")
         {
             string digitString = string.Empty;
-            for (int i = 0; i < password.digits; i++)
+            int i = 0;
+            while (i < password.digits)
             {
-                digitString += ReturnRandomDigit();
+                int randomDigit = ReturnRandomCharacter(0, 9);
+                var doesContain = similar.Contains(randomDigit.ToString());
+                if (!doesContain)
+                {
+                    digitString += randomDigit;
+                    i++;
+                }
             }
             return digitString;
         }
