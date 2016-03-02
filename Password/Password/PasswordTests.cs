@@ -97,15 +97,15 @@ namespace Password
             return ReturnRandomCharacter(0, 9);
         }
 
-        string GetString(PasswordSettings password, string type, string excluded = "l1Io0O{}[]()/\'~,;.<>\"")
+        string GetString(PasswordSettings password, int lowerBound, int upperBound, string excluded = "l1Io0O{}[]()/\'~,;.<>\"")
         {
             string generated = string.Empty;
             int i = 0;
-            if (type == "uppercase")
+            if (lowerBound == 'A' && upperBound == 'Z')
             {
                 while (i < password.uppercaseLetters)
                 {
-                    char randomUppercase = (char)ReturnRandomCharacter('A', 'Z');
+                    char randomUppercase = (char)ReturnRandomCharacter(lowerBound, upperBound);
                     var doesContain = excluded.Contains(randomUppercase.ToString());
                     if (!doesContain)
                     {
@@ -114,11 +114,11 @@ namespace Password
                     }
                 }
             }
-            else if (type == "digits")
+            else if (lowerBound == 0 && upperBound == 9)
             {
                 while (i < password.digits)
                 {
-                    int randomDigit = ReturnRandomCharacter(0, 9);
+                    int randomDigit = ReturnRandomCharacter(lowerBound, upperBound);
                     var doesContain = excluded.Contains(randomDigit.ToString());
                     if (!doesContain)
                     {
@@ -127,12 +127,12 @@ namespace Password
                     }
                 }
             }
-            else if (type == "lowercase")
+            else if (lowerBound == 'a' && upperBound == 'z')
             {
                 int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
                 while (i < lowercase)
                 {
-                    char randomLowercase = (char)ReturnRandomCharacter('a', 'z');
+                    char randomLowercase = (char)ReturnRandomCharacter(lowerBound, upperBound);
                     var doesContain = excluded.Contains(randomLowercase.ToString());
                     if (!doesContain)
                     {
@@ -146,12 +146,12 @@ namespace Password
 
          string GetUppercase(PasswordSettings password, string similar = "l1Io0O")
         {
-            return GetString(password, "uppercase", "l1Io0O{}[]()/\'~,;.<>\"");
+            return GetString(password, 'A', 'Z', "l1Io0O{}[]()/\'~,;.<>\"");
         }
 
         string GetDigits(PasswordSettings password, string similar = "l1Io0O")
         {
-            return GetString(password, "digits", "l1Io0O{}[]()/\'~,;.<>\"");
+            return GetString(password, 0, 9, "l1Io0O{}[]()/\'~,;.<>\"");
         }
 
         string GetSymbols(PasswordSettings password, string ambiguous = "{}[]()/\'~,;.<>\"")
@@ -174,7 +174,7 @@ namespace Password
         string GetPassword(PasswordSettings password, string similar = "l1Io0O")
         {
             int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
-            string neededPassword = GetString(password, "lowercase", "l1Io0O{}[]()/\'~,;.<>\"");
+            string neededPassword = GetString(password, 'a', 'z', "l1Io0O{}[]()/\'~,;.<>\"");
             
             neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password);
             return neededPassword;
