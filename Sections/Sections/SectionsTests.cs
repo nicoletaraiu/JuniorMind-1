@@ -10,6 +10,8 @@ namespace Sections
         public void FindTheEndOfTheSection()
         {
             Assert.AreEqual(new Point(0, 1), FindTheEndOfTheSection(new Point(0, 0), new Instructions(true, false, false, false)));
+            Assert.AreEqual(new Point(2, 1), FindTheEndOfTheSection(new Point(3, 2), new Instructions(false, true, false, true)));
+            Assert.AreEqual(new Point(1, 4), FindTheEndOfTheSection(new Point(2, 3), new Instructions(true, false, false, true)));
         }
 
         public struct Instructions
