@@ -39,7 +39,7 @@ namespace Sections
         public void CheckPresence()
         {
             Assert.AreEqual(true, CheckPresence(new Point(1, 0), new Point[] { new Point(2, 0), new Point(1, 0), new Point(1, 1) }));
-            Assert.AreEqual(false, CheckPresence(new Point(1, 0), new Point[] { new Point(2, 0), new Point(1, 0), new Point(1, 1) }));
+            Assert.AreEqual(false, CheckPresence(new Point(1, 0), new Point[] { new Point(2, 0), new Point(1, 3), new Point(1, 1) }));
         }
 
 
@@ -78,7 +78,12 @@ namespace Sections
             }
            static bool CheckPresence(Point point, Point[] savedPoints)
         {
-            return true;
+            foreach (var x in savedPoints)
+            {
+                if (point.x == x.x && point.y == x.y)
+                    return true; 
+            }
+            return false;
         }
         }
     }
