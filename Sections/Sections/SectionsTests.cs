@@ -79,13 +79,20 @@ namespace Sections
             static Point FindTheFirstIntersection(Point point, Instructions[] instructions)
             {
             Point[] savedPoints = new Point[instructions.Length];
+
             for (int i = 0; i < instructions.Length; i++)
-            {
-                
-                if (instructions[i] == Instructions.up) point.y += 1;
-                if (instructions[i] == Instructions.down) point.y -= 1;
-                if (instructions[i] == Instructions.right) point.x += 1;
-                if (instructions[i] == Instructions.left) point.x -= 1;
+            {   
+                switch (instructions[i])
+                {
+                    case Instructions.up: point.y += 1;
+                        break;
+                    case Instructions.down: point.y -= 1;
+                        break;
+                    case Instructions.right: point.x += 1;
+                        break;
+                    case Instructions.left: point.x -= 1;
+                        break;
+                }
                 savedPoints[i] = point;
                 if (CheckPresence(point, savedPoints))
                     return point;
