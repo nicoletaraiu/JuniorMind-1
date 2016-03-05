@@ -9,49 +9,49 @@ namespace Password
         [TestMethod]
         public void CheckTheNumberOfUppercaseCharacters()
         {
-            var password = GetUppercase(new PasswordSettings(5, 2, 1, 2));
+            var password = GetUppercase(new PasswordSettings(5, 2, 1, 2, true, true));
             Assert.AreEqual(true, Count(password, 2));
         }
         [TestMethod]
         public void CheckTheNumberOfDigits()
         {
-            var password = GetDigits(new PasswordSettings(16, 5, 8, 3));
+            var password = GetDigits(new PasswordSettings(16, 5, 8, 3, true, true));
             Assert.AreEqual(true, Count(password, 8));
         }
         [TestMethod]
         public void CheckTheNumberOfSymbols()
         {
-            var password = GetSymbols(new PasswordSettings(18, 2, 3, 13));
+            var password = GetSymbols(new PasswordSettings(18, 2, 3, 13, true, true));
             Assert.AreEqual(true, Count(password, 13));
         }
         [TestMethod]
         public void CheckTheLengthOfThePassword()
         {
-            var password = GetPassword(new PasswordSettings(23, 10, 5, 8));
+            var password = GetPassword(new PasswordSettings(23, 10, 5, 8, true, true));
             Assert.AreEqual(true, Count(password, 23));
         }
         [TestMethod]
         public void ShouldCountLowercaseCharacters()
         {
-            var password = GetPassword(new PasswordSettings(25, 5, 4, 3));
+            var password = GetPassword(new PasswordSettings(25, 5, 4, 3, true, true));
             Assert.AreEqual(13, CountLowercase(password));
         }
         [TestMethod]
         public void ShouldCountLowercaseChars()
         {
-            var password = GetPassword(new PasswordSettings(15, 2, 1, 3));
+            var password = GetPassword(new PasswordSettings(15, 2, 1, 3, true, true));
             Assert.AreEqual(9, CountLowercase(password));
         }
         [TestMethod]
         public void MoreComplexTest()
         {
-            var password = GetPassword(new PasswordSettings(50, 10, 20, 5), "l1Io0O");
+            var password = GetPassword(new PasswordSettings(50, 10, 20, 5, false, false), "l1Io0O");
             Assert.AreEqual(true, Count(password, 50));
-            var uppercase = GetUppercase(new PasswordSettings(50, 10, 20, 5), "l1Io0O");
+            var uppercase = GetUppercase(new PasswordSettings(50, 10, 20, 5, true, true), "l1Io0O");
             Assert.AreEqual(true, Count(uppercase,10));
-            var digits = GetDigits(new PasswordSettings(50, 10, 20, 5), "l1Io0O");
+            var digits = GetDigits(new PasswordSettings(50, 10, 20, 5, true, true), "l1Io0O");
             Assert.AreEqual(true, Count(digits, 20));
-            var symbols = GetSymbols(new PasswordSettings(50, 10, 20, 5), "{}[]()/\'~,;.<>\"");
+            var symbols = GetSymbols(new PasswordSettings(50, 10, 20, 5, true, true), "{}[]()/\'~,;.<>\"");
             Assert.AreEqual(true, Count(symbols, 5));
             Assert.AreEqual(15, CountLowercase(password));
         }
@@ -63,13 +63,17 @@ namespace Password
             public int uppercaseLetters;
             public int digits;
             public int symbols;
+            public bool excludeSimilar;
+            public bool excludeAmbiguous;
 
-            public PasswordSettings(int chosenLength, int uppercaseLetters, int digits, int symbols)
+            public PasswordSettings(int chosenLength, int uppercaseLetters, int digits, int symbols, bool excludeSimilar, bool excludeAmbiguous)
             {
                 this.chosenLength = chosenLength;
                 this.uppercaseLetters = uppercaseLetters;
                 this.digits = digits;
                 this.symbols = symbols;
+                this.excludeSimilar = excludeSimilar;
+                this.excludeAmbiguous = excludeAmbiguous;
             }
         }
 
@@ -104,7 +108,7 @@ namespace Password
                 while (i < count)
                 {
                     char randomUppercase = (char)ReturnRandomCharacter(lowerBound, upperBound);
-                    var doesContain = excluded.Contains(randomUppercase.ToString());
+                var doesContain = excluded.Contains(randomUppercase.ToString());
                     if (!doesContain)
                     {
                         generated += randomUppercase;
@@ -116,7 +120,7 @@ namespace Password
 
          string GetUppercase(PasswordSettings password, string similar = "l1Io0O")
         {
-            return GetString(password.uppercaseLetters, 'A', 'Z', "l1Io0O{}[]()/\'~,;.<>\"");
+            return GetString(password.uppercaseLetters, 'A', 'Z', "l1Io0O");
         }
 
         string GetDigits(PasswordSettings password, string similar = "l1Io0O")
@@ -132,7 +136,15 @@ namespace Password
             {
                 char randomSymbol = ReturnRandomSymbol();
                 var doesContain = ambiguous.Contains(randomSymbol.ToString());
-                if (!doesContain)
+                if (password.excludeAmbiguous)
+                {
+                    if (!doesContain)
+                    {
+                        symbols += randomSymbol;
+                        i++;
+                    }
+                }
+                else
                 {
                     symbols += randomSymbol;
                     i++;
