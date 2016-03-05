@@ -7,38 +7,51 @@ namespace Sections
     public class SectionsTests
     {
         [TestMethod]
-        public void ShouldReturnTheEndOfTheSection()
-        { 
-           /* Assert.AreEqual(new Point(0, 1), FindTheFirstIntersection(new Point(0, 0), new Instructions[] { new Instructions(true, false, false, false)}));
-            Assert.AreEqual(new Point(1, 4), FindTheFirstIntersection(new Point(2, 3), new Instructions[] { new Instructions(true, false, false, true) })); */
-        }
-        [TestMethod]
         public void ShouldReturnTheFirstIntersection()
         {
-           /* Assert.AreEqual(new Point(0, 1), FindTheFirstIntersection(new Point(0, 0), new Instructions[] {
-                new Instructions(true, false, false, false),
-                new Instructions(false, false, true, false),
-                new Instructions(true, false, false, false),
-                new Instructions(false, false, false, true),
-                new Instructions(false, true, false, false),
-                new Instructions(true, false, false, false),
-                new Instructions(false, false, true, false)})); */
+            Assert.AreEqual(new Point(0, 1), FindTheFirstIntersection(new Point(0, 0), new Instructions[] {
+                Instructions.up,
+                Instructions.right,
+                Instructions.up,
+                Instructions.left,
+                Instructions.down,
+                Instructions.up,
+                Instructions.right})); 
+        }
+        [TestMethod]
+        public void ShouldReturnTheSecondPoint()
+        {
+            Assert.AreEqual(new Point(1, 1), FindTheFirstIntersection(new Point(0, 1), new Instructions[] {
+                Instructions.right,
+                Instructions.up,
+                Instructions.down,
+                Instructions.left}));
+        }
+        [TestMethod]
+        public void ShouldReturnTheThirdPoint()
+        {
+            Assert.AreEqual(new Point(4, 2), FindTheFirstIntersection(new Point(2, 2), new Instructions[] {
+                Instructions.right,
+                Instructions.right,
+                Instructions.right,
+                Instructions.left,
+                Instructions.up}));
         }
         [TestMethod]
         public void ShouldReturnFirstPoint()
         {
-           /* Assert.AreEqual(new Point(0, 0), FindTheFirstIntersection(new Point(0, 0), new Instructions[]
+            Assert.AreEqual(new Point(0, 0), FindTheFirstIntersection(new Point(0, 0), new Instructions[]
             {
-                new Instructions(false, false, true, false),
-                new Instructions(true, false, false, false),
-                new Instructions(false, false, false, true),
-                new Instructions(false, true, false, false),
-                new Instructions(false, false, false, true)})); */
+                Instructions.right,
+                Instructions.up,
+                Instructions.left,
+                Instructions.down,
+                Instructions.left})); 
         }
         [TestMethod]
         public void CheckPresence()
         {
-            Assert.AreEqual(true, CheckPresence(new Point(1, 0), new Point[] { new Point(2, 0), new Point(1, 0), new Point(1, 1) }));
+            Assert.AreEqual(true, CheckPresence(new Point(1, 0), new Point[] { new Point(2, 0), new Point(1, 0), new Point(1, 1), new Point(1,0) }));
             Assert.AreEqual(false, CheckPresence(new Point(1, 0), new Point[] { new Point(2, 0), new Point(1, 3), new Point(1, 1) }));
         }
 
@@ -68,22 +81,27 @@ namespace Sections
             Point[] savedPoints = new Point[instructions.Length];
             for (int i = 0; i < instructions.Length; i++)
             {
-                if (instructions[i] == Instructions.up) savedPoints[i].y += 1;
-                if (instructions[i] == Instructions.down) savedPoints[i].y -= 1;
-                if (instructions[i] == Instructions.right) savedPoints[i].x += 1;
-                if (instructions[i] == Instructions.left) savedPoints[i].x -= 1;
-                savedPoints[i] = new Point(point.x, point.y);
+                
+                if (instructions[i] == Instructions.up) point.y += 1;
+                if (instructions[i] == Instructions.down) point.y -= 1;
+                if (instructions[i] == Instructions.right) point.x += 1;
+                if (instructions[i] == Instructions.left) point.x -= 1;
+                savedPoints[i] = point;
+                if (CheckPresence(point, savedPoints))
+                    return point;
             }
             return point;
             }
+
            static bool CheckPresence(Point point, Point[] savedPoints)
         {
+            int counter = 0;
             foreach (var x in savedPoints)
             {
                 if (point.x == x.x && point.y == x.y)
-                    return true; 
+                    counter++;
             }
-            return false;
+            return (counter > 1);
         }
         }
     }
