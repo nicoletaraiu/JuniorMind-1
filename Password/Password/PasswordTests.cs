@@ -97,13 +97,11 @@ namespace Password
             return ReturnRandomCharacter(0, 9);
         }
 
-        string GetString(PasswordSettings password, int lowerBound, int upperBound, string excluded = "l1Io0O{}[]()/\'~,;.<>\"")
+        string GetString(int count, int lowerBound, int upperBound, string excluded = "l1Io0O{}[]()/\'~,;.<>\"")
         {
             string generated = string.Empty;
             int i = 0;
-            if (lowerBound == 'A' && upperBound == 'Z')
-            {
-                while (i < password.uppercaseLetters)
+                while (i < count)
                 {
                     char randomUppercase = (char)ReturnRandomCharacter(lowerBound, upperBound);
                     var doesContain = excluded.Contains(randomUppercase.ToString());
@@ -113,45 +111,17 @@ namespace Password
                         i++;
                     }
                 }
-            }
-            else if (lowerBound == 0 && upperBound == 9)
-            {
-                while (i < password.digits)
-                {
-                    int randomDigit = ReturnRandomCharacter(lowerBound, upperBound);
-                    var doesContain = excluded.Contains(randomDigit.ToString());
-                    if (!doesContain)
-                    {
-                        generated += randomDigit;
-                        i++;
-                    }
-                }
-            }
-            else if (lowerBound == 'a' && upperBound == 'z')
-            {
-                int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
-                while (i < lowercase)
-                {
-                    char randomLowercase = (char)ReturnRandomCharacter(lowerBound, upperBound);
-                    var doesContain = excluded.Contains(randomLowercase.ToString());
-                    if (!doesContain)
-                    {
-                        generated += randomLowercase;
-                        i++;
-                    }
-                }
-            }
             return generated;
         }
 
          string GetUppercase(PasswordSettings password, string similar = "l1Io0O")
         {
-            return GetString(password, 'A', 'Z', "l1Io0O{}[]()/\'~,;.<>\"");
+            return GetString(password.uppercaseLetters, 'A', 'Z', "l1Io0O{}[]()/\'~,;.<>\"");
         }
 
         string GetDigits(PasswordSettings password, string similar = "l1Io0O")
         {
-            return GetString(password, 0, 9, "l1Io0O{}[]()/\'~,;.<>\"");
+            return GetString(password.digits, 0, 9, "l1Io0O{}[]()/\'~,;.<>\"");
         }
 
         string GetSymbols(PasswordSettings password, string ambiguous = "{}[]()/\'~,;.<>\"")
@@ -174,7 +144,7 @@ namespace Password
         string GetPassword(PasswordSettings password, string similar = "l1Io0O")
         {
             int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
-            string neededPassword = GetString(password, 'a', 'z', "l1Io0O{}[]()/\'~,;.<>\"");
+            string neededPassword = GetString(lowercase, 'a', 'z', "l1Io0O{}[]()/\'~,;.<>\"");
             
             neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password);
             return neededPassword;
