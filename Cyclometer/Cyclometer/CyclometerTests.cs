@@ -4,11 +4,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Cyclometer
 {
     [TestClass]
-    public class UnitTest1
+    public class CyclometerTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ShouldReturnOneRotation()
         {
+            Assert.AreEqual(2.198, CalculateRotationDistance(0.7));
         }
+
+        double CalculateRotationDistance(double diameter)
+        {
+            double distance = 3.14 * diameter;
+            return distance;
+        }
+
     }
 }
