@@ -9,13 +9,29 @@ namespace Cyclometer
         [TestMethod]
         public void ShouldReturnOneRotation()
         {
-            Assert.AreEqual(2.198, CalculateRotationDistance(0.7));
+            Assert.AreEqual(5.652, CalculateRotationDistance(new Bike[] {
+            new Bike(0.7),
+            new Bike(0.6),
+            new Bike(0.5)}));
         }
 
-        double CalculateRotationDistance(double diameter)
+        public struct Bike {
+            public double diameter;
+
+            public Bike(double diameter)
+            {
+                this.diameter = diameter;
+            }
+        }
+
+        double CalculateRotationDistance(Bike[] bikes)
         {
-            double distance = 3.14 * diameter;
-            return distance;
+            double totalDistance = 0;
+            for (int i = 0; i < bikes.Length; i++)
+            {
+                totalDistance += 3.14 * bikes[i].diameter;
+            }
+            return totalDistance;
         }
 
     }
