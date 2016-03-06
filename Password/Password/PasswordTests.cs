@@ -21,8 +21,8 @@ namespace Password
         [TestMethod]
         public void CheckTheNumberOfSymbols()
         {
-            var password = GetSymbols(new PasswordSettings(18, 2, 3, 13, true, true));
-            Assert.AreEqual(true, Count(password, 13));
+            var password = GetSymbols(7);
+            Assert.AreEqual(true, Count(password, 7));
         }
         [TestMethod]
         public void CheckTheLengthOfThePassword()
@@ -33,7 +33,7 @@ namespace Password
         [TestMethod]
         public void ShouldCountLowercaseCharacters()
         {
-            var password = GetPassword(new PasswordSettings(25, 5, 4, 3, true, true));
+            var password = GetPassword(new PasswordSettings(25, 5, 4, 3, false, true));
             Assert.AreEqual(13, CountLowercase(password));
         }
         [TestMethod]
@@ -45,13 +45,13 @@ namespace Password
         [TestMethod]
         public void MoreComplexTest()
         {
-            var password = GetPassword(new PasswordSettings(50, 10, 20, 5, false, false), "l1Io0O");
+            var password = GetPassword(new PasswordSettings(50, 10, 20, 5, false, false));
             Assert.AreEqual(true, Count(password, 50));
             var uppercase = GetUppercase(new PasswordSettings(50, 10, 20, 5, true, true), "l1Io0O");
             Assert.AreEqual(true, Count(uppercase,10));
             var digits = GetDigits(new PasswordSettings(50, 10, 20, 5, true, true), "l1Io0O");
             Assert.AreEqual(true, Count(digits, 20));
-            var symbols = GetSymbols(new PasswordSettings(50, 10, 20, 5, true, true), "{}[]()/\'~,;.<>\"");
+            var symbols = GetSymbols(5, "{}[]()/\'~,;.<>\"");
             Assert.AreEqual(true, Count(symbols, 5));
             Assert.AreEqual(15, CountLowercase(password));
         }
@@ -132,39 +132,34 @@ namespace Password
             return GetString(password.digits, 0, 9, string.Empty);
         }
 
-        string GetSymbols(PasswordSettings password, string ambiguous = "{}[]()/\'~,;.<>\"")
+        string GetSymbols(int count, string excludedSymbols = "")
         {
             string symbols = string.Empty;
             int i = 0;
-                while (i < password.symbols)
+                while (i < count)
                 {
-                    char randomSymbol = ReturnRandomSymbol();
-                    var doesContain = ambiguous.Contains(randomSymbol.ToString());
-
-                    if (!doesContain)
-                    {
+                char randomSymbol = ReturnRandomSymbol();
                         symbols += randomSymbol;
                         i++;
-                    }
-                }
+                 }
             return symbols;
         }
 
-        string GetPassword(PasswordSettings password, string similar = "l1Io0O")
+        string GetPassword(PasswordSettings password)
         {
-            int lowercase = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
-            if (password.excludeSimilar)
-            {
-                string neededPassword = GetString(lowercase, 'a', 'z', "l1Io0O{}[]()/\'~,;.<>\"");
-                neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password, "{}[]()/\'~,;.<>\"");
-                return neededPassword;
-            }
-            else
-            {
-                string neededPassword = GetString(lowercase, 'a', 'z', string.Empty);
-                neededPassword += GetUppercase(password) + GetDigits(password) + GetSymbols(password, string.Empty);
-                return neededPassword;
-            }    
+            var excluded = password.excludeSimilar ? "l1Io0O" : string.Empty;
+            var excludedSymbols = password.excludeAmbiguous ? "{}[]()/\'~,;.<>\"" : string.Empty;
+            var result = GetString(GetLowercaseCount(password), 'a', 'z', excluded);
+            result += GetString(password.uppercaseLetters, 'A', 'Z', excluded);
+            result += GetString(password.digits, 0, 9, excluded);
+            result += GetSymbols(password.symbols, excludedSymbols);
+            return result;
+        }
+
+        int GetLowercaseCount(PasswordSettings password)
+        {
+            int lowercaseCount = password.chosenLength - password.uppercaseLetters - password.digits - password.symbols;
+            return lowercaseCount;
         }
 
         int CountLowercase(string password)
