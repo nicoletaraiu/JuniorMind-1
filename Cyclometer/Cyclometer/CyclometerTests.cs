@@ -25,7 +25,7 @@ namespace Cyclometer
         public void ShouldReturnAverageSpeedOneCyclist()
         {
             var cyclist = new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) });
-            Assert.AreEqual(0, CalculateAverageSpeed(cyclist));
+            Assert.AreEqual(7.536, CalculateAverageSpeed(cyclist), 0.00001);
         }
 
         public struct Cyclist {
