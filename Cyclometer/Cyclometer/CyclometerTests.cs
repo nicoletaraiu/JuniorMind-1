@@ -28,13 +28,13 @@ namespace Cyclometer
             Assert.AreEqual(7.536, CalculateAverageSpeed(cyclist), 0.00001);
         }
         [TestMethod]
-        public void ShouldReturnTotalAverageSpeed()
+        public void ShouldReturnBestAverageSpeed()
         {
             var cyclists = new Cyclist[] {
             new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) }),
             new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) }),
             new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) }) };
-            Assert.AreEqual(0, CalculateTotalAverageSpeed(cyclists));
+            Assert.AreEqual(7.536, CalculateBestAverageSpeed(cyclists), 0.0001);
         }
 
         public struct Cyclist {
@@ -95,14 +95,16 @@ namespace Cyclometer
             return averageSpeed;
         }
 
-        double CalculateTotalAverageSpeed(Cyclist[] cyclists)
+        double CalculateBestAverageSpeed(Cyclist[] cyclists)
         {
-            double averagespeed = 0;
+            double bestAverageSpeed = CalculateAverageSpeed(cyclists[0]);
             for (int i = 0; i < cyclists.Length; i++)
             {
-                averagespeed += CalculateAverageSpeed(cyclists[i]);
+                double speed = CalculateAverageSpeed(cyclists[i]);
+                if (speed > bestAverageSpeed)
+                    bestAverageSpeed = speed;
             }
-            return averagespeed;
+            return bestAverageSpeed;
         }
 
     }
