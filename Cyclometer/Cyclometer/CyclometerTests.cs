@@ -27,6 +27,15 @@ namespace Cyclometer
             var cyclist = new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) });
             Assert.AreEqual(7.536, CalculateAverageSpeed(cyclist), 0.00001);
         }
+        [TestMethod]
+        public void ShouldReturnTotalAverageSpeed()
+        {
+            var cyclists = new Cyclist[] {
+            new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) }),
+            new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) }),
+            new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) }) };
+            Assert.AreEqual(0, CalculateTotalAverageSpeed(cyclists));
+        }
 
         public struct Cyclist {
             public string name;
@@ -84,6 +93,16 @@ namespace Cyclometer
             }
             averageSpeed += distance / totalTime;
             return averageSpeed;
+        }
+
+        double CalculateTotalAverageSpeed(Cyclist[] cyclists)
+        {
+            double averagespeed = 0;
+            for (int i = 0; i < cyclists.Length; i++)
+            {
+                averagespeed += CalculateAverageSpeed(cyclists[i]);
+            }
+            return averagespeed;
         }
 
     }
