@@ -7,12 +7,6 @@ namespace Cyclometer
     public class CyclometerTests
     {
         [TestMethod]
-        public void ShouldReturnRotationsSum()
-        {
-            var records = new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) };
-            Assert.AreEqual(9, CalculateRotationsSum(records));
-        }
-        [TestMethod]
         public void ShouldReturnTotalDistanceOfOneCyclist()
         {
             var cyclist = new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) });
@@ -26,6 +20,12 @@ namespace Cyclometer
             new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) }),
             new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) }) };
             Assert.AreEqual(59.66, CalculateTotalDistance(cyclists));
+        }
+        [TestMethod]
+        public void ShouldReturnAverageSpeedOneCyclist()
+        {
+            var cyclist = new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) });
+            Assert.AreEqual(0, CalculateAverageSpeed(cyclist));
         }
 
         public struct Cyclist {
@@ -52,16 +52,6 @@ namespace Cyclometer
                 this.second = second;
             }
         }
-        
-        double CalculateRotationsSum(Records[] records)
-        {
-            int sum = 0;
-            for (int i = 0; i < records.Length; i++)
-            {
-                sum += records[i].rotations;
-            }
-            return sum;
-        }
 
         double CalculateTotalDistanceOfOneCyclist(Cyclist cyclist)
         {
@@ -81,6 +71,19 @@ namespace Cyclometer
                 totalDistance += CalculateTotalDistanceOfOneCyclist(cyclists[i]);
             }
             return totalDistance;
+        }
+
+        double CalculateAverageSpeed(Cyclist cyclist)
+        {
+            double distance = CalculateTotalDistanceOfOneCyclist(cyclist);
+            double averageSpeed = 0;
+            int totalTime = 0;
+            for (int i = 0; i < cyclist.records.Length; i++)
+            {
+                totalTime = cyclist.records[i].second;
+            }
+            averageSpeed += distance / totalTime;
+            return averageSpeed;
         }
 
     }
