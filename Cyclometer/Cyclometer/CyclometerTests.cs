@@ -6,14 +6,6 @@ namespace Cyclometer
     [TestClass]
     public class CyclometerTests
     {
-       /* [TestMethod]
-        public void ShouldReturnOneRotation()
-        {
-            Assert.AreEqual(5.652, CalculateTotalDistance(new Cyclist[] {
-            new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) }) ,
-            new Cyclist("Gheorghe", 0.6, new Records[] { new Records (3, 1), new Records(4, 2), new Records(5, 3) }),
-            new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3)}) }));
-        }*/
         [TestMethod]
         public void ShouldReturnRotationsSum()
         {
@@ -33,7 +25,7 @@ namespace Cyclometer
             new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) }),
             new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) }),
             new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) }) };
-            Assert.AreEqual(0, CalculateTotalDistance(cyclists));
+            Assert.AreEqual(59.66, CalculateTotalDistance(cyclists));
         }
 
         public struct Cyclist {
@@ -59,16 +51,6 @@ namespace Cyclometer
                 this.rotations = rotations;
                 this.second = second;
             }
-        }
-
-        double CalculateDistanceOfOneRotation(Cyclist[] cyclists)
-        {
-            double oneRotationDistance = 0;
-            for (int i = 0; i < cyclists.Length; i++)
-            {
-                oneRotationDistance = 3.14 * cyclists[i].diameter;
-            }
-            return oneRotationDistance;
         }
         
         double CalculateRotationsSum(Records[] records)
