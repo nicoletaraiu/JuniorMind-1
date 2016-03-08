@@ -63,8 +63,11 @@ namespace Cyclometer
         [TestMethod]
         public void ShouldReturnMaxSpeedOfOneCyclist()
         {
-            var cyclist = new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3) });
-            Assert.AreEqual(5.652, CalculateMaxSpeedOfOneCyclist(cyclist), 0.0001);
+            var Darius = new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3) });
+            Assert.AreEqual(5.652, CalculateMaxSpeedOfOneCyclist(Darius), 0.0001);
+            var Raul = new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) });
+            Assert.AreEqual(9.42, CalculateMaxSpeedOfOneCyclist(Raul));
+
         }
 
         public struct Cyclist {
