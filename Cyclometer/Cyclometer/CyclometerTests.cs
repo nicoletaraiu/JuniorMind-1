@@ -28,6 +28,18 @@ namespace Cyclometer
             Assert.AreEqual(7.536, CalculateAverageSpeed(cyclist), 0.00001);
         }
         [TestMethod]
+        public void ShouldReturnAverageSpeedOfEachCyclist()
+        {
+            var Ion = new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) });
+            Assert.AreEqual(6.594, CalculateAverageSpeed(Ion));
+            var Raul = new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) });
+            Assert.AreEqual(5.756, CalculateAverageSpeed(Raul), 0.001);
+            var Mihai = new Cyclist("Mihai", 0.8, new Records[] { new Records(5, 1), new Records(5, 2), new Records(5, 3) });
+            Assert.AreEqual(12.56, CalculateAverageSpeed(Mihai), 0.001);
+            var Darius = new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3) });
+            Assert.AreEqual(3.768, CalculateAverageSpeed(Darius), 0.001);
+        }
+        [TestMethod]
         public void ShouldReturnBestAverageSpeed()
         {
             var cyclists = new Cyclist[] {
@@ -42,8 +54,10 @@ namespace Cyclometer
             var cyclists = new Cyclist[] {
             new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) }),
             new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) }),
-            new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) }) };
-            Assert.AreEqual(new Cyclist("Gheorghe", 0.6, new Records[] { new Records(3, 1), new Records(4, 2), new Records(5, 3) }), FindCyclistWithBestAverageSpeed(cyclists));
+            new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) }) ,
+            new Cyclist("Mihai", 0.8, new Records[] { new Records(5, 1), new Records(5, 2), new Records(5, 3) }),
+            new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3)}) };
+            Assert.AreEqual(new Cyclist("Mihai", 0.8, new Records[] { new Records(5, 1), new Records(5, 2), new Records(5, 3) }), FindCyclistWithBestAverageSpeed(cyclists));
         }
 
         public struct Cyclist {
