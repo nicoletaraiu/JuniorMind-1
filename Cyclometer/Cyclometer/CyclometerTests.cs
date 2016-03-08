@@ -60,6 +60,12 @@ namespace Cyclometer
             Assert.AreEqual(12.56, CalculateBestAverageSpeed(cyclists), 0.0001);
             Assert.AreEqual(cyclists[3], FindCyclistWithBestAverageSpeed(cyclists));
         }
+        [TestMethod]
+        public void ShouldReturnMaxSpeedOfOneCyclist()
+        {
+            var cyclist = new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3) });
+            Assert.AreEqual(0, CalculateMaxSpeedOfOneCyclist(cyclist));
+        }
 
         public struct Cyclist {
             public string name;
@@ -145,6 +151,20 @@ namespace Cyclometer
                 }
             }
             return bestCyclist;
+        }
+
+        double CalculateMaxSpeedOfOneCyclist(Cyclist cyclist)
+        {
+            double maxSpeed = 0;
+            double distance = 3.14 * cyclist.diameter;
+            for (int i = 0; i < cyclist.records.Length; i++)
+            {
+                double speed = distance * cyclist.records[i].rotations;
+                if (speed > maxSpeed)
+                    maxSpeed = speed;
+            }
+            return maxSpeed;
+           
         }
 
     }
