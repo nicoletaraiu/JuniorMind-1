@@ -181,7 +181,6 @@ namespace Cyclometer
             {
                 NameAndSecond goldenSecond = new NameAndSecond(cyclists[0].name, cyclists[0].records[0].second);
                 double maxSpeed = 0;
-                int numberOfRotations = 0;
                 for (int i = 0; i < cyclists.Length; i++)
                 {
 
