@@ -131,11 +131,7 @@ namespace Cyclometer
         {
             double distance = CalculateTotalDistanceOfOneCyclist(cyclist);
             double averageSpeed = 0;
-            int totalTime = 0;
-            for (int i = 0; i < cyclist.records.Length; i++)
-            {
-                totalTime = cyclist.records[i].second;
-            }
+            int totalTime = cyclist.records[cyclist.records.Length - 1].second;
             averageSpeed += distance / totalTime;
             return averageSpeed;
         }
