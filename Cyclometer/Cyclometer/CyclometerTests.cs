@@ -65,12 +65,13 @@ namespace Cyclometer
         public void ShouldReturnMaxSpeedOfOneCyclist()
         {
             var Darius = new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3) });
-            Assert.AreEqual(5.652, CalculateMaxSpeedOfOneCyclist(Darius), 0.0001);
+            Assert.AreEqual(Darius.records[0], GetMaxRotationsOfOneCyclist(Darius));
             var Raul = new Cyclist("Raul", 0.5, new Records[] { new Records(2, 1), new Records(6, 2), new Records(3, 3) });
-            Assert.AreEqual(9.42, CalculateMaxSpeedOfOneCyclist(Raul));
+            Assert.AreEqual(Raul.records[1], GetMaxRotationsOfOneCyclist(Raul));
         }
 
-        public struct Cyclist {
+        public struct Cyclist
+        {
             public string name;
             public double diameter;
             public Records[] records;
@@ -116,7 +117,7 @@ namespace Cyclometer
             }
             return totalDistance;
         }
-        
+
         double CalculateTotalDistance(Cyclist[] cyclists)
         {
             double totalDistance = 0;
@@ -143,7 +144,7 @@ namespace Cyclometer
             {
                 double speed = CalculateAverageSpeed(cyclists[i]);
                 if (speed > bestAverageSpeed)
-                    bestAverageSpeed = speed; 
+                    bestAverageSpeed = speed;
             }
             return bestAverageSpeed;
         }
@@ -164,42 +165,43 @@ namespace Cyclometer
             return bestCyclist;
         }
 
-        double CalculateMaxSpeedOfOneCyclist(Cyclist cyclist)
+        Records GetMaxRotationsOfOneCyclist(Cyclist cyclist)
         {
-            double maxSpeed = 0;
-            double distance = 3.14 * cyclist.diameter;
+            Records maxRotations = new Records(cyclist.records[0].rotations, cyclist.records[0].second);
             for (int i = 0; i < cyclist.records.Length; i++)
             {
-                double speed = distance * cyclist.records[i].rotations;
-                if (speed > maxSpeed)
-                    maxSpeed = speed;
+                if (cyclist.records[i].rotations > maxRotations.rotations)
+                    maxRotations = new Records(cyclist.records[i].rotations, cyclist.records[i].second);
             }
-            return maxSpeed;
+            return maxRotations;
         }
 
         NameAndSecond GetMaxSpeedOfTheRace(Cyclist[] cyclists)
         {
-            NameAndSecond goldenSecond = new NameAndSecond(cyclists[0].name, cyclists[0].records[0].second);
-            double maxSpeed = 0;
-            int numberOfRotations = 0;
-            for (int i = 0; i < cyclists.Length; i++)
             {
-                 double speed = CalculateMaxSpeedOfOneCyclist(cyclists[i]);
-                if (speed > maxSpeed)
+                NameAndSecond goldenSecond = new NameAndSecond(cyclists[0].name, cyclists[0].records[0].second);
+                double maxSpeed = 0;
+                int numberOfRotations = 0;
+                for (int i = 0; i < cyclists.Length; i++)
                 {
-                    maxSpeed = speed;
-                    for (int j = 0; j < cyclists[i].records.Length; j++)
+
+                    double speed = cyclists[i].diameter * GetMaxRotationsOfOneCyclist(cyclists[i]).rotations;
+                    if (speed > maxSpeed)
                     {
-                        int rotations = cyclists[i].records[j].rotations;
-                        if (rotations > numberOfRotations)
-                            numberOfRotations = rotations;
-                        goldenSecond = new NameAndSecond(cyclists[i].name, cyclists[i].records[j].second);
+                        maxSpeed = speed;
+                        for (int j = 0; j < cyclists[i].records.Length; j++)
+                        {
+                            Records rotations = GetMaxRotationsOfOneCyclist(cyclists[i]);
+                            if (rotations.rotations > numberOfRotations)
+                                numberOfRotations = rotations.rotations;
+                            goldenSecond = new NameAndSecond(cyclists[i].name, cyclists[i].records[j].second);
+                        }
                     }
                 }
+                return goldenSecond;
+
             }
-            return goldenSecond;
 
         }
-
     }
 }
