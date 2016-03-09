@@ -49,7 +49,7 @@ namespace Cyclometer
             Assert.AreEqual(7.536, CalculateBestAverageSpeed(cyclists), 0.0001);
         }
         [TestMethod]
-        public void ShouldReturnCyclistWithBestAverageSpeed()
+        public void ThreeTests()
         {
             var cyclists = new Cyclist[] {
             new Cyclist("Ion", 0.7, new Records[] { new Records(4, 1), new Records(3, 2), new Records(2, 3) }),
@@ -62,7 +62,7 @@ namespace Cyclometer
             Assert.AreEqual(new NameAndSecond("Mihai", 3), GetMaxSpeedOfTheRace(cyclists));
         }
         [TestMethod]
-        public void ShouldReturnMaxSpeedOfOneCyclist()
+        public void ShouldReturnMaxRotationsOfOneCyclist()
         {
             var Darius = new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3) });
             Assert.AreEqual(Darius.records[0], GetMaxRotationsOfOneCyclist(Darius));
