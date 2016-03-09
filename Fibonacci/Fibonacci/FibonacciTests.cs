@@ -9,7 +9,9 @@ namespace Fibonacci
         [TestMethod]
         public void ShouldReturnFive()
         {
-            Assert.AreEqual(0, Fibonacci(7));
+            Assert.AreEqual(13, Fibonacci(7));
+            Assert.AreEqual(21, Fibonacci(8));
+            Assert.AreEqual(34, Fibonacci(9));
         }
 
 
