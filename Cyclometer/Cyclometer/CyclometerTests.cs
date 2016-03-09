@@ -192,9 +192,7 @@ namespace Cyclometer
                     }
                 }
                 return goldenSecond;
-
             }
-
         }
     }
 }
