@@ -14,13 +14,12 @@ namespace Fibonacci
             Assert.AreEqual(34, Fibonacci(9));
         }
 
-
         public int Fibonacci(int number)
         {
             int previous = 0;
             return Fibonacci(number, ref previous);
         }
-
+    
         public int Fibonacci(int number, ref int previous)
         {
             if (number < 2) return number;
