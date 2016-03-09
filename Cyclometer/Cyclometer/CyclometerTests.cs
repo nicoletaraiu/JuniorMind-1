@@ -59,7 +59,7 @@ namespace Cyclometer
             new Cyclist("Darius", 0.6, new Records[] { new Records(3, 1), new Records(2, 2), new Records(1, 3)}) };
             Assert.AreEqual(12.56, CalculateBestAverageSpeed(cyclists), 0.0001);
             Assert.AreEqual(cyclists[3], FindCyclistWithBestAverageSpeed(cyclists));
-            Assert.AreEqual(new NameAndSecond("Mihai", 3), GetMaxSpeedOfTheRace(cyclists));
+            Assert.AreEqual(new NameAndSecond("Mihai", 1), GetMaxSpeedOfTheRace(cyclists));
         }
         [TestMethod]
         public void ShouldReturnMaxRotationsOfOneCyclist()
@@ -189,13 +189,7 @@ namespace Cyclometer
                     if (speed > maxSpeed)
                     {
                         maxSpeed = speed;
-                        for (int j = 0; j < cyclists[i].records.Length; j++)
-                        {
-                            Records rotations = GetMaxRotationsOfOneCyclist(cyclists[i]);
-                            if (rotations.rotations > numberOfRotations)
-                                numberOfRotations = rotations.rotations;
-                            goldenSecond = new NameAndSecond(cyclists[i].name, cyclists[i].records[j].second);
-                        }
+                        goldenSecond = new NameAndSecond(cyclists[i].name, GetMaxRotationsOfOneCyclist(cyclists[i]).second);
                     }
                 }
                 return goldenSecond;
