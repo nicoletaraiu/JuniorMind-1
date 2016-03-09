@@ -183,12 +183,12 @@ namespace Cyclometer
                 double maxSpeed = 0;
                 for (int i = 0; i < cyclists.Length; i++)
                 {
-
-                    double speed = cyclists[i].diameter * GetMaxRotationsOfOneCyclist(cyclists[i]).rotations;
+                    Records MaxRotations = GetMaxRotationsOfOneCyclist(cyclists[i]);
+                    double speed = cyclists[i].diameter * MaxRotations.rotations;
                     if (speed > maxSpeed)
                     {
                         maxSpeed = speed;
-                        goldenSecond = new NameAndSecond(cyclists[i].name, GetMaxRotationsOfOneCyclist(cyclists[i]).second);
+                        goldenSecond = new NameAndSecond(cyclists[i].name, MaxRotations.second);
                     }
                 }
                 return goldenSecond;
