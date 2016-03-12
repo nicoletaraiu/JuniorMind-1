@@ -21,6 +21,21 @@ namespace Pascal_s_triangle
         {
             CollectionAssert.AreEqual(new int[] { 1, 3, 3, 1 }, Triangle(4));
         }
+        [TestMethod]
+        public void FifthLine()
+        {
+            CollectionAssert.AreEqual(new int[] { 1, 4, 6, 4, 1 }, Triangle(5));
+        }
+        [TestMethod]
+        public void SixthLine()
+        {
+            CollectionAssert.AreEqual(new int[] { 1, 5, 10, 10, 5, 1 }, Triangle(6));
+        }
+        [TestMethod]
+        public void SeventhLine()
+        {
+            CollectionAssert.AreEqual(new int[] { 1, 6, 15, 20, 15, 6, 1 }, Triangle(7));
+        }
 
         public int[] Triangle(int n)
         {
