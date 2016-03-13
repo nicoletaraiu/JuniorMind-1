@@ -24,7 +24,7 @@ namespace ReverseString
         [TestMethod]
         public void MoreLetters()
         {
-            Assert.AreEqual("", ReverseString("Champions League"));
+            Assert.AreEqual("eugaeL snoipmahC", ReverseString("Champions League"));
         }
 
         public string ReverseString(string word)
