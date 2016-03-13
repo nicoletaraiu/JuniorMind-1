@@ -21,6 +21,11 @@ namespace ReverseString
         {
             Assert.AreEqual("ba", ReverseString("ab"));
         }
+        [TestMethod]
+        public void MoreLetters()
+        {
+            Assert.AreEqual("", ReverseString("Champions League"));
+        }
 
         public string ReverseString(string word)
         {
