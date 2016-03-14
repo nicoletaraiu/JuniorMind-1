@@ -35,15 +35,10 @@ namespace ReverseString
 
         public string ReverseString(string word, ref string previous)
         {
-            string reversed = string.Empty;
-            if (word.Length < 2) return word;
-            int length = word.Length;
-            while (length > 0)
-            {
-                reversed += word[length - 1] + ReverseString(previous);
-                length--;
-            }
-            return reversed;
+            
+            if (word.Length > 0)
+                return word[word.Length - 1] + ReverseString(word.Substring(0, word.Length - 1));
+            return word;
         }
 
     }
