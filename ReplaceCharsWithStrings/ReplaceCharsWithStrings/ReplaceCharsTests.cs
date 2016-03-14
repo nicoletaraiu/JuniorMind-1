@@ -20,14 +20,7 @@ namespace ReplaceCharsWithStrings
 
         public string ReplaceChar(string s, char toReplace, string toReplaceWith, ref string previous)
         {
-            string result = 
-            if (s.Length < 2) return s;
-            foreach (char c in s)
-                if (c == toReplace)
-                {
-                    Array.Resize(ref result, result.Length + toReplaceWith.Length);
-
-                }
+            
         }
  
 
