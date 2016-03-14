@@ -9,20 +9,13 @@ namespace ReplaceCharsWithStrings
         [TestMethod]
         public void FirstTest()
         {
-            Assert.AreEqual("abcghief", Replace("abcde", 'd', "ghi"));
+            Assert.AreEqual("abcghief", ReplaceChar("abcde", 'd', "ghi"));
         }
 
-       public string ReplaceChar(string s)
+        public string ReplaceChar(string s, char toReplace, string toReplaceWith)
         {
-            string previous = string.Empty;
-            return ReplaceChar(s, ref previous);
+            return s;
         }
-
-        public string ReplaceChar(string s, char toReplace, string toReplaceWith, ref string previous)
-        {
-            
-        }
- 
 
     }
 }
