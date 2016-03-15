@@ -34,14 +34,13 @@ namespace ReplaceCharsWithStrings
 
         public string ReplaceChar(string s, char toReplace, string toReplaceWith)
         {
-            if (s.Length < 2)
+            if (s.Length > 0)
             {
-                if (s[0] == toReplace) return toReplaceWith.ToString();
-                else return s[0].ToString();
+                string modified = ReplaceChar(s.Substring(1, s.Length - 1), toReplace, toReplaceWith);
+                if (s[0] == toReplace) return toReplaceWith.ToString() + modified;
+                return s[0] + modified;
             }
-            string obtained = ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith);
-            if (s[s.Length - 1] == toReplace) return obtained + toReplaceWith;
-            return obtained + s[s.Length - 1];
+            return s;
         }
     }
 }
