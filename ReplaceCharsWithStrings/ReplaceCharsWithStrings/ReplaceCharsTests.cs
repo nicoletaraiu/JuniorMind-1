@@ -9,7 +9,7 @@ namespace ReplaceCharsWithStrings
         [TestMethod]
         public void FirstTest()
         {
-            Assert.AreEqual("abcghief", ReplaceChar("abcde", 'd', "ghi"));
+            Assert.AreEqual("abcghief", ReplaceChar("abcdef", 'd', "ghi"));
         }
         [TestMethod]
         public void SecondTest()
@@ -37,6 +37,5 @@ namespace ReplaceCharsWithStrings
             if (s[s.Length - 1] == toReplace) return ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith) + toReplaceWith;
             return ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith) + s[s.Length - 1];
         }
-
     }
 }
