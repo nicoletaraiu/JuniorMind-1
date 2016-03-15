@@ -39,8 +39,9 @@ namespace ReplaceCharsWithStrings
                 if (s[0] == toReplace) return toReplaceWith.ToString();
                 else return s[0].ToString();
             }
-            if (s[s.Length - 1] == toReplace) return ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith) + toReplaceWith;
-            return ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith) + s[s.Length - 1];
+            string obtained = ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith);
+            if (s[s.Length - 1] == toReplace) return obtained + toReplaceWith;
+            return obtained + s[s.Length - 1];
         }
     }
 }
