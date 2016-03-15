@@ -32,9 +32,10 @@ namespace ReplaceCharsWithStrings
             if (s.Length < 2)
             {
                 if (s[0] == toReplace) return toReplaceWith.ToString();
-                else return s;
+                else return s[0].ToString();
             }
-            return s[0] + ReplaceChar(s.Substring(1, s.Length - 1), toReplace, toReplaceWith);
+            if (s[s.Length - 1] == toReplace) return ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith) + toReplaceWith;
+            return ReplaceChar(s.Substring(0, s.Length - 1), toReplace, toReplaceWith) + s[s.Length - 1];
         }
 
     }
