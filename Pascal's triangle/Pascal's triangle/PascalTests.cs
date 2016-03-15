@@ -39,17 +39,11 @@ namespace Pascal_s_triangle
 
         public int[] Triangle(int n)
         {
-            int[] previous = new int[n - 1];
-            return Triangle(n, ref previous);
-        }
-
-        public int[] Triangle(int n, ref int[] previous)
-        {
             int[] result = new int[n];
             result[0] = 1;
             result[result.Length - 1] = 1;
             if (n < 3) return result;
-            previous = Triangle(n - 1);
+            int[] previous = Triangle(n - 1);
             for (int i = 1; i < previous.Length; i++)
             {
                 result[i] = previous[i - 1] + previous[i];
