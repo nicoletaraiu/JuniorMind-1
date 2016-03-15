@@ -26,6 +26,11 @@ namespace ReplaceCharsWithStrings
         {
             Assert.AreEqual("m", ReplaceChar("m", 'n', "o"));
         }
+        [TestMethod]
+        public void LastTest()
+        {
+            Assert.AreEqual("elementary", ReplaceChar("3l3m3ntary", '3', "e"));
+        }
 
         public string ReplaceChar(string s, char toReplace, string toReplaceWith)
         {
