@@ -14,6 +14,16 @@ namespace Towers_of_Hanoi
             CollectionAssert.AreEqual(Generate(7), TOH(7, Generate(7), new int[7], new int[7]));
         }
         [TestMethod]
+        public void SixtyThree()
+        {
+            CollectionAssert.AreEqual(Generate(63), TOH(63, Generate(63), new int[63], new int[63]));
+        }
+        [TestMethod]
+        public void TheSpecialOne()
+        {
+            CollectionAssert.AreEqual(Generate(64), TOH(64, Generate(64), new int[64], new int[64]));
+        }
+        [TestMethod]
         public void ShouldGenerateNumbersArray()
         {
             CollectionAssert.AreEqual(new int[] { 5, 4, 3, 2, 1 }, Generate(5));
