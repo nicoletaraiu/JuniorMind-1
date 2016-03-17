@@ -22,7 +22,7 @@ namespace Towers_of_Hanoi
             {
                 TOH(disks - 1, A, B, C);
                 Move(disks, A, C);
-                TOH(disks - 1, B, A, C);
+                TOH(disks - 1, B, C, A);
             }
             return C;
         }
