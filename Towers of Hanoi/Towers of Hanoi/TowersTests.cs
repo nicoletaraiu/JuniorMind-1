@@ -9,9 +9,9 @@ namespace Towers_of_Hanoi
         [TestMethod]
         public void MoreTests()
         {
-            CollectionAssert.AreEqual(new int[] { 3, 2, 1 }, TOH(3, new int[] { 3, 2, 1 }, new int[3], new int[3]));
-            CollectionAssert.AreEqual(new int[] { 4, 3, 2, 1 }, TOH(4, new int[] { 4, 3, 2, 1 }, new int[4], new int[4]));
-            CollectionAssert.AreEqual(new int[] { 7, 6, 5, 4, 3, 2, 1 }, TOH(7, new int[] { 7, 6, 5, 4, 3, 2, 1, 0 }, new int[7], new int[7]));
+            CollectionAssert.AreEqual(Generate(3), TOH(3, Generate(3), new int[3], new int[3]));
+            CollectionAssert.AreEqual(Generate(4), TOH(4, Generate(4), new int[4], new int[4]));
+            CollectionAssert.AreEqual(Generate(7), TOH(7, Generate(7), new int[7], new int[7]));
         }
         [TestMethod]
         public void ShouldGenerateNumbersArray()
