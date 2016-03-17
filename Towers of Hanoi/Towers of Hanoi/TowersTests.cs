@@ -7,9 +7,11 @@ namespace Towers_of_Hanoi
     public class TowersTests
     {
         [TestMethod]
-        public void ThreeDiscs()
+        public void MoreTests()
         {
             CollectionAssert.AreEqual(new int[] { 3, 2, 1 }, TOH(3, new int[] { 3, 2, 1 }, new int[3], new int[3]));
+            CollectionAssert.AreEqual(new int[] { 4, 3, 2, 1 }, TOH(4, new int[] { 4, 3, 2, 1 }, new int[4], new int[4]));
+            CollectionAssert.AreEqual(new int[] { 7, 6, 5, 4, 3, 2, 1 }, TOH(7, new int[] { 7, 6, 5, 4, 3, 2, 1, 0 }, new int[7], new int[7]));
         }
 
         static int[] TOH(int disks, int[] A, int[] B, int[] C)
