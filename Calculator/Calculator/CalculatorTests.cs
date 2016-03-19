@@ -9,14 +9,18 @@ namespace Calculator
         [TestMethod]
         public void ShouldReturnOne()
         {
-            int i = 0;
-            Assert.AreEqual(1, Compute("1", ref i));
+            Assert.AreEqual(1, Compute("1"));
         }
         [TestMethod]
         public void ShouldReturn12()
         {
+            Assert.AreEqual(12, Compute("* 3 4"));
+        }
+
+        double Compute(string s)
+        {
             int i = 0;
-            Assert.AreEqual(12, Compute("* 3 4", ref i));
+            return Compute(s, ref i);
         }
 
         double Compute(string s, ref int i)
