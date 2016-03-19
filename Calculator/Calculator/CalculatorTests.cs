@@ -19,15 +19,14 @@ namespace Calculator
 
         double Compute(string s)
         {
+            string[] elements = s.Split(' ');
             int i = 0;
-            return Compute(s, ref i);
+            return Compute(elements, ref i);
         }
 
-        double Compute(string s, ref int i)
+        double Compute(string[] elements, ref int i)
         {
-            string[] elements = s.Split(' ');
             string currentElement = elements[i++];
-
             double result = 0;
             if (double.TryParse(currentElement, out result))
             {
@@ -36,10 +35,10 @@ namespace Calculator
 
             switch (currentElement)
             {
-                case "+": return Compute(s, ref i) + Compute(s, ref i);
-                case "-": return Compute(s, ref i) - Compute(s, ref i);
-                case "*": return Compute(s, ref i) * Compute(s, ref i);
-                default: return Compute(s, ref i) / Compute(s, ref i);
+                case "+": return Compute(elements, ref i) + Compute(elements, ref i);
+                case "-": return Compute(elements, ref i) - Compute(elements, ref i);
+                case "*": return Compute(elements, ref i) * Compute(elements, ref i);
+                default: return Compute(elements, ref i) / Compute(elements, ref i);
             }
         }
     }
