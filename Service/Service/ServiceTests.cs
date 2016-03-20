@@ -9,17 +9,24 @@ namespace Service
         [TestMethod]
         public void TestMethod1()
         {
-            var products = new Product[] { new Product("Siemens", "Low"), new Product("Nokia", "Medium"), new Product("Alcatel", "High") };
-            var expected = new Product[] { new Product("Alcatel", "High"), new Product("Nokia", "Medium"), new Product("Siemens", "Low") };
+            var products = new Product[] { new Product("Siemens", Priority.Low), new Product("Nokia", Priority.Medium), new Product("Alcatel", Priority.High) };
+            var expected = new Product[] { new Product("Alcatel", Priority.High), new Product("Nokia", Priority.Medium), new Product("Siemens", Priority.Low) };
             CollectionAssert.AreEqual(expected, Sort(products));
+        }
+        
+        public enum Priority
+        {
+            Low = 3,
+            Medium = 2,
+            High = 1
         }
 
         public struct Product
         {
             public string name;
-            public string priority;
+            public Priority priority;
 
-            public Product(string name, string priority)
+            public Product(string name, Priority priority)
             {
                 this.name = name;
                 this.priority = priority;
@@ -28,7 +35,22 @@ namespace Service
 
         static Product[] Sort(Product[] products)
         {
+            for (int i = 0; i < products.Length; i++)
+            {
+                for (int j = 0; j < products.Length - 1; j++)
+                {
+                    if (products[j].priority > products[j + 1].priority)
+                        Swap(ref products[j], ref products[j + 1]);
+                }
+            }
             return products;
+        }
+
+        static void Swap(ref Product a, ref Product b)
+        {
+            Product temp = a;
+            a = b;
+            b = temp;
         }
     }
 }
