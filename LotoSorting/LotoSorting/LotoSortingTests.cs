@@ -10,6 +10,8 @@ namespace LotoSorting
         public void ShouldReturnSortedArray()
         {
             CollectionAssert.AreEqual(new int[] { 10, 19, 30, 39, 40, 49 }, Sort(new int[] { 30, 40, 39, 49, 10, 19 }));
+            CollectionAssert.AreEqual(new int[] { 1, 2, 3, 4, 5, 6 }, Sort(new int[] { 5, 3, 1, 6, 4, 2 }));
+            CollectionAssert.AreEqual(new int[] { 10, 20, 30, 40, 41, 42 }, Sort(new int[] { 42, 41, 40, 30, 10, 20 }));
         }
 
         int[] Sort(int[] winningNumbers)
