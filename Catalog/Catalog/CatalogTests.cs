@@ -9,7 +9,7 @@ namespace Catalog
         [TestMethod]
         public void ShouldCalculateGeneralAverageGrade()
         {
-            Assert.AreEqual(10, CalculateTheAverageGradeForOneSubject(new Student("Ion", new int[] { 9, 8, 10 })));
+            Assert.AreEqual(9, CalculateTheAverageGradeForOneSubject(new Student("Ion", new int[] { 9, 8, 10 })));
         }
         
         public struct Student
@@ -26,7 +26,12 @@ namespace Catalog
 
         static int CalculateTheAverageGradeForOneSubject(Student student)
         {
-            return 0;
+            int totalGrade = 0;
+            for (int i = 0; i < student.grades.Length; i++)
+            {
+                totalGrade += student.grades[i];
+            }
+            return totalGrade / student.grades.Length;
         }
     }
 }
