@@ -18,6 +18,16 @@ namespace Text
                 new Occurrence("unu", 1)
             }, Sort("cinci unu trei cinci trei patru doi cinci patru trei patru doi cinci patru cinci"));
         }
+        [TestMethod]
+        public void ShouldReturnSortedStruct()
+        {
+            CollectionAssert.AreEqual(new Occurrence[]{
+                new Occurrence("merse", 3),
+                new Occurrence("si", 2),
+                new Occurrence("tot", 2),
+                new Occurrence("El", 1)
+            } ,Sort("El merse si tot merse si tot merse"));
+        }
 
         public struct Occurrence
         {
