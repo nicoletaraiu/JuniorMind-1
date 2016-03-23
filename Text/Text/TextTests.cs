@@ -9,13 +9,13 @@ namespace Text
         [TestMethod]
         public void ShouldReturnTheStatistic()
         {
-            Assert.AreEqual(new Occurrence[]
+            CollectionAssert.AreEqual(new Occurrence[]
             {
                 new Occurrence("cinci", 5),
-                new Occurrence("patru", 4),
+                new Occurrence("unu", 1),
                 new Occurrence("trei", 3),
-                new Occurrence("doi", 2),
-                new Occurrence("unu", 1)
+                new Occurrence("patru", 4),
+                new Occurrence("doi", 2)
             }, Sort("cinci unu trei cinci trei patru doi cinci patru trei patru doi cinci patru cinci"));
         }
 
@@ -34,24 +34,41 @@ namespace Text
         Occurrence[] Sort(string Text)
         {
             string[] words = Text.Split(' ');
-            Occurrence[] list = new Occurrence[words.Length];
+            Occurrence[] list = new Occurrence[0];
             string[] keeper = new string[words.Length];
             for (int i = 0; i < words.Length - 1; i++)
             {
                 int pos = Array.IndexOf(keeper, words[i]);
+                keeper[i] = words[i];
                 if (pos == -1)
                 {
                     int counter = 1;
-                    keeper[i] = words[i];
                     for (int j = i + 1; j < words.Length; j++)
                     {
                         if (words[i] == words[j])
                             counter++;
                     }
-                    list[i] = new Occurrence(words[i], counter);
+                    Array.Resize(ref list, list.Length + 1);
+                    list[list.Length - 1] = new Occurrence(words[i], counter);
                 }
+                else continue;
             }
+            /*for (int i = 0; i < list.Length - 1; i++)
+            {
+                for (int j = i + 1; j < list.Length; j++)
+                {
+                    if (list[j - 1].occurrences > list[j].occurrences)
+                        Swap(ref list[j - 1], ref list[j]);
+                }
+            }*/
             return list;
         }
+        /*
+        static void Swap(ref Occurrence a, ref Occurrence b)
+        {
+            Occurrence temp = a;
+            a = b;
+            b = temp;
+        }*/
     }
 }
