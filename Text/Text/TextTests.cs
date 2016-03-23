@@ -12,10 +12,10 @@ namespace Text
             CollectionAssert.AreEqual(new Occurrence[]
             {
                 new Occurrence("cinci", 5),
-                new Occurrence("unu", 1),
-                new Occurrence("trei", 3),
                 new Occurrence("patru", 4),
-                new Occurrence("doi", 2)
+                new Occurrence("trei", 3),
+                new Occurrence("doi", 2),
+                new Occurrence("unu", 1)
             }, Sort("cinci unu trei cinci trei patru doi cinci patru trei patru doi cinci patru cinci"));
         }
 
@@ -53,22 +53,22 @@ namespace Text
                 }
                 else continue;
             }
-            /*for (int i = 0; i < list.Length - 1; i++)
+            for (int i = 0; i < list.Length; i++)
             {
-                for (int j = i + 1; j < list.Length; j++)
+                for (int j = 0; j < list.Length - 1; j++)
                 {
-                    if (list[j - 1].occurrences > list[j].occurrences)
-                        Swap(ref list[j - 1], ref list[j]);
+                    if (list[j].occurrences < list[j + 1].occurrences)
+                        Swap(ref list[j], ref list[j + 1]);
                 }
-            }*/
+            }
             return list;
         }
-        /*
+        
         static void Swap(ref Occurrence a, ref Occurrence b)
         {
             Occurrence temp = a;
             a = b;
             b = temp;
-        }*/
+        }
     }
 }
