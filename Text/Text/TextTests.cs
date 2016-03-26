@@ -63,22 +63,51 @@ namespace Text
                 }
                 else continue;
             }
-            for (int i = 0; i < list.Length; i++)
-            {
-                for (int j = 0; j < list.Length - 1; j++)
-                {
-                    if (list[j].occurrences < list[j + 1].occurrences)
-                        Swap(ref list[j], ref list[j + 1]);
-                }
-            }
+            /* for (int i = 0; i < list.Length; i++)
+             {
+                 for (int j = 0; j < list.Length - 1; j++)
+                 {
+                     if (list[j].occurrences < list[j + 1].occurrences)
+                         Swap(ref list[j], ref list[j + 1]);
+                 }
+             }*/
+            Quicksort(list, 0, list.Length - 1);
             return list;
         }
         
-        static void Swap(ref Occurrence a, ref Occurrence b)
+        private void Quicksort(Occurrence[] list, int low, int high)
         {
-            Occurrence temp = a;
-            a = b;
-            b = temp;
+            int pivotLocation = 0;
+            if (low < high)
+            {
+                pivotLocation = Partition(list, low, high);
+                Quicksort(list, low, pivotLocation - 1);
+                Quicksort(list, pivotLocation + 1, high);
+            }
+        }
+
+        private int Partition(Occurrence[] list, int low, int high)
+        {
+            int pivot = list[high].occurrences;
+            int i = low;
+
+            for (int j = low + 1; j <= high; j++)
+            {
+                if (list[j].occurrences >= pivot)
+                {
+                    ++i;
+                    Swap(list, i, j);
+                }
+            }
+            Swap(list, low, i);
+            return i;
+        }
+
+        static void Swap(Occurrence[] list, int a, int b)
+        {
+            Occurrence temp = list[a];
+            list[a] = list[b];
+            list[b] = temp;
         }
     }
 }
