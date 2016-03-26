@@ -63,14 +63,6 @@ namespace Text
                 }
                 else continue;
             }
-            /* for (int i = 0; i < list.Length; i++)
-             {
-                 for (int j = 0; j < list.Length - 1; j++)
-                 {
-                     if (list[j].occurrences < list[j + 1].occurrences)
-                         Swap(ref list[j], ref list[j + 1]);
-                 }
-             }*/
             Quicksort(list, 0, list.Length - 1);
             return list;
         }
@@ -88,7 +80,7 @@ namespace Text
 
         private int Partition(Occurrence[] list, int low, int high)
         {
-            int pivot = list[high].occurrences;
+            int pivot = list[low].occurrences;
             int i = low;
 
             for (int j = low + 1; j <= high; j++)
@@ -96,7 +88,7 @@ namespace Text
                 if (list[j].occurrences >= pivot)
                 {
                     ++i;
-                    Swap(list, i, j);
+                    Swap(list, i, j); 
                 }
             }
             Swap(list, low, i);
