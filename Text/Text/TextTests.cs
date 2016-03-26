@@ -16,17 +16,29 @@ namespace Text
                 new Occurrence("trei", 3),
                 new Occurrence("doi", 2),
                 new Occurrence("unu", 1)
-            }, Sort("cinci unu trei cinci trei patru doi cinci patru trei patru doi cinci patru cinci"));
+             }, Sort("cinci unu trei cinci trei patru doi cinci patru trei patru doi cinci patru cinci"));
         }
         [TestMethod]
         public void ShouldReturnSortedStruct()
         {
-            CollectionAssert.AreEqual(new Occurrence[]{
+            CollectionAssert.AreEqual(new Occurrence[]
+            {
                 new Occurrence("merse", 3),
                 new Occurrence("si", 2),
                 new Occurrence("tot", 2),
                 new Occurrence("El", 1)
-            } ,Sort("El merse si tot merse si tot merse"));
+            }, Sort("El merse si tot merse si tot merse"));
+        }
+        [TestMethod]
+        public void ShouldSortTheStruct()
+        {
+            CollectionAssert.AreEqual(new Occurrence[] 
+            {
+                new Occurrence("verde", 5),
+                new Occurrence("albastru", 4),
+                new Occurrence("rosu", 3),
+                new Occurrence("galben", 2)
+             }, Sort("rosu verde albastru rosu verde albastru galben galben albastru rosu verde albastru verde verde"));
         }
 
         public struct Occurrence
