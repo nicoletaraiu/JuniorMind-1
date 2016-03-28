@@ -35,25 +35,30 @@ namespace Catalog
         [TestMethod]
         public void ShouldSortStudentsDependingOnGeneralAverageGrade()
         {
-            var students = new Student[] { new Student("Catalin", new Class[]
-           {
+            var students = new Student[] {
+                new Student("Catalin", new Class[]{
                 new Class("English", new double[] { 9, 10, 8 }),
                 new Class("French", new double[] { 10, 8 }),
-                new Class("Informatics", new double[] { 4, 6, 6, 4 })
-           }),  new Student("Raul", new Class[]
-           {
+                new Class("Informatics", new double[] { 4, 6, 6, 4 })}),
+                new Student("Raul", new Class[]{
                 new Class("Math", new double[] { 5, 6, 4 }),
                 new Class("Biology", new double[] { 7, 6, 8 }),
-                new Class("Chemistry", new double[] { 5, 7, 6 })
-           }),  new Student("Andrei", new Class[]
-           {
+                new Class("Chemistry", new double[] { 5, 7, 6 }) }),
+                new Student("Mircea", new Class[]{
+                new Class("English", new double[] {6, 4, 8}),
+                new Class("French", new double[] {6, 6})}),
+                new Student("Andrei", new Class[]{
                 new Class("Physics", new double[] { 7, 9 }),
                 new Class("Spanish", new double[] { 9, 9 }),
                 new Class("History", new double[] { 8, 10 }),
                 new Class("Sports", new double[] { 10, 10 }),
-                new Class("Economy", new double[] { 9, 1, 5 }) }) };
+                new Class("Economy", new double[] { 9, 1, 5 }) }),
+                new Student("Paul", new Class[] {
+                new Class("History", new double[] {4, 8}),
+                new Class("French", new double[] {10, 2}) }) };
             Assert.AreEqual(new NameAndGeneralAverageGrade("Andrei", 8), Sort(students));
-            Assert.AreEqual(new NameAndGeneralAverageGrade("Raul", 6), FindTheSmallestGeneralAverageGrades(students));
+            CollectionAssert.AreEqual(new NameAndGeneralAverageGrade[] {
+            new NameAndGeneralAverageGrade("Mircea", 6), new NameAndGeneralAverageGrade("Raul", 6), new NameAndGeneralAverageGrade("Paul", 6) }, FindTheSmallestGeneralAverageGrades(students));
         }
 
         [TestMethod]
@@ -98,16 +103,30 @@ namespace Catalog
             }
         }
 
-        public static NameAndGeneralAverageGrade FindTheSmallestGeneralAverageGrades(Student[] students)
+        public static NameAndGeneralAverageGrade[] FindTheSmallestGeneralAverageGrades(Student[] students)
         {
+            NameAndGeneralAverageGrade[] results = new NameAndGeneralAverageGrade[0];
             NameAndGeneralAverageGrade result = new NameAndGeneralAverageGrade(students[0].name, CalculateTheAverageGradeForOneStudent(students[0]));
+            int averageGrade = 0;
             for (int i = 0; i < students.Length; i++)
             {
                 int value = CalculateTheAverageGradeForOneStudent(students[i]);
                 if (CalculateTheAverageGradeForOneStudent(students[i]) < result.generalAverageGrade)
+                { 
                     result = new NameAndGeneralAverageGrade(students[i].name, value);
+                    averageGrade = value;
+                }
             }
-            return result;
+            for (int i = 0; i < students.Length; i++)
+            {
+                int value = CalculateTheAverageGradeForOneStudent(students[i]);
+                if (value == result.generalAverageGrade)
+                {
+                    Array.Resize(ref results, results.Length + 1);
+                    results[results.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, value);
+                }
+            }
+            return results;
         }
 
         public static string[] SortAlphabetically(string[] students)
