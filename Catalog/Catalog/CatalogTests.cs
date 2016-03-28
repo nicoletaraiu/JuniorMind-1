@@ -61,6 +61,11 @@ namespace Catalog
             Assert.AreEqual("Mariana", CompareTwoNames("Mariana", "Marinel"));
             Assert.AreEqual("Mariana", CompareTwoNames("Marinel", "Mariana"));
         }
+        [TestMethod]
+        public void ShouldSortAlphabetically()
+        {
+            CollectionAssert.AreEqual(new string[] { "Andrei", "Bogdan", "Ciprian", "Daniel" }, SortAlphabetically(new string[] { "Ciprian", "Bogdan", "Daniel", "Andrei" }));
+        }
         
         public struct Student
         {
@@ -98,13 +103,18 @@ namespace Catalog
             }
         }
 
-        /*public static SortAlphabetically(Student[] students)
+        public static string[] SortAlphabetically(string[] students)
         {
             for (int i = 0; i < students.Length; i++)
             {
-                if ()
+                for (int j = 0; j < students.Length - 1; j++)
+                {
+                    if ((CompareTwoNames(students[j], students[j + 1]) != students[j]))
+                        Swap(ref students[j], ref students[j + 1]);
+                }
             }
-        }*/
+            return students;
+        }
 
         public static NameAndGeneralAverageGrade Sort(Student[] students)
         { 
@@ -156,6 +166,13 @@ namespace Catalog
                 continue;
             }
             return first;
+        }
+
+        static void Swap(ref string first, ref string second)
+        {
+            string temp = first;
+            first = second;
+            second = temp;
         }
 
         static void Swap(ref Student first, ref Student second)
