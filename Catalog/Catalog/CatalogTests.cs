@@ -22,6 +22,7 @@ namespace Catalog
                 new Class("Sports", new double[] { 10, 10 }),
                 new Class("Economy", new double[] { 9, 1, 5 })})));
         }
+
         [TestMethod]
         public void ShouldReturnAverage()
         {
@@ -30,6 +31,7 @@ namespace Catalog
                 new Class("Biology", new double[] { 2, 3, 4 }),
                 new Class("Chemistry", new double[] { 3, 4, 5 }) })));
         }
+
         [TestMethod]
         public void ShouldSortStudentsDependingOnGeneralAverageGrade()
         {
@@ -52,10 +54,34 @@ namespace Catalog
                 new Class("Economy", new double[] { 9, 1, 5 })
            })}));
         }
+
         [TestMethod]
         public void ShouldSortAlphabetically()
         {
             CollectionAssert.AreEqual(new string[] { "Andrei", "Bogdan", "Ciprian", "Daniel" }, SortAlphabetically(new string[] { "Ciprian", "Bogdan", "Daniel", "Andrei" }));
+        }
+
+        [TestMethod]
+        public void ShouldReturnTheStudentsWithSmallestGeneralAverageGrade()
+        {
+            Assert.AreEqual(new NameAndGeneralAverageGrade("Raul", 6),
+                FindTheSmallestGeneralAverageGrades(new Student[] { new Student("Raul", new Class[]
+           {
+                new Class("Math", new double[] { 5, 6, 4 }),
+                new Class("Biology", new double[] { 7, 6, 8 }),
+                new Class("Chemistry", new double[] { 5, 7, 6 })
+           }), new Student("Catalin", new Class[]
+           {
+                new Class("English", new double[] { 9, 10, 8 }),
+                new Class("French", new double[] { 10, 8 }),
+                new Class("Informatics", new double[] { 4, 6, 6, 4 })
+           }), new Student("Andrei", new Class[]
+           {
+               new Class("Physics", new double[] { 7, 9 }),
+                new Class("Spanish", new double[] { 9, 9 }),
+                new Class("History", new double[] { 8, 10 }),
+                new Class("Sports", new double[] { 10, 10 }),
+                new Class("Economy", new double[] { 9, 1, 5 }) }) }));
         }
         
         public struct Student
@@ -92,6 +118,18 @@ namespace Catalog
                 this.name = name;
                 this.generalAverageGrade = generalAverageGrade;
             }
+        }
+
+        public static NameAndGeneralAverageGrade FindTheSmallestGeneralAverageGrades(Student[] students)
+        {
+            NameAndGeneralAverageGrade result = new NameAndGeneralAverageGrade(students[0].name, CalculateTheAverageGradeForOneStudent(students[0]));
+            for (int i = 0; i < students.Length; i++)
+            {
+                int value = CalculateTheAverageGradeForOneStudent(students[i]);
+                if (CalculateTheAverageGradeForOneStudent(students[i]) < result.generalAverageGrade)
+                    result = new NameAndGeneralAverageGrade(students[i].name, value);
+            }
+            return result;
         }
 
         public static string[] SortAlphabetically(string[] students)
