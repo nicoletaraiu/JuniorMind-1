@@ -60,15 +60,22 @@ namespace Catalog
             double totalGrade = 0;
             for (int i = 0; i < student.classes.Length; i++)
             {
-                double domainGrade = 0;
-                for (int j = 0; j < student.classes[i].grades.Length; j++)
-                {
-                    domainGrade += student.classes[i].grades[j];
-                }
-                domainGrade /= student.classes[i].grades.Length;
+                double domainGrade = CalculateDomainGrade(student.classes[i]);
                 totalGrade += domainGrade;
             }
             return (int)totalGrade / student.classes.Length;
         }
+
+        static double CalculateDomainGrade(Class domain)
+        {
+            double result = 0;
+            for (int i = 0; i < domain.grades.Length; i++)
+            {
+                result += domain.grades[i];
+            }
+            result /= domain.grades.Length;
+            return result;
+        }
+
     }
 }
