@@ -53,15 +53,6 @@ namespace Catalog
            })}));
         }
         [TestMethod]
-        public void ShouldReturnTheStudentWithTheNameCloserToTheLeftSide()
-        {
-            Assert.AreEqual("Andrei", CompareTwoNames("Raul", "Andrei"));
-            Assert.AreEqual("Mircea", CompareTwoNames("Mircea", "Tiberiu"));
-            Assert.AreEqual("Andreea", CompareTwoNames("Andrei", "Andreea"));
-            Assert.AreEqual("Mariana", CompareTwoNames("Mariana", "Marinel"));
-            Assert.AreEqual("Mariana", CompareTwoNames("Marinel", "Mariana"));
-        }
-        [TestMethod]
         public void ShouldSortAlphabetically()
         {
             CollectionAssert.AreEqual(new string[] { "Andrei", "Bogdan", "Ciprian", "Daniel" }, SortAlphabetically(new string[] { "Ciprian", "Bogdan", "Daniel", "Andrei" }));
@@ -109,7 +100,7 @@ namespace Catalog
             {
                 for (int j = 0; j < students.Length - 1; j++)
                 {
-                    if ((CompareTwoNames(students[j], students[j + 1]) != students[j]))
+                    if (String.Compare(students[j], students[j + 1]) > 0)
                         Swap(ref students[j], ref students[j + 1]);
                 }
             }
@@ -153,19 +144,6 @@ namespace Catalog
             }
             result /= domain.grades.Length;
             return result;
-        }
-
-        static string CompareTwoNames(string first, string second)
-        {
-            for (int i = 0; i < first.Length; i++)
-            {
-                if (second[i] < first[i])
-                    return second;
-                else if (first[i] < second[i])
-                    return first;
-                continue;
-            }
-            return first;
         }
 
         static void Swap(ref string first, ref string second)
