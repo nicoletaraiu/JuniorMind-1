@@ -70,6 +70,34 @@ namespace Catalog
             CollectionAssert.AreEqual(new string[] { "Andrei", "Bogdan", "Ciprian", "Daniel" }, SortAlphabetically(new string[] { "Ciprian", "Bogdan", "Daniel", "Andrei" }));
         }
 
+        [TestMethod]
+        public void ShouldFindTheBestStudents()
+        {
+            var students = new Student[] {
+                new Student("Catalin", new Class[]{
+                    new Class("English", new double[] { 10, 10, 10 }),
+                    new Class("French", new double[] { 10, 10 }),
+                    new Class("Informatics", new double[] { 10, 10, 10, 10 })}),
+                new Student("Raul", new Class[]{
+                    new Class("Math", new double[] { 5, 6, 4 }),
+                    new Class("Biology", new double[] { 7, 6, 8 }),
+                    new Class("Chemistry", new double[] { 5, 7, 6 }) }),
+                new Student("Mircea", new Class[]{
+                    new Class("English", new double[] {10, 10, 10, 10}),
+                    new Class("French", new double[] {10, 10, 10, 10, 10}) }),
+                new Student("Andrei", new Class[]{
+                    new Class("Physics", new double[] { 7, 9 }),
+                    new Class("Spanish", new double[] { 9, 9 }),
+                    new Class("History", new double[] { 8, 10 }),
+                    new Class("Sports", new double[] { 10, 10 }),
+                    new Class("Economy", new double[] { 9, 1, 5 }) })
+            };
+            CollectionAssert.AreEqual(new NameAndGeneralAverageGrade[]
+            {
+                new NameAndGeneralAverageGrade("Catalin", 10), new NameAndGeneralAverageGrade("Mircea", 10) }, FindTheBestStudents(students));
+            }
+    
+
         public struct Student
         {
             public string name;
@@ -104,6 +132,58 @@ namespace Catalog
                 this.name = name;
                 this.generalAverageGrade = generalAverageGrade;
             }
+        }
+
+        public static NameAndGeneralAverageGrade[] FindTheBestStudents(Student[] students)
+        {
+            NameAndGeneralAverageGrade[] bestStudents = new NameAndGeneralAverageGrade[0];
+            for (int i = 0; i < students.Length; i++)
+            {
+                int bestMarks = CountBestMarksForOneStudent(students[i]);
+                if (bestMarks > 0)
+                {
+                    Array.Resize(ref bestStudents, bestStudents.Length + 1);
+                    bestStudents[bestStudents.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, 10);
+                }    
+            }
+            int max = CountBestMarksForOneStudent(students[0]);
+            NameAndGeneralAverageGrade[] bestOfTheBest = new NameAndGeneralAverageGrade[0];
+            for (int i = 1; i < bestStudents.Length; i++)
+            {
+                int marks = CountBestMarksForOneStudent(students[i]);
+                if (marks > max)
+                    max = marks;
+            }
+            for (int i = 0; i < bestStudents.Length; i++)
+            {
+                if (CountBestMarksForOneStudent(students[i]) == max)
+                {
+                    Array.Resize(ref bestOfTheBest, bestOfTheBest.Length + 1);
+                    bestOfTheBest[bestOfTheBest.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, 10);
+                }
+            }
+            return bestOfTheBest;
+        }
+
+        public static int CountBestMarksForOneStudent(Student student)
+        {
+            int counter = 0;
+            for (int i = 0; i < student.classes.Length; i++)
+            {
+                counter += CountBestMarksFromOneDomain(student.classes[i]);
+            }
+            return counter;
+        }
+
+        public static int CountBestMarksFromOneDomain(Class domain)
+        {
+            int counter = 0;
+            for (int i = 0; i < domain.grades.Length; i++)
+            {
+                if (domain.grades[i] == 10)
+                    counter++;
+            }
+            return counter;
         }
 
         public static NameAndGeneralAverageGrade[] FindStudentsWithSpecificGeneralAverageGrade(Student[] students, int averageGrade)
