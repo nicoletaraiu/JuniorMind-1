@@ -37,28 +37,31 @@ namespace Catalog
         {
             var students = new Student[] {
                 new Student("Catalin", new Class[]{
-                new Class("English", new double[] { 9, 10, 8 }),
-                new Class("French", new double[] { 10, 8 }),
-                new Class("Informatics", new double[] { 4, 6, 6, 4 })}),
+                    new Class("English", new double[] { 9, 10, 8 }),
+                    new Class("French", new double[] { 10, 8 }),
+                    new Class("Informatics", new double[] { 4, 6, 6, 4 })}),
                 new Student("Raul", new Class[]{
-                new Class("Math", new double[] { 5, 6, 4 }),
-                new Class("Biology", new double[] { 7, 6, 8 }),
-                new Class("Chemistry", new double[] { 5, 7, 6 }) }),
+                    new Class("Math", new double[] { 5, 6, 4 }),
+                    new Class("Biology", new double[] { 7, 6, 8 }),
+                    new Class("Chemistry", new double[] { 5, 7, 6 }) }),
                 new Student("Mircea", new Class[]{
-                new Class("English", new double[] {6, 4, 8}),
-                new Class("French", new double[] {6, 6})}),
+                    new Class("English", new double[] {6, 4, 8}),
+                    new Class("French", new double[] {6, 6})}),
                 new Student("Andrei", new Class[]{
-                new Class("Physics", new double[] { 7, 9 }),
-                new Class("Spanish", new double[] { 9, 9 }),
-                new Class("History", new double[] { 8, 10 }),
-                new Class("Sports", new double[] { 10, 10 }),
-                new Class("Economy", new double[] { 9, 1, 5 }) }),
+                    new Class("Physics", new double[] { 7, 9 }),
+                    new Class("Spanish", new double[] { 9, 9 }),
+                    new Class("History", new double[] { 8, 10 }),
+                    new Class("Sports", new double[] { 10, 10 }),
+                    new Class("Economy", new double[] { 9, 1, 5 }) }),
                 new Student("Paul", new Class[] {
-                new Class("History", new double[] {4, 8}),
-                new Class("French", new double[] {10, 2}) }) };
+                    new Class("History", new double[] {4, 8}),
+                    new Class("French", new double[] {10, 2}) }) };
             Assert.AreEqual(new NameAndGeneralAverageGrade("Andrei", 8), Sort(students));
             CollectionAssert.AreEqual(new NameAndGeneralAverageGrade[] {
             new NameAndGeneralAverageGrade("Mircea", 6), new NameAndGeneralAverageGrade("Raul", 6), new NameAndGeneralAverageGrade("Paul", 6) }, FindTheSmallestGeneralAverageGrades(students));
+            CollectionAssert.AreEqual(new NameAndGeneralAverageGrade[] {
+                new NameAndGeneralAverageGrade("Mircea", 6), new NameAndGeneralAverageGrade("Raul", 6), new NameAndGeneralAverageGrade("Paul", 6) }, FindStudentsWithSpecificGeneralAverageGrade(students, 6));
+            CollectionAssert.AreEqual(new NameAndGeneralAverageGrade[] { new NameAndGeneralAverageGrade("Andrei", 8) }, FindStudentsWithSpecificGeneralAverageGrade(students, 8));
         }
 
         [TestMethod]
@@ -66,7 +69,7 @@ namespace Catalog
         {
             CollectionAssert.AreEqual(new string[] { "Andrei", "Bogdan", "Ciprian", "Daniel" }, SortAlphabetically(new string[] { "Ciprian", "Bogdan", "Daniel", "Andrei" }));
         }
-        
+
         public struct Student
         {
             public string name;
@@ -103,6 +106,21 @@ namespace Catalog
             }
         }
 
+        public static NameAndGeneralAverageGrade[] FindStudentsWithSpecificGeneralAverageGrade(Student[] students, int averageGrade)
+        {
+            NameAndGeneralAverageGrade[] specific = new NameAndGeneralAverageGrade[0];
+            for (int i = 0; i < students.Length; i++)
+            {
+                int toCompare = CalculateTheAverageGradeForOneStudent(students[i]);
+                if (toCompare == averageGrade)
+                {
+                    Array.Resize(ref specific, specific.Length + 1);
+                    specific[specific.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, toCompare);
+                }
+            }
+            return specific;
+        }
+
         public static NameAndGeneralAverageGrade[] FindTheSmallestGeneralAverageGrades(Student[] students)
         {
             NameAndGeneralAverageGrade[] results = new NameAndGeneralAverageGrade[0];
@@ -112,7 +130,7 @@ namespace Catalog
             {
                 int value = CalculateTheAverageGradeForOneStudent(students[i]);
                 if (CalculateTheAverageGradeForOneStudent(students[i]) < result.generalAverageGrade)
-                { 
+                {
                     result = new NameAndGeneralAverageGrade(students[i].name, value);
                     averageGrade = value;
                 }
@@ -143,7 +161,7 @@ namespace Catalog
         }
 
         public static NameAndGeneralAverageGrade Sort(Student[] students)
-        { 
+        {
             for (int i = 0; i < students.Length - 1; i++)
             {
                 int maximum = i;
