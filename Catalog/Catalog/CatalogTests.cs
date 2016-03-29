@@ -96,7 +96,7 @@ namespace Catalog
             {
                 new NameAndGeneralAverageGrade("Catalin", 10), new NameAndGeneralAverageGrade("Mircea", 10) }, FindTheBestStudents(students));
             }
-    
+
 
         public struct Student
         {
@@ -136,33 +136,26 @@ namespace Catalog
 
         public static NameAndGeneralAverageGrade[] FindTheBestStudents(Student[] students)
         {
-            NameAndGeneralAverageGrade[] bestStudents = new NameAndGeneralAverageGrade[0];
-            for (int i = 0; i < students.Length; i++)
-            {
-                int bestMarks = CountBestMarksForOneStudent(students[i]);
-                if (bestMarks > 0)
-                {
-                    Array.Resize(ref bestStudents, bestStudents.Length + 1);
-                    bestStudents[bestStudents.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, 10);
-                }    
-            }
+            NameAndGeneralAverageGrade[] bestStudents = new NameAndGeneralAverageGrade[1];
+            bestStudents[0] = new NameAndGeneralAverageGrade(students[0].name, CalculateTheAverageGradeForOneStudent(students[0]));
             int max = CountBestMarksForOneStudent(students[0]);
-            NameAndGeneralAverageGrade[] bestOfTheBest = new NameAndGeneralAverageGrade[0];
-            for (int i = 1; i < bestStudents.Length; i++)
+            for (int i = 1; i < students.Length; i++)
             {
-                int marks = CountBestMarksForOneStudent(students[i]);
-                if (marks > max)
-                    max = marks;
-            }
-            for (int i = 0; i < bestStudents.Length; i++)
-            {
-                if (CountBestMarksForOneStudent(students[i]) == max)
+                int toCompare = CountBestMarksForOneStudent(students[i]);
+                if (toCompare > max)
                 {
-                    Array.Resize(ref bestOfTheBest, bestOfTheBest.Length + 1);
-                    bestOfTheBest[bestOfTheBest.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, 10);
+                    max = toCompare;
+                    Array.Resize(ref bestStudents, 1);
+                    bestStudents[bestStudents.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, CalculateTheAverageGradeForOneStudent(students[i]));
+                }
+                else if (toCompare == max)
+                {
+                    max = toCompare;
+                    Array.Resize(ref bestStudents, bestStudents.Length + 1);
+                    bestStudents[bestStudents.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, CalculateTheAverageGradeForOneStudent(students[i]));
                 }
             }
-            return bestOfTheBest;
+            return bestStudents;
         }
 
         public static int CountBestMarksForOneStudent(Student student)
