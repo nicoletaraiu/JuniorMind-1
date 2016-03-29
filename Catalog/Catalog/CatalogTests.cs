@@ -196,25 +196,23 @@ namespace Catalog
 
         public static NameAndGeneralAverageGrade[] FindTheSmallestGeneralAverageGrades(Student[] students)
         {
-            NameAndGeneralAverageGrade[] results = new NameAndGeneralAverageGrade[0];
-            NameAndGeneralAverageGrade result = new NameAndGeneralAverageGrade(students[0].name, CalculateTheAverageGradeForOneStudent(students[0]));
-            int averageGrade = 0;
-            for (int i = 0; i < students.Length; i++)
+            NameAndGeneralAverageGrade[] results = new NameAndGeneralAverageGrade[1];
+            results[0] = new NameAndGeneralAverageGrade(students[0].name, CalculateTheAverageGradeForOneStudent(students[0]));
+            int min = results[0].generalAverageGrade;
+            for (int i = 1; i < students.Length; i++)
             {
                 int value = CalculateTheAverageGradeForOneStudent(students[i]);
-                if (CalculateTheAverageGradeForOneStudent(students[i]) < result.generalAverageGrade)
+                if (value < min)
                 {
-                    result = new NameAndGeneralAverageGrade(students[i].name, value);
-                    averageGrade = value;
+                    min = value;
+                    Array.Resize(ref results, 1);
+                    results[results.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, min);
                 }
-            }
-            for (int i = 0; i < students.Length; i++)
-            {
-                int value = CalculateTheAverageGradeForOneStudent(students[i]);
-                if (value == result.generalAverageGrade)
+                else if (value == min)
                 {
+                    min = value;
                     Array.Resize(ref results, results.Length + 1);
-                    results[results.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, value);
+                    results[results.Length - 1] = new NameAndGeneralAverageGrade(students[i].name, min);
                 }
             }
             return results;
