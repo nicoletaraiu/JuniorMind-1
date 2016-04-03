@@ -43,7 +43,20 @@ namespace Elections
                 new Candidate("Costel", 600),
                  new Candidate("Marcel", 500),
                 new Candidate("Vasile", 1200) };
+            var secondList = new Candidate[] {
+                new Candidate("Costel", 700),
+                new Candidate("Alex", 500),
+                new Candidate("Cosmin", 300),
+                new Candidate("Vasile", 200),
+                new Candidate("Marcel", 100) };
+            var secondSorted = new Candidate[] {
+                new Candidate("Alex", 500),
+                new Candidate("Cosmin", 300),
+                new Candidate("Costel", 700),
+                new Candidate("Marcel", 100),
+                new Candidate("Vasile", 200) };
             CollectionAssert.AreEqual(sorted, SortAlphabetically(firstList));
+            CollectionAssert.AreEqual(secondSorted, SortAlphabetically(secondList));
         }
         
         public struct PollingStation
