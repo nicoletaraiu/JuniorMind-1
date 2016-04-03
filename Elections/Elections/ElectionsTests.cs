@@ -9,18 +9,53 @@ namespace Elections
         [TestMethod]
         public void ShouldSortCandidates()
         {
+            var firstList = new Candidate[] {
+                new Candidate("Vasile", 1200),
+                new Candidate("Cosmin", 900),
+                new Candidate("Alex", 800),
+                new Candidate("Costel", 600),
+                new Candidate("Marcel", 500) };
+            var secondList = new Candidate[] {
+                new Candidate("Costel", 700),
+                new Candidate("Alex", 500),
+                new Candidate("Cosmin", 300),
+                new Candidate("Vasile", 200),
+                new Candidate("Marcel", 100) };
+            var thirdList = new Candidate[] {
+                new Candidate("Costel", 1200),
+                new Candidate("Mircea", 1100),
+                new Candidate("Alex", 900),
+                new Candidate("Cosmin", 700),
+                new Candidate("Marcel", 500) };
+        }
+        [TestMethod]
+        public void ShouldSortAlphabetically()
+        {
+            var firstList = new Candidate[] {
+                new Candidate("Vasile", 1200),
+                new Candidate("Cosmin", 900),
+                new Candidate("Alex", 800),
+                new Candidate("Costel", 600),
+                new Candidate("Marcel", 500) };
             var sorted = new Candidate[] {
-            new Candidate("Marcel", 1000),
-            new Candidate("Alex", 998),
-            new Candidate("Costel", 784),
-            new Candidate("Vasile", 554),
-            new Candidate("Cosmin", 449) };
-            CollectionAssert.AreEqual(sorted, Sort(new Candidate[] {
-                new Candidate("Vasile", 554),
-                new Candidate("Cosmin", 449),
-                new Candidate("Alex", 998),
-                new Candidate("Costel", 784),
-                new Candidate("Marcel", 1000) }));
+                new Candidate("Alex", 800),
+                new Candidate("Cosmin", 900),
+                new Candidate("Costel", 600),
+                 new Candidate("Marcel", 500),
+                new Candidate("Vasile", 1200) };
+            CollectionAssert.AreEqual(sorted, SortAlphabetically(firstList));
+        }
+        
+        public struct PollingStation
+        {
+            public string name;
+            public Candidate[] candidates;
+
+            public PollingStation(string name, Candidate[] candidates)
+            {
+                this.name = name;
+                this.candidates = candidates;
+            }
         }
 
         public struct Candidate
@@ -35,10 +70,25 @@ namespace Elections
             }
         }
 
-            public Candidate[] Sort(Candidate[] candidates)
+        public static Candidate[] SortAlphabetically(Candidate[] candidates)
+        {
+            for (int i = 0; i < candidates.Length; i++)
             {
-                return candidates;
+                for (int j = 0; j < candidates.Length - 1; j++)
+                {
+                    if (String.Compare(candidates[j].name, candidates[j + 1].name) > 0)
+                        Swap(ref candidates[j], ref candidates[j + 1]);
+                }
             }
-
+            return candidates;
         }
+
+        static void Swap(ref Candidate first, ref Candidate second)
+        {
+            Candidate temp = first;
+            first = second;
+            second = temp;
+        }
+
+    }
 }
