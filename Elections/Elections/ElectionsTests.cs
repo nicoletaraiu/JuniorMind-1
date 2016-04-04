@@ -94,22 +94,11 @@ namespace Elections
         public static Candidate[] Sort(List[] lists)
         {  
             List[] sortedAlphabetically = new List[lists.Length];
-            Candidate[] sorted = new Candidate[lists[0].candidates.Length];
             for (int i = 0; i < sortedAlphabetically.Length; i++)
             {
                 sortedAlphabetically[i].candidates = SortAlphabetically(lists[i].candidates);
             }
-            for (int i = 0; i < sorted.Length; i++)
-            {
-                int totalVotes = 0;
-                string name = "";
-                for (int j = 0; j < sortedAlphabetically.Length; j++)
-                {   
-                    totalVotes += sortedAlphabetically[j].candidates[i].votes;
-                    name = sortedAlphabetically[j].candidates[i].name;
-                }
-                sorted[i] = new Candidate(name, totalVotes);
-            }
+            Candidate[] sorted = GetCandidate(sortedAlphabetically);
             for (int i = 0; i < sorted.Length - 1; i++)
             {
                 for (int j = i + 1; j > 0; j--)
@@ -117,6 +106,23 @@ namespace Elections
                     if (sorted[j - 1].votes < sorted[j].votes)
                         Swap(ref sorted[j], ref sorted[j - 1]);
                 }
+            }
+            return sorted;
+        }
+
+        public static Candidate[] GetCandidate(List[] lists)
+        {
+            Candidate[] sorted = new Candidate[lists[0].candidates.Length];
+            for (int i = 0; i < sorted.Length; i++)
+            {
+                int votes = 0;
+                string name = "";
+                for (int j = 0; j < lists.Length; j++)
+                {
+                    votes += lists[j].candidates[i].votes;
+                    name = lists[j].candidates[i].name;
+                }
+                sorted[i] = new Candidate(name, votes);
             }
             return sorted;
         }
