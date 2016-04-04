@@ -30,11 +30,11 @@ namespace Elections
                 new Candidate("Marcel", 500) }) };
             var sorted = new Candidate[]
             {
+                new Candidate("Vasile", 2600),
+                new Candidate("Costel", 2400),
                 new Candidate("Alex", 2200),
                 new Candidate("Cosmin", 1900),
-                new Candidate("Costel", 2400),
-                new Candidate("Marcel", 1100),
-                new Candidate("Vasile", 2600)   
+                new Candidate("Marcel", 1100)
             };
             CollectionAssert.AreEqual(sorted, Sort(lists));
         }
@@ -99,7 +99,6 @@ namespace Elections
             {
                 sortedAlphabetically[i].candidates = SortAlphabetically(lists[i].candidates);
             }
-           
             for (int i = 0; i < sorted.Length; i++)
             {
                 int totalVotes = 0;
@@ -110,6 +109,14 @@ namespace Elections
                     name = sortedAlphabetically[j].candidates[i].name;
                 }
                 sorted[i] = new Candidate(name, totalVotes);
+            }
+            for (int i = 0; i < sorted.Length - 1; i++)
+            {
+                for (int j = i + 1; j > 0; j--)
+                {
+                    if (sorted[j - 1].votes < sorted[j].votes)
+                        Swap(ref sorted[j], ref sorted[j - 1]);
+                }
             }
             return sorted;
         }
