@@ -155,16 +155,29 @@ namespace Elections
             Candidate[] sorted = new Candidate[lists[0].candidates.Length];
             for (int i = 0; i < sorted.Length; i++)
             {
-                int votes = 0;
-                string name = "";
-                for (int j = 0; j < lists.Length; j++)
-                {
-                    votes += lists[j].candidates[i].votes;
-                    name = lists[j].candidates[i].name;
-                }
-                sorted[i] = new Candidate(name, votes);
+                sorted[i] = new Candidate(GetName(lists, i), GetVotes(lists, i));
             }
             return sorted;
+        }
+
+        public static string GetName(List[] lists, int position)
+        {
+            string name = "";
+            for (int i = 0; i < lists.Length; i++)
+            {
+                name = lists[i].candidates[position].name;
+            }
+            return name;
+        }
+
+        public static int GetVotes(List[] lists, int position)
+        {
+            int votes = 0;
+            for (int i = 0; i < lists.Length; i++)
+            {
+                votes += lists[i].candidates[position].votes;
+            }
+            return votes;
         }
 
         public static Candidate[] SortAlphabetically(Candidate[] candidates)
