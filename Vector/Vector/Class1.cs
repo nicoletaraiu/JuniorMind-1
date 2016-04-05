@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Vector
 {
-    class IVector<T> : IList<T>
+    class Vector<T> : IList<T>
     {
-        private IList<T> myList = new List<T>();
+        private T[] myList = new T[100];
+        private int count = 0;
+
         public T this[int index]
         {
             get
@@ -29,7 +31,7 @@ namespace Vector
         {
             get
             {
-                return myList.Count;
+                return count;
                 ///throw new NotImplementedException();
             }
         }
@@ -45,24 +47,36 @@ namespace Vector
 
         public void Add(T item)
         {
-            myList.Add(item);
+            myList[count] = item;
+            count++;
             ///throw new NotImplementedException();
         }
 
         public void Clear()
         {
-            myList.Clear();
+            count = 0;
             ///throw new NotImplementedException();
         }
 
         public bool Contains(T item)
         {
-            return (myList.Contains(item));
+            for (int i = 0; i < count; i++)
+            {
+                if (myList[i].Equals(item))
+                    return true;
+            }
+            return false;
             ///throw new NotImplementedException();
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
+            int j = arrayIndex;
+            for (int i = 0; i < count; i++)
+            {
+                array.SetValue(myList[i], j);
+                j++;
+            }
             ///throw new NotImplementedException();
         }
 
@@ -73,7 +87,13 @@ namespace Vector
 
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < count; i++)
+            {
+                if (myList[i].Equals(item))
+                    return i;
+            }
+            return -1;
+            ///throw new NotImplementedException();
         }
 
         public void Insert(int index, T item)
