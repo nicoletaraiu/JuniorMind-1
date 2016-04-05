@@ -36,7 +36,7 @@ namespace Elections
                 new Candidate("Cosmin", 1900),
                 new Candidate("Marcel", 1100)
             };
-            CollectionAssert.AreEqual(sorted, Sort(lists));
+            CollectionAssert.AreEqual(sorted, Centralize(lists));
         }
         [TestMethod]
         public void ShouldSortAlphabetically()
@@ -109,7 +109,7 @@ namespace Elections
             }
         }
 
-        public static Candidate[] Sort(List[] lists)
+        public static Candidate[] Centralize(List[] lists)
         {  
             List[] sortedAlphabetically = new List[lists.Length];
             for (int i = 0; i < sortedAlphabetically.Length; i++)
