@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Vector
 {
     [TestClass]
-    public class UnitTest1
+    public class VectorTests
     {
         [TestMethod]
         public void TestMethod1()

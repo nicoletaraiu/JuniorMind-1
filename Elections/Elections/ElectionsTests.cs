@@ -68,6 +68,24 @@ namespace Elections
             CollectionAssert.AreEqual(sorted, SortAlphabetically(firstList));
             CollectionAssert.AreEqual(secondSorted, SortAlphabetically(secondList));
         }
+        [TestMethod]
+        public void ShouldSortArray()
+        {
+            var list = new Candidate[] {
+                new Candidate("Vasile", 500),
+                new Candidate("Cosmin", 300),
+                new Candidate("Alex", 800),
+                new Candidate("Costel", 600),
+                new Candidate("Marcel", 400) };
+            var sorted = new Candidate[]
+            {
+                new Candidate("Alex", 800),
+                new Candidate("Costel", 600),
+                new Candidate("Vasile", 500),
+                new Candidate("Marcel", 400),
+                new Candidate("Cosmin", 300) };
+            CollectionAssert.AreEqual(sorted, Quicksort(list, 0, list.Length - 1));
+        }
         
         public struct List
         {
@@ -99,19 +117,11 @@ namespace Elections
                 sortedAlphabetically[i].candidates = SortAlphabetically(lists[i].candidates);
             }
             Candidate[] sorted = GetCandidate(sortedAlphabetically);
-            /*for (int i = 0; i < sorted.Length - 1; i++)
-            {
-                for (int j = i + 1; j > 0; j--)
-                {
-                    if (sorted[j - 1].votes < sorted[j].votes)
-                        Swap(ref sorted[j], ref sorted[j - 1]);
-                }
-            }*/
-            Quicksort(sorted, 0, sorted.Length - 1);
+            sorted = Quicksort(sorted, 0, sorted.Length - 1);
             return sorted;
         }
 
-        static void Quicksort(Candidate[] candidates, int low, int high)
+        static Candidate[] Quicksort(Candidate[] candidates, int low, int high)
         {
             int pivotLocation = 0;
             if (low < high)
@@ -120,6 +130,7 @@ namespace Elections
                 Quicksort(candidates, low, pivotLocation - 1);
                 Quicksort(candidates, pivotLocation + 1, high);
             }
+            return candidates;
         }
 
         static int Partition(Candidate[] candidates, int low, int high)
@@ -129,7 +140,7 @@ namespace Elections
 
             for (int j = low + 1; j <= high; j++)
             {
-                if (candidates[i].votes >= pivot)
+                if (candidates[j].votes >= pivot)
                 {
                     ++i;
                     Swap(candidates, i, j);
