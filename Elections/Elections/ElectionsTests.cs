@@ -99,15 +99,44 @@ namespace Elections
                 sortedAlphabetically[i].candidates = SortAlphabetically(lists[i].candidates);
             }
             Candidate[] sorted = GetCandidate(sortedAlphabetically);
-            for (int i = 0; i < sorted.Length - 1; i++)
+            /*for (int i = 0; i < sorted.Length - 1; i++)
             {
                 for (int j = i + 1; j > 0; j--)
                 {
                     if (sorted[j - 1].votes < sorted[j].votes)
                         Swap(ref sorted[j], ref sorted[j - 1]);
                 }
-            }
+            }*/
+            Quicksort(sorted, 0, sorted.Length - 1);
             return sorted;
+        }
+
+        static void Quicksort(Candidate[] candidates, int low, int high)
+        {
+            int pivotLocation = 0;
+            if (low < high)
+            {
+                pivotLocation = Partition(candidates, low, high);
+                Quicksort(candidates, low, pivotLocation - 1);
+                Quicksort(candidates, pivotLocation + 1, high);
+            }
+        }
+
+        static int Partition(Candidate[] candidates, int low, int high)
+        {
+            int pivot = candidates[low].votes;
+            int i = low;
+
+            for (int j = low + 1; j <= high; j++)
+            {
+                if (candidates[i].votes >= pivot)
+                {
+                    ++i;
+                    Swap(candidates, i, j);
+                }
+            }
+            Swap(candidates, low, i);
+            return i;
         }
 
         public static Candidate[] GetCandidate(List[] lists)
@@ -138,6 +167,13 @@ namespace Elections
                 }
             }
             return candidates;
+        }
+
+        static void Swap(Candidate[] candidates, int a, int b)
+        {
+            Candidate temp = candidates[a];
+            candidates[a] = candidates[b];
+            candidates[b] = temp;
         }
 
         static void Swap(ref Candidate first, ref Candidate second)
