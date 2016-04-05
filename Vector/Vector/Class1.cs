@@ -9,16 +9,19 @@ namespace Vector
 {
     class IVector<T> : IList<T>
     {
+        private IList<T> myList = new List<T>();
         public T this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                return myList[index];
+                ///throw new NotImplementedException();
             }
 
             set
             {
-                throw new NotImplementedException();
+                myList[index] = value;
+                ///throw new NotImplementedException();
             }
         }
 
@@ -26,7 +29,8 @@ namespace Vector
         {
             get
             {
-                throw new NotImplementedException();
+                return myList.Count;
+                ///throw new NotImplementedException();
             }
         }
 
@@ -34,28 +38,32 @@ namespace Vector
         {
             get
             {
-                throw new NotImplementedException();
+                return false;
+                ///throw new NotImplementedException();
             }
         }
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            myList.Add(item);
+            ///throw new NotImplementedException();
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            myList.Clear();
+            ///throw new NotImplementedException();
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return (myList.Contains(item));
+            ///throw new NotImplementedException();
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            ///throw new NotImplementedException();
         }
 
         public IEnumerator<T> GetEnumerator()
