@@ -32,7 +32,6 @@ namespace Vector
             get
             {
                 return count;
-                ///throw new NotImplementedException();
             }
         }
 
@@ -49,13 +48,11 @@ namespace Vector
         {
             myList[count] = item;
             count++;
-            ///throw new NotImplementedException();
         }
 
         public void Clear()
         {
             count = 0;
-            ///throw new NotImplementedException();
         }
 
         public bool Contains(T item)
@@ -66,7 +63,6 @@ namespace Vector
                     return true;
             }
             return false;
-            ///throw new NotImplementedException();
         }
 
         public void CopyTo(T[] array, int arrayIndex)

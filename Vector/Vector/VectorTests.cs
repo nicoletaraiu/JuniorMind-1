@@ -24,13 +24,16 @@ namespace Vector
             Assert.AreEqual(0, vector.Count);
         }
         [TestMethod]
-        public void ShouldCheckPresence()
+        public void ShouldCheckPresenceAndReturnIndex()
         {
             vector.Add(10);
             vector.Add(8);
             vector.Add(5);
             Assert.AreEqual(true, vector.Contains(8));
             Assert.IsFalse(vector.Contains(6));
+            Assert.AreEqual(1, vector.IndexOf(8));
+            Assert.AreEqual(2, vector.IndexOf(5));
+            Assert.AreEqual(-1, vector.IndexOf(12));
         }
     }
 }
