@@ -40,7 +40,6 @@ namespace Vector
             get
             {
                 return false;
-                ///throw new NotImplementedException();
             }
         }
 
@@ -89,7 +88,6 @@ namespace Vector
                     return i;
             }
             return -1;
-            ///throw new NotImplementedException();
         }
 
         public void Insert(int index, T item)

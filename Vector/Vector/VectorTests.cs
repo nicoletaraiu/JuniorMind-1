@@ -24,7 +24,7 @@ namespace Vector
             Assert.AreEqual(0, vector.Count);
         }
         [TestMethod]
-        public void ShouldCheckPresenceAndReturnIndex()
+        public void MultipleTests()
         {
             vector.Add(10);
             vector.Add(8);
@@ -34,6 +34,13 @@ namespace Vector
             Assert.AreEqual(1, vector.IndexOf(8));
             Assert.AreEqual(2, vector.IndexOf(5));
             Assert.AreEqual(-1, vector.IndexOf(12));
+            Assert.IsFalse(vector.IsReadOnly);
+            int[] target = new int[3];
+            vector.CopyTo(target, 0);
+            CollectionAssert.AreEqual(new int[] { 10, 8, 5 }, target);
+            int[] secondTarget = new int[5];
+            vector.CopyTo(secondTarget, 2);
+            CollectionAssert.AreEqual(new int[] { 0, 0, 10, 8, 5 }, secondTarget);
         }
     }
 }
