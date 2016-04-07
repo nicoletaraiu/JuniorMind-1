@@ -41,6 +41,8 @@ namespace Vector
             int[] secondTarget = new int[5];
             vector.CopyTo(secondTarget, 2);
             CollectionAssert.AreEqual(new int[] { 0, 0, 10, 8, 5 }, secondTarget);
+            vector.Insert(1, 3);
+            Assert.AreEqual(new Vector<int>() { 10, 3, 5 } , vector);
         }
     }
 }

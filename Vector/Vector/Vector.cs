@@ -9,20 +9,20 @@ namespace Vector
 {
     class Vector<T> : IList<T>
     {
-        private T[] myList = new T[100];
+        private T[] list = new T[100];
         private int count = 0;
 
         public T this[int index]
         {
             get
             {
-                return myList[index];
+                return list[index];
                 ///throw new NotImplementedException();
             }
 
             set
             {
-                myList[index] = value;
+                list[index] = value;
                 ///throw new NotImplementedException();
             }
         }
@@ -45,7 +45,7 @@ namespace Vector
 
         public void Add(T item)
         {
-            myList[count] = item;
+            list[count] = item;
             count++;
         }
 
@@ -58,7 +58,7 @@ namespace Vector
         {
             for (int i = 0; i < count; i++)
             {
-                if (myList[i].Equals(item))
+                if (list[i].Equals(item))
                     return true;
             }
             return false;
@@ -69,10 +69,9 @@ namespace Vector
             int j = arrayIndex;
             for (int i = 0; i < count; i++)
             {
-                array.SetValue(myList[i], j);
+                array.SetValue(list[i], j);
                 j++;
             }
-            ///throw new NotImplementedException();
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -84,7 +83,7 @@ namespace Vector
         {
             for (int i = 0; i < count; i++)
             {
-                if (myList[i].Equals(item))
+                if (list[i].Equals(item))
                     return i;
             }
             return -1;
@@ -92,7 +91,11 @@ namespace Vector
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < count; i++)
+            {
+                if (i == index)
+                list[i] = item;
+            }
         }
 
         public bool Remove(T item)
