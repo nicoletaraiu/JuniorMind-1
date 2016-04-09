@@ -9,7 +9,7 @@ namespace Vector
 {
     class Vector<T> : IList<T>
     {
-        private T[] list = new T[100];
+        private T[] list = new T[5];
         private int count = 0;
 
         public T this[int index]
@@ -45,6 +45,9 @@ namespace Vector
 
         public void Add(T item)
         {
+            
+            if (count == list.Length)
+                Array.Resize(ref list, list.Length * 2);
             list[count] = item;
             count++;
         }
