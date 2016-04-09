@@ -108,7 +108,17 @@ namespace Vector
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < count; i++)
+            {
+                if (i == index)
+                {
+                    for (int j = i; j < count; j++)
+                    {
+                        list[j] = list[j + 1];
+                    }
+                    Array.Resize(ref list, list.Length - 1);
+                }
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

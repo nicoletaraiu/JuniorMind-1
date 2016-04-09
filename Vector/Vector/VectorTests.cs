@@ -8,12 +8,14 @@ namespace Vector
     {
         Vector<int> vector = new Vector<int>();
         [TestMethod]
-        public void ShouldCountElements()
+        public void ShouldCountElementsAndRemoveElement()
         {
             vector.Add(5);
             vector.Add(7);
             vector.Add(9);
             Assert.AreEqual(3, vector.Count);
+            vector.RemoveAt(1);
+            Assert.AreEqual(1, vector.IndexOf(9));
         }
         [TestMethod]
         public void ShouldClearVector()
