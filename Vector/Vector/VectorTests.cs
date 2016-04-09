@@ -43,10 +43,20 @@ namespace Vector
             CollectionAssert.AreEqual(new int[] { 0, 0, 10, 8, 5 }, secondTarget);
         }
         [TestMethod]
-        public void ShouldInsertElement()
+        public void ShouldDoubleSize()
         {
-            vector.Insert(0, 3);
-            Assert.AreEqual(new Vector<int>() { 3 }, vector);
+            vector.Add(10);
+            vector.Add(8);
+            vector.Add(5);
+            vector.Add(6);
+            vector.Add(3);
+            vector.Add(7);
+            vector.Add(2);
+            Assert.AreEqual(6, vector.IndexOf(2));
+            vector.Insert(2, 15);
+            Assert.AreEqual(2, vector.IndexOf(15));
+            vector.Insert(5, 40);
+            Assert.AreEqual(5, vector.IndexOf(40));
         }
     }
 }
