@@ -103,7 +103,15 @@ namespace Vector
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < count; i++)
+            {
+                if (list[i].Equals(item))
+                {
+                    RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void RemoveAt(int index)

@@ -16,6 +16,8 @@ namespace Vector
             Assert.AreEqual(3, vector.Count);
             vector.RemoveAt(1);
             Assert.AreEqual(1, vector.IndexOf(9));
+            Assert.IsTrue(vector.Remove(5));
+            Assert.IsFalse(vector.Remove(10));
         }
         [TestMethod]
         public void ShouldClearVector()
