@@ -62,15 +62,10 @@ namespace Vector
             Assert.Equal(5, vector.IndexOf(40));
         }
         [Fact]
-        public void GetEnumerator()
-        {   
-            vector.Add(10);
-            vector.Add(8);
-            vector.Add(5);
-            vector.Add(6);
-            vector.Add(3);
-            IEnumerable<int> list = (IEnumerable<int>)vector;
-            Assert.Equal(new int[] { 10, 8, 5, 6, 3 }, list);
+        public void IEnumerable()
+        {
+            var vector = new Vector<int> { 10, 8, 5, 6, 3 };
+            Assert.Equal(new int[] { 10, 8, 5, 6, 3 }, vector);
         }
     }
 }
