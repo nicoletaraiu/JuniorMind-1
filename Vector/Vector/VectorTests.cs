@@ -1,52 +1,51 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using System.Collections.Generic;
+using Xunit;
 namespace Vector
 {
-    [TestClass]
     public class VectorTests
     {
         Vector<int> vector = new Vector<int>();
-        [TestMethod]
+        [Fact]
         public void ShouldCountElementsAndRemoveElement()
         {
             vector.Add(5);
             vector.Add(7);
             vector.Add(9);
-            Assert.AreEqual(3, vector.Count);
+            Assert.Equal(3, vector.Count);
             vector.RemoveAt(1);
-            Assert.AreEqual(1, vector.IndexOf(9));
-            Assert.IsTrue(vector.Remove(5));
-            Assert.IsFalse(vector.Remove(10));
+            Assert.Equal(1, vector.IndexOf(9));
+            Assert.True(vector.Remove(5));
+            Assert.False(vector.Remove(10));
         }
-        [TestMethod]
+        [Fact]
         public void ShouldClearVector()
         {
             vector.Add(10);
             vector.Add(7);
             vector.Clear();
-            Assert.AreEqual(0, vector.Count);
+            Assert.Equal(0, vector.Count);
         }
-        [TestMethod]
+        [Fact]
         public void MultipleTests()
         {
             vector.Add(10);
             vector.Add(8);
             vector.Add(5);
-            Assert.AreEqual(true, vector.Contains(8));
-            Assert.IsFalse(vector.Contains(6));
-            Assert.AreEqual(1, vector.IndexOf(8));
-            Assert.AreEqual(2, vector.IndexOf(5));
-            Assert.AreEqual(-1, vector.IndexOf(12));
-            Assert.IsFalse(vector.IsReadOnly);
+            Assert.Equal(true, vector.Contains(8));
+            Assert.False(vector.Contains(6));
+            Assert.Equal(1, vector.IndexOf(8));
+            Assert.Equal(2, vector.IndexOf(5));
+            Assert.Equal(-1, vector.IndexOf(12));
+            Assert.False(vector.IsReadOnly);
             int[] target = new int[3];
             vector.CopyTo(target, 0);
-            CollectionAssert.AreEqual(new int[] { 10, 8, 5 }, target);
+            Assert.Equal(new int[] { 10, 8, 5 }, target);
             int[] secondTarget = new int[5];
             vector.CopyTo(secondTarget, 2);
-            CollectionAssert.AreEqual(new int[] { 0, 0, 10, 8, 5 }, secondTarget);
+            Assert.Equal(new int[] { 0, 0, 10, 8, 5 }, secondTarget);
         }
-        [TestMethod]
+        [Fact]
         public void ShouldDoubleSize()
         {
             vector.Add(10);
@@ -56,11 +55,22 @@ namespace Vector
             vector.Add(3);
             vector.Add(7);
             vector.Add(2);
-            Assert.AreEqual(6, vector.IndexOf(2));
+            Assert.Equal(6, vector.IndexOf(2));
             vector.Insert(2, 15);
-            Assert.AreEqual(2, vector.IndexOf(15));
+            Assert.Equal(2, vector.IndexOf(15));
             vector.Insert(5, 40);
-            Assert.AreEqual(5, vector.IndexOf(40));
+            Assert.Equal(5, vector.IndexOf(40));
+        }
+        [Fact]
+        public void GetEnumerator()
+        {   
+            vector.Add(10);
+            vector.Add(8);
+            vector.Add(5);
+            vector.Add(6);
+            vector.Add(3);
+            IEnumerator<int> list = vector.GetEnumerator();
+            Assert.Equal(new int[] { 10, 8, 5, 6, 3 }, vector);
         }
     }
 }

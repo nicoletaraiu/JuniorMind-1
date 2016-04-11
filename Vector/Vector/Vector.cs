@@ -79,7 +79,8 @@ namespace Vector
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < count; i++)
+                yield return list[i];
         }
 
         public int IndexOf(T item)
@@ -116,17 +117,11 @@ namespace Vector
 
         public void RemoveAt(int index)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = index; i < count; i++)
             {
-                if (i == index)
-                {
-                    for (int j = i; j < count; j++)
-                    {
-                        list[j] = list[j + 1];
-                    }
-                    Array.Resize(ref list, list.Length - 1);
-                }
+                list[i] = list[i + 1]; 
             }
+            Array.Resize(ref list, list.Length - 1);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
