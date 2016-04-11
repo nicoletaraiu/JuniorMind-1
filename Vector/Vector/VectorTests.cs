@@ -69,8 +69,8 @@ namespace Vector
             vector.Add(5);
             vector.Add(6);
             vector.Add(3);
-            IEnumerator<int> list = vector.GetEnumerator();
-            Assert.Equal(new int[] { 10, 8, 5, 6, 3 }, vector);
+            IEnumerable<int> list = (IEnumerable<int>)vector;
+            Assert.Equal(new int[] { 10, 8, 5, 6, 3 }, list);
         }
     }
 }
