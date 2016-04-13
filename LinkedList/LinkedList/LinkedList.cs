@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    class Class1
+    class List<T> : LinkedList<T>
     {
+        
+        private Node head;
+        private int count;
+
+        public List()
+        {
+            head = null;
+        }
+
+        
     }
 }
