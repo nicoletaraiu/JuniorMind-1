@@ -92,5 +92,12 @@ namespace LinkedList
             }
             return -1;
         }
+
+        public bool Contains(T element)
+        {
+            int index = IndexOf(element);
+            bool contains = (index != -1);
+            return contains;
+        }
     }
 }
