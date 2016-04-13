@@ -68,5 +68,29 @@ namespace LinkedList
             }
             count++;
         }
+
+        public void Clear()
+        {
+            this.head = null;
+            this.tail = null;
+            this.count = 0;
+        }
+
+        public int IndexOf(T item)
+        {
+            int index = 0;
+            Node<T> currentItem = this.head;
+            while (currentItem != null)
+            {
+                if (((currentItem != null) && (item.Equals(currentItem.Element))) ||
+                    ((currentItem.Element == null) && (item == null)))
+                {
+                    return index;
+                }
+                index++;
+                currentItem = currentItem.Next;
+            }
+            return -1;
+        }
     }
 }
