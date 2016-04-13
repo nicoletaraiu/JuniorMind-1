@@ -53,5 +53,20 @@ namespace LinkedList
                 currentNode.Element = value;
             }
         }
+
+        public void Add(T item)
+        {
+            if (this.head == null)
+            {
+                this.head = new Node<T>(item);
+                this.tail = this.head;
+            }
+            else
+            {
+                Node<T> newItem = new Node<T>(item, tail);
+                this.tail = newItem;
+            }
+            count++;
+        }
     }
 }
