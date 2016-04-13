@@ -8,15 +8,50 @@ namespace LinkedList
 {
     class List<T> : LinkedList<T>
     {
-        
-        private Node head;
+        private Node<T> head;
+        private Node<T> tail;
         private int count;
 
         public List()
         {
-            head = null;
+            this.head = null;
+            this.tail = null;
+            this.count = 0;
         }
 
-        
+        public int Count
+        {
+            get { return this.count; }
+        }
+
+        public T this[int index]
+        {
+            get
+            {
+                if (index >= count || index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Out of range.");
+                }
+                Node<T> currentNode = this.head;
+                for (int i = 0; i < index; i++)
+                {
+                    currentNode = currentNode.Next;
+                }
+                return currentNode.Element;
+            }
+            set
+            {
+                if (index >= count || index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Out of range.");
+                }
+                Node<T> currentNode = this.head;
+                for (int i = 0; i < index; i++)
+                {
+                    currentNode = currentNode.Next;
+                }
+                currentNode.Element = value;
+            }
+        }
     }
 }
