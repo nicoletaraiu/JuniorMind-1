@@ -1,14 +1,19 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using Xunit;
 
 namespace LinkedList
 {
-    [TestClass]
     public class LinkedListTests
     {
-        [TestMethod]
-        public void TestMethod1()
+        List<int> list = new List<int>();
+        [Fact]
+        public void ShouldAddElement()
         {
+            list.Add(7);
+            list.Add(2);
+            list.Add(4);
+            Assert.Equal(3, list.Count);
         }
     }
 }
