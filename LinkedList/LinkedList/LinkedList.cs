@@ -57,6 +57,16 @@ namespace LinkedList
         public void AddLast(T item)
         {
             Node<T> current = new Node<T>(item);
+            Node<T> saved = sentinel.Previous;
+            current.Previous = sentinel.Previous;
+            current.Next = sentinel;
+            sentinel.Previous = current;
+            sentinel.Next = saved.Next.Next;
+        }
+
+        public void AddFirst(T item)
+        {
+            Node<T> current = new Node<T>(item);
             current.Previous = sentinel;
             current.Next = sentinel.Next;
             sentinel.Next = current;
