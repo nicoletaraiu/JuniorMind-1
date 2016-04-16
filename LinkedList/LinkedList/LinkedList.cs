@@ -56,6 +56,11 @@ namespace LinkedList
 
         public void AddLast(T item)
         {
+            Node<T> current = new Node<T>(item);
+            current.Previous = sentinel;
+            current.Next = sentinel.Next;
+            sentinel.Next = current;
+            current.Previous.Previous = current;
             count++;
         }
 
@@ -64,6 +69,7 @@ namespace LinkedList
             this.count = 0;
         }
 
+       /* public int IndexOf(T item)
         {
             int index = 0;
             Node<T> currentItem = this.head;
@@ -85,5 +91,6 @@ namespace LinkedList
             int index = IndexOf(element);
             bool contains = (index != -1);
             return contains;
+        } */
     }
 }
