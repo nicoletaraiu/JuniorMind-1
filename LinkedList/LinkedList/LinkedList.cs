@@ -69,28 +69,16 @@ namespace LinkedList
             this.count = 0;
         }
 
-       /* public int IndexOf(T item)
-        {
-            int index = 0;
-            Node<T> currentItem = this.head;
-            while (currentItem != null)
-            {
-                if (((currentItem != null) && (item.Equals(currentItem.Element))) ||
-                    ((currentItem.Element == null) && (item == null)))
-                {
-                    return index;
-                }
-                index++;
-                currentItem = currentItem.Next;
-            }
-            return -1;
-        }
-
         public bool Contains(T element)
         {
-            int index = IndexOf(element);
-            bool contains = (index != -1);
-            return contains;
-        } */
+            Node<T> current = sentinel.Next;
+            while (!(current.Equals(sentinel)))
+            {
+                if (current.Element.Equals(element))
+                    return true;
+                current = current.Next;
+            }
+            return false;
+        } 
     }
 }
