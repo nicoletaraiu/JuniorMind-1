@@ -79,6 +79,20 @@ namespace LinkedList
                 current = current.Next;
             }
             return false;
+        }
+
+        public int IndexOf(T element)
+        {
+            Node<T> current = sentinel.Next;
+            int i = 0;
+            while (i != count)
+            {
+                if (current.Element.Equals(element))
+                    return i;
+                current = current.Next;
+                i++;
+            }
+            return -1;
         } 
     }
 }
