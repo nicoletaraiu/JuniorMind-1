@@ -8,14 +8,14 @@ namespace LinkedList
 {
     class List<T> : LinkedList<T>
     {
-        private Node<T> head;
-        private Node<T> tail;
+        private Node<T> sentinel;
         private int count;
 
         public List()
         {
-            this.head = null;
-            this.tail = null;
+            sentinel = new Node<T>(default(T));
+            sentinel.Next = sentinel;
+            sentinel.Previous = sentinel;
             this.count = 0;
         }
 
@@ -32,7 +32,7 @@ namespace LinkedList
                 {
                     throw new ArgumentOutOfRangeException("Out of range.");
                 }
-                Node<T> currentNode = this.head;
+                Node<T> currentNode = this.sentinel;
                 for (int i = 0; i < index; i++)
                 {
                     currentNode = currentNode.Next;
@@ -45,7 +45,7 @@ namespace LinkedList
                 {
                     throw new ArgumentOutOfRangeException("Out of range.");
                 }
-                Node<T> currentNode = this.head;
+                Node<T> currentNode = this.sentinel;
                 for (int i = 0; i < index; i++)
                 {
                     currentNode = currentNode.Next;
@@ -54,29 +54,16 @@ namespace LinkedList
             }
         }
 
-        public void Add(T item)
+        public void AddLast(T item)
         {
-            if (this.head == null)
-            {
-                this.head = new Node<T>(item);
-                this.tail = this.head;
-            }
-            else
-            {
-                Node<T> newItem = new Node<T>(item, tail);
-                this.tail = newItem;
-            }
             count++;
         }
 
         public void Clear()
         {
-            this.head = null;
-            this.tail = null;
             this.count = 0;
         }
 
-        public int IndexOf(T item)
         {
             int index = 0;
             Node<T> currentItem = this.head;
@@ -98,6 +85,5 @@ namespace LinkedList
             int index = IndexOf(element);
             bool contains = (index != -1);
             return contains;
-        }
     }
 }
