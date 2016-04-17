@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    class List<T>
+    class List<T> : IEnumerable<T>
     {
         private Node<T> sentinel;
         private int count;
@@ -104,6 +105,20 @@ namespace LinkedList
                 }
                 toBeRemoved = toBeRemoved.Next;
             }
+        }
+        public void Add(T item)
+        {
+            AddLast(item);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
