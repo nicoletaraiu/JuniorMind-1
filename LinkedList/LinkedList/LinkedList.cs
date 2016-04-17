@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    class List<T> : LinkedList<T>
+    class List<T>
     {
         private Node<T> sentinel;
         private int count;
@@ -24,53 +24,25 @@ namespace LinkedList
             get { return this.count; }
         }
 
-        public T this[int index]
+        public new void AddLast(T item)
         {
-            get
-            {
-                if (index >= count || index < 0)
-                {
-                    throw new ArgumentOutOfRangeException("Out of range.");
-                }
-                Node<T> currentNode = this.sentinel;
-                for (int i = 0; i < index; i++)
-                {
-                    currentNode = currentNode.Next;
-                }
-                return currentNode.Element;
-            }
-            set
-            {
-                if (index >= count || index < 0)
-                {
-                    throw new ArgumentOutOfRangeException("Out of range.");
-                }
-                Node<T> currentNode = this.sentinel;
-                for (int i = 0; i < index; i++)
-                {
-                    currentNode = currentNode.Next;
-                }
-                currentNode.Element = value;
-            }
+             Node<T> current = new Node<T>(item);
+             Node<T> saved = sentinel.Previous;
+             current.Previous = sentinel.Previous;
+             current.Next = sentinel;
+             sentinel.Previous = current;
+             saved.Next = current;
+             count++;
         }
 
-        public void AddLast(T item)
+        public new void AddFirst(T item)
         {
             Node<T> current = new Node<T>(item);
-            Node<T> saved = sentinel.Previous;
-            current.Previous = sentinel.Previous;
-            current.Next = sentinel;
-            sentinel.Previous = current;
-            sentinel.Next = saved.Next.Next;
-        }
-
-        public void AddFirst(T item)
-        {
-            Node<T> current = new Node<T>(item);
+            Node<T> saved = sentinel.Next;
             current.Previous = sentinel;
             current.Next = sentinel.Next;
             sentinel.Next = current;
-            current.Previous.Previous = current;
+            saved.Previous = current;
             count++;
         }
 
@@ -104,5 +76,19 @@ namespace LinkedList
             }
             return -1;
         } 
+
+        public void RemoveAt(int index)
+        {
+            Node<T> toBeRemoved = sentinel.Next;
+            for (int i = 0; i < index; i++)
+            {
+                toBeRemoved = toBeRemoved.Next;
+            }
+            Node<T> prevSaved = toBeRemoved.Previous;
+            Node<T> nextSaved = toBeRemoved.Next;
+            prevSaved.Next = nextSaved;
+            nextSaved.Previous = prevSaved;
+            count--;
+        }
     }
 }
