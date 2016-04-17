@@ -129,5 +129,14 @@ namespace LinkedList
             Assert.Equal(4, list.Count);
             Assert.Equal(new[] { 3, 5, 7, 9 }, list);
         }
+
+        [Fact]
+        public void ShouldCopyElements()
+        {
+            var list = new List<int> { 4, 5, 6 };
+            int[] array = { 1, 2, 3 };
+            list.CopyTo(array, 1);
+            Assert.Equal(new int[] { 1, 4, 5 }, array);
+        }
     }
 }

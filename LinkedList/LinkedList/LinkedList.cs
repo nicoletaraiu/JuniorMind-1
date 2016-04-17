@@ -139,7 +139,12 @@ namespace LinkedList
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            Node < T > node = sentinel.Next;
+            for (int i = arrayIndex; i < array.Length; i++)
+            {
+                array.SetValue(node.Element, i);
+                node = node.Next;
+            }
         }
 
         bool ICollection<T>.Remove(T item)
