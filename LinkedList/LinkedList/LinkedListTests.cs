@@ -12,30 +12,37 @@ namespace LinkedList
             var list = new List<int>();
             Assert.Equal(0, list.Count);
         }
+
         [Fact]
         public void IsEnumerable()
         {
             var list = new List<int>();
             Assert.Equal(new int[0], list);
         }
+
+        [Fact]
+        public void NewElementsCanBeAdded()
+        {
+            var list = new List<int> { 3, 5, 7 };
+            Assert.Equal(3, list.Count);
+            Assert.Equal(new[] { 3, 5, 7 }, list);
+        }
+
         [Fact]
         public void ShouldReturnCount()
         {
-            List<int> list = new List<int>();
-            list.AddLast(5);
-            list.AddLast(1);
-            list.AddLast(0);
+            var list = new List<int> { 5, 1, 0 };
             Assert.Equal(3, list.Count);
         }
+
         [Fact]
         public void ShouldCheckExistence()
         {
-            List<int> list = new List<int>();
-            list.AddLast(2);
-            list.AddLast(1);
+            var list = new List<int> { 2, 1 };
             Assert.True(list.Contains(1));
             Assert.False(list.Contains(0));
         }
+
         [Fact]
         public void ShouldReturnIndex()
         {
@@ -43,6 +50,7 @@ namespace LinkedList
             Assert.Equal(1, list.IndexOf(2));
             Assert.Equal(-1, list.IndexOf(6));
         }
+
         [Fact]
         public void ShouldClear()
         {
@@ -50,18 +58,21 @@ namespace LinkedList
             list.Clear();
             Assert.Equal(0, list.Count);
         }
+
         [Fact]
         public void ShouldAddFirst()
         {
             var list = new List<int> { 5, 3, 2 };
             Assert.Equal(0, list.IndexOf(5));
         }
+
         [Fact]
         public void ShouldAddLast()
         {
             var list = new List<int> { 1, 2, 3 };
             Assert.Equal(2, list.IndexOf(3));
         }
+
         [Fact]
         public void TheFirstElementCanBeRemoved()
         {
@@ -70,6 +81,7 @@ namespace LinkedList
             list.RemoveAt(0);
             Assert.Equal(0, list.IndexOf(2));
         }
+
         [Fact]
         public void TheLastElementCanBeRemoved()
         {
@@ -78,6 +90,7 @@ namespace LinkedList
             list.RemoveAt(4);
             Assert.False(list.Contains(10));
         }
+
         [Fact]
         public void CanRemoveAnElementWithGivenValue()
         {
@@ -86,6 +99,16 @@ namespace LinkedList
             list.Remove(4);
             Assert.False(list.Contains(4));
         }
+
+        [Fact]
+        public void NewElementsCanBeAddedAtTheBegining()
+        {
+            var list = new List<int> { 3, 5, 7 };
+            list.AddFirst(9);
+            Assert.Equal(4, list.Count);
+            Assert.Equal(new[] { 9, 3, 5, 7 }, list);
+        }
+
         [Fact]
         public void NewElementsCanBeAddedAtTheEnd()
         {
