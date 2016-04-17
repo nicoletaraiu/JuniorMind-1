@@ -121,12 +121,18 @@ namespace LinkedList
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            Node<T> node = sentinel.Next;
+            while (node != sentinel)
+            {
+                yield return node.Element;
+                node = node.Next;
+            }
+
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return (IEnumerator)GetEnumerator();
         }
 
         public void CopyTo(T[] array, int arrayIndex)
