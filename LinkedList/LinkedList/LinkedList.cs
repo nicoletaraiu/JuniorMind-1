@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    class List<T> : IEnumerable<T>
+    class List<T> : IEnumerable<T>, ICollection<T>
     {
         private Node<T> sentinel;
         private int count;
@@ -23,6 +23,14 @@ namespace LinkedList
         public int Count
         {
             get { return this.count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public new void AddLast(T item)
@@ -117,6 +125,16 @@ namespace LinkedList
         }
 
         IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<T>.Remove(T item)
         {
             throw new NotImplementedException();
         }

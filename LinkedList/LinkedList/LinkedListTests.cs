@@ -80,5 +80,13 @@ namespace LinkedList
             list.Remove(4);
             Assert.False(list.Contains(4));
         }
+        [Fact]
+        public void NewElementsCanBeAddedAtTheEnd()
+        {
+            var list = new List<int> { 3, 5, 7 };
+            list.AddLast(9);
+            Assert.Equal(4, list.Count);
+            Assert.Equal(new[] { 3, 5, 7, 9 }, list);
+        }
     }
 }
