@@ -61,7 +61,7 @@ namespace LinkedList
             Assert.Equal(2, list.IndexOf(3));
         }
         [Fact]
-        public void ShouldRemoveNode()
+        public void ShouldRemoveAtIndex()
         {
             List<int> list = new List<int>();
             list.AddLast(7);
@@ -73,6 +73,18 @@ namespace LinkedList
             Assert.False(list.Contains(15));
             Assert.True(list.Contains(4));
             list.RemoveAt(2);
+            Assert.False(list.Contains(4));
+        }
+        [Fact]
+        public void ShouldRemoveNode()
+        {
+            List<int> list = new List<int>();
+            list.AddLast(7);
+            list.AddLast(2);
+            list.AddLast(4);
+            list.AddLast(15);
+            list.AddLast(10);
+            list.Remove(4);
             Assert.False(list.Contains(4));
         }
     }

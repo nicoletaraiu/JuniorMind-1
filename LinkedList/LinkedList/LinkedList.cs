@@ -90,5 +90,20 @@ namespace LinkedList
             nextSaved.Previous = prevSaved;
             count--;
         }
+        public void Remove(T item)
+        {
+            Node<T> toBeRemoved = sentinel.Next;
+            for (int i = 0; i < count; i++)
+            {
+                if (toBeRemoved.Element.Equals(item))
+                {
+                    Node<T> prev = toBeRemoved.Previous;
+                    Node<T> next = toBeRemoved.Next;
+                    prev.Next = next;
+                    next.Previous = prev;
+                }
+                toBeRemoved = toBeRemoved.Next;
+            }
+        }
     }
 }
