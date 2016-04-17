@@ -99,7 +99,7 @@ namespace LinkedList
             nextSaved.Previous = prevSaved;
             count--;
         }
-        public void Remove(T item)
+        public bool Remove(T item)
         {
             Node<T> toBeRemoved = sentinel.Next;
             for (int i = 0; i < count; i++)
@@ -110,9 +110,11 @@ namespace LinkedList
                     Node<T> next = toBeRemoved.Next;
                     prev.Next = next;
                     next.Previous = prev;
+                    return true;
                 }
                 toBeRemoved = toBeRemoved.Next;
             }
+            return false;
         }
         public void Add(T item)
         {

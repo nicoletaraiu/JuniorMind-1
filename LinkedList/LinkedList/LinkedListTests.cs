@@ -36,11 +36,16 @@ namespace LinkedList
         }
 
         [Fact]
-        public void ShouldCheckExistence()
+        public void ContainReturnsTrueIfTheElementExists()
         {
             var list = new List<int> { 2, 1 };
             Assert.True(list.Contains(1));
-            Assert.False(list.Contains(0));
+        }
+        [Fact]
+        public void ContainsReturnsFalseIfTheElementDoesNotExist()
+        {
+            var list = new List<int> { 3, 4, 5 };
+            Assert.False(list.Contains(1));
         }
 
         [Fact]
@@ -52,7 +57,7 @@ namespace LinkedList
         }
 
         [Fact]
-        public void ShouldClear()
+        public void CanRemoveAllElements()
         {
             var list = new List<int> { 3, 2 };
             list.Clear();
@@ -98,6 +103,13 @@ namespace LinkedList
             Assert.True(list.Contains(4));
             list.Remove(4);
             Assert.False(list.Contains(4));
+        }
+        [Fact]
+        public void RemoveReturnsFalseIfTheElementDoesNotExist()
+        {
+            var list = new List<int> { 7, 2, 4, 15, 10 };
+            Assert.False(list.Remove(20));
+            Assert.False(list.Remove(6));
         }
 
         [Fact]
