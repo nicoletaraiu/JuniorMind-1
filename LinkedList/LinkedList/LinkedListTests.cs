@@ -13,6 +13,12 @@ namespace LinkedList
             Assert.Equal(0, list.Count);
         }
         [Fact]
+        public void IsEnumerable()
+        {
+            var list = new List<int>();
+            Assert.Equal(new int[0], list);
+        }
+        [Fact]
         public void ShouldReturnCount()
         {
             List<int> list = new List<int>();
