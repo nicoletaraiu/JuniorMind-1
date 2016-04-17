@@ -108,6 +108,7 @@ namespace LinkedList
         public void RemoveReturnsFalseIfTheElementDoesNotExist()
         {
             var list = new List<int> { 7, 2, 4, 15, 10 };
+            Assert.True(list.Remove(4));
             Assert.False(list.Remove(20));
             Assert.False(list.Remove(6));
         }

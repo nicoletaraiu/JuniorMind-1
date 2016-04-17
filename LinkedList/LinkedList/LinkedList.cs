@@ -35,21 +35,17 @@ namespace LinkedList
 
         public new void AddLast(T item)
         {
-             Node<T> current = new Node<T>(item);
-             Node<T> saved = sentinel.Previous;
-             current.Previous = sentinel.Previous;
-             current.Next = sentinel;
-             sentinel.Previous = current;
-             saved.Next = current;
-             count++;
+            Node<T> current = new Node<T>(item) { Previous = sentinel.Previous, Next = sentinel };
+            Node<T> saved = sentinel.Previous;
+            sentinel.Previous = current;
+            saved.Next = current;
+            count++;
         }
 
         public new void AddFirst(T item)
         {
-            Node<T> current = new Node<T>(item);
+            var current = new Node<T>(item) { Previous = sentinel, Next = sentinel.Next };
             Node<T> saved = sentinel.Next;
-            current.Previous = sentinel;
-            current.Next = sentinel.Next;
             sentinel.Next = current;
             saved.Previous = current;
             count++;
@@ -63,7 +59,7 @@ namespace LinkedList
         public bool Contains(T element)
         {
             Node<T> current = sentinel.Next;
-            while (!(current.Equals(sentinel)))
+            while (!current.Equals(sentinel))
             {
                 if (current.Element.Equals(element))
                     return true;
@@ -84,38 +80,32 @@ namespace LinkedList
                 i++;
             }
             return -1;
-        } 
+        }
 
         public void RemoveAt(int index)
         {
-            Node<T> toBeRemoved = sentinel.Next;
-            for (int i = 0; i < index; i++)
-            {
-                toBeRemoved = toBeRemoved.Next;
-            }
+            Node<T> toBeRemoved = GetNodeAtIndex(index);
+            EstablishLinks(toBeRemoved);
+        }
+
+        private void EstablishLinks(Node<T> toBeRemoved)
+        {
             Node<T> prevSaved = toBeRemoved.Previous;
             Node<T> nextSaved = toBeRemoved.Next;
             prevSaved.Next = nextSaved;
             nextSaved.Previous = prevSaved;
             count--;
         }
+
         public bool Remove(T item)
         {
-            Node<T> toBeRemoved = sentinel.Next;
-            for (int i = 0; i < count; i++)
-            {
-                if (toBeRemoved.Element.Equals(item))
-                {
-                    Node<T> prev = toBeRemoved.Previous;
-                    Node<T> next = toBeRemoved.Next;
-                    prev.Next = next;
-                    next.Previous = prev;
-                    return true;
-                }
-                toBeRemoved = toBeRemoved.Next;
-            }
-            return false;
+            Node<T> toBeRemoved = GetNodeOfValue(item);
+            if (toBeRemoved.Equals(sentinel))
+                return false;
+            EstablishLinks(toBeRemoved);
+            return true;
         }
+
         public void Add(T item)
         {
             AddLast(item);
@@ -139,7 +129,7 @@ namespace LinkedList
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            Node < T > node = sentinel.Next;
+            Node<T> node = sentinel.Next;
             for (int i = arrayIndex; i < array.Length; i++)
             {
                 array.SetValue(node.Element, i);
@@ -150,6 +140,28 @@ namespace LinkedList
         bool ICollection<T>.Remove(T item)
         {
             throw new NotImplementedException();
+        }
+
+        public Node<T> GetNodeAtIndex(int index)
+        {
+            Node<T> node = sentinel.Next;
+            for (int i = 0; i < index; i++)
+            {
+                node = node.Next;
+            }
+            return node;
+        }
+
+        public Node<T> GetNodeOfValue(T value)
+        {
+            Node<T> node = sentinel.Next;
+            while (node != sentinel)
+            {
+                if (node.Element.Equals(value))
+                    return node;
+                node = node.Next;
+            }
+            return sentinel;
         }
     }
 }
