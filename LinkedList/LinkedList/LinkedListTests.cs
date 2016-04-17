@@ -7,6 +7,12 @@ namespace LinkedList
     public class LinkedListTests
     {
         [Fact]
+        public void EmptyListHasZeroElements()
+        {
+            var list = new List<int>();
+            Assert.Equal(0, list.Count);
+        }
+        [Fact]
         public void ShouldReturnCount()
         {
             List<int> list = new List<int>();
