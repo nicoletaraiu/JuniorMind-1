@@ -139,5 +139,12 @@ namespace LinkedList
             list.CopyTo(array, 1);
             Assert.Equal(new int[] { 1, 4, 5 }, array);
         }
+        [Fact]
+        public void ShouldThrowException()
+        {
+            var list = new List<int> { 2, 3 };
+            int[] array = { 10, 9, 8, 7, 6, 5, 4, 3 };
+            Assert.Throws<IndexOutOfRangeException>(() => list.CopyTo(array, 1));
+        }
     }
 }
