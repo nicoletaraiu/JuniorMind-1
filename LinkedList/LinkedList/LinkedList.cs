@@ -58,23 +58,20 @@ namespace LinkedList
 
         public bool Contains(T element)
         {
-            Node<T> current = sentinel.Next;
-            while (!current.Equals(sentinel))
-            {
-                if (current.Element.Equals(element))
-                    return true;
-                current = current.Next;
-            }
+            Node<T> node = GetNodeOfValue(element);
+            if (!(node.Equals(sentinel)))
+                return true;
             return false;
         }
 
         public int IndexOf(T element)
         {
+            Node<T> node = GetNodeOfValue(element);
             Node<T> current = sentinel.Next;
             int i = 0;
-            while (i != count)
+            while (!current.Equals(sentinel))
             {
-                if (current.Element.Equals(element))
+                if (current.Element.Equals(node.Element))
                     return i;
                 current = current.Next;
                 i++;
@@ -85,10 +82,10 @@ namespace LinkedList
         public void RemoveAt(int index)
         {
             Node<T> toBeRemoved = GetNodeAtIndex(index);
-            EstablishLinks(toBeRemoved);
+            RemoveNode(toBeRemoved);
         }
 
-        private void EstablishLinks(Node<T> toBeRemoved)
+        private void RemoveNode(Node<T> toBeRemoved)
         {
             Node<T> prevSaved = toBeRemoved.Previous;
             Node<T> nextSaved = toBeRemoved.Next;
@@ -102,7 +99,7 @@ namespace LinkedList
             Node<T> toBeRemoved = GetNodeOfValue(item);
             if (toBeRemoved.Equals(sentinel))
                 return false;
-            EstablishLinks(toBeRemoved);
+            RemoveNode(toBeRemoved);
             return true;
         }
 
@@ -119,7 +116,6 @@ namespace LinkedList
                 yield return node.Element;
                 node = node.Next;
             }
-
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -132,8 +128,12 @@ namespace LinkedList
             Node<T> node = sentinel.Next;
             for (int i = arrayIndex; i < array.Length; i++)
             {
-                array.SetValue(node.Element, i);
-                node = node.Next;
+                if (!node.Equals(sentinel))
+                {
+                    array.SetValue(node.Element, i);
+                    node = node.Next;
+                }
+                else throw new IndexOutOfRangeException();
             }
         }
 
@@ -145,11 +145,15 @@ namespace LinkedList
         public Node<T> GetNodeAtIndex(int index)
         {
             Node<T> node = sentinel.Next;
-            for (int i = 0; i < index; i++)
+            if (index <= count)
             {
-                node = node.Next;
+                for (int i = 0; i < index; i++)
+                {
+                    node = node.Next;
+                }
+                return node;
             }
-            return node;
+            throw new IndexOutOfRangeException();
         }
 
         public Node<T> GetNodeOfValue(T value)
