@@ -59,7 +59,7 @@ namespace LinkedList
         public bool Contains(T element)
         {
             Node<T> node = GetNodeOfValue(element);
-            if (!(node.Equals(sentinel)))
+            if (!node.Equals(sentinel))
                 return true;
             return false;
         }
