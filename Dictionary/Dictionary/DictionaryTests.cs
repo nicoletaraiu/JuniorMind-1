@@ -1,14 +1,14 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using Xunit;
+ 
 namespace Dictionary
 {
-    [TestClass]
     public class DictionaryTests
     {
-        [TestMethod]
-        public void TestMethod1()
+        [Fact]
+        public void ShouldCountElements()
         {
+            var table = new Dictionary<int, string>();
         }
     }
 }
