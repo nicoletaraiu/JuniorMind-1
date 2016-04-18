@@ -139,7 +139,7 @@ namespace LinkedList
 
         bool ICollection<T>.Remove(T item)
         {
-            throw new NotImplementedException();
+            return Remove(item);
         }
 
         public Node<T> GetNodeAtIndex(int index)

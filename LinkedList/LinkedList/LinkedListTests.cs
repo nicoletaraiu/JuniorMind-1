@@ -146,5 +146,12 @@ namespace LinkedList
             int[] array = { 10, 9, 8, 7, 6, 5, 4, 3 };
             Assert.Throws<IndexOutOfRangeException>(() => list.CopyTo(array, 1));
         }
+        [Fact]
+        public void CheckRemove()
+        {
+            var list = new List<int> { 6, 8, 10, 12, 14 };
+            Assert.True(list.Remove(12));
+            Assert.False(list.Remove(11));
+        }
     }
 }
