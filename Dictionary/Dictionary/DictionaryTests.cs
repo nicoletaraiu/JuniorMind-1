@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hashtable;
+using System;
 using Xunit;
  
 namespace Dictionary
@@ -6,9 +7,10 @@ namespace Dictionary
     public class DictionaryTests
     {
         [Fact]
-        public void ShouldCountElements()
+        public void NewEntriesCanBeAdded()
         {
-            var table = new Dictionary<int, string>();
+            HashTable<int, string> table = new HashTable<int, string>();
+            Assert.False(table.ContainsKey(5));
         }
     }
 }

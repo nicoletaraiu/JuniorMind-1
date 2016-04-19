@@ -5,23 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dictionary
+namespace Hashtable
 {
-    class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
+    class HashTable<TKey, TValue> : IDictionary<TKey, TValue>
     {
         public int[] buckets = new int[10];
-        public struct Table
+        public struct Entry
         {
             public TKey key;
             public TValue value;
+            public int position;
 
-            public Table(TKey key, TValue value)
+            public Entry(TKey key, TValue value, int position)
             {
                 this.key = key;
                 this.value = value;
+                this.position = position;
             }
         }
-        public Table[] elements = new Table[10];
+        public Entry[] elements = new Entry[10];
 
         public TValue this[TKey key]
         {
@@ -90,7 +92,12 @@ namespace Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < buckets.Length; i++)
+            {
+                if (buckets[i].Equals(key.GetHashCode()))
+                    return true;
+            }
+            return false;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
