@@ -9,19 +9,24 @@ namespace Hashtable
 {
     class HashTable<TKey, TValue> : IDictionary<TKey, TValue>
     {
+        public int countBuckets = 0;
+        public int countEntries = 0;
         public int[] buckets = new int[10];
         public struct Entry
         {
-            public KeyValuePair<TKey, TValue> pair;
+            public TKey key;
+            public TValue value;
             public int position;
 
-            public Entry(KeyValuePair<TKey, TValue> pair, int position)
+            public Entry(TKey key, TValue value, int position)
             {
-                this.pair = pair;
+                this.key = key;
+                this.value = value;
                 this.position = position;
             }
         }
         public Entry[] entries = new Entry[10];
+        public int count = 0;
 
         public TValue this[TKey key]
         {
@@ -40,7 +45,7 @@ namespace Hashtable
         {
             get
             {
-                return Count;
+                return count;
             }
         }
 
@@ -75,7 +80,12 @@ namespace Hashtable
 
         public void Add(TKey key, TValue value)
         {
-            throw new NotImplementedException();
+            int index = key.GetHashCode();
+            buckets[countBuckets] = index;
+            entries[countEntries] = new Entry(key, value, entries[index--].position);
+            countBuckets++;
+            countEntries++;
+            count++;
         }
 
         public void Clear()
@@ -85,21 +95,16 @@ namespace Hashtable
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            for (int i = 0; i < entries.Length; i++)
-            {
-                if (item.Key.Equals(entries[i].pair.Key) && (item.Value.Equals(entries[i].pair.Value)))
+            int i = item.Key.GetHashCode();
+                if (item.Key.Equals(entries[i].key) && (item.Value.Equals(entries[i].value)))
                     return true;
-            }
             return false;
         }
 
         public bool ContainsKey(TKey key)
         {
-            for (int i = 0; i < buckets.Length; i++)
-            {
-                if (buckets[i].Equals(key.GetHashCode()))
+                if (buckets[key.GetHashCode()].Equals(key.GetHashCode()))
                     return true;
-            }
             return false;
         }
 
