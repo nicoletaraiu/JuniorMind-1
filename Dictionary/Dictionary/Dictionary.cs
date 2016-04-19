@@ -12,18 +12,16 @@ namespace Hashtable
         public int[] buckets = new int[10];
         public struct Entry
         {
-            public TKey key;
-            public TValue value;
+            public KeyValuePair<TKey, TValue> pair;
             public int position;
 
-            public Entry(TKey key, TValue value, int position)
+            public Entry(KeyValuePair<TKey, TValue> pair, int position)
             {
-                this.key = key;
-                this.value = value;
+                this.pair = pair;
                 this.position = position;
             }
         }
-        public Entry[] elements = new Entry[10];
+        public Entry[] entries = new Entry[10];
 
         public TValue this[TKey key]
         {
@@ -87,7 +85,12 @@ namespace Hashtable
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < entries.Length; i++)
+            {
+                if (item.Key.Equals(entries[i].pair.Key) && (item.Value.Equals(entries[i].pair.Value)))
+                    return true;
+            }
+            return false;
         }
 
         public bool ContainsKey(TKey key)
