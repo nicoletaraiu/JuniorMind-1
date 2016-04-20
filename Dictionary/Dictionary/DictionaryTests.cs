@@ -8,12 +8,7 @@ namespace Dictionary
     public class DictionaryTests
     {
         HashTable<int, string> table = new HashTable<int, string>();
-        [Fact]
-        public void ShouldCheckKeysPresence()
-        {
-            Assert.False(table.ContainsKey(5));
-        }
-
+        
         [Fact]
         public void ShouldCheckPairsPresence()
         {
@@ -34,6 +29,8 @@ namespace Dictionary
             table.Add(4, "SF");
             table.Add(5, "electronica");
             Assert.Equal(10, table.Count);
+            Assert.True(table.ContainsKey(4));
+            Assert.False(table.ContainsKey(8));
         }
     }
 }
