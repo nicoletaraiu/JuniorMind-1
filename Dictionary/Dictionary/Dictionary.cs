@@ -86,7 +86,7 @@ namespace Hashtable
 
         public void Add(TKey key, TValue value)
         {
-            int index = key.GetHashCode();
+            int index = key.GetHashCode() % buckets.Length;
             if (buckets[index] >= 0)
             {
                 int existingValue = buckets[index];
@@ -112,7 +112,7 @@ namespace Hashtable
 
         public bool ContainsKey(TKey key)
         {
-            int index = key.GetHashCode();
+            int index = key.GetHashCode() % buckets.Length;
             if (buckets[index] > -1)
                 return true;
             return false;
