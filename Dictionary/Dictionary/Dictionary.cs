@@ -10,25 +10,13 @@ namespace Hashtable
     class HashTable<TKey, TValue> : IDictionary<TKey, TValue>
     {
         public int countEntries = 0;
-        public int[] buckets = new int[10];
-        public HashTable()
+        public int[] buckets;
+        public HashTable(int capacity = 10)
         {
+            buckets = new int[capacity];
             for (int i = 0; i < buckets.Length; i++)
             {
                 buckets[i] = -1;
-            }
-        }
-        public struct Entry
-        {
-            public TKey key;
-            public TValue value;
-            public int next;
-
-            public Entry(TKey key, TValue value, int next)
-            {
-                this.key = key;
-                this.value = value;
-                this.next = next;
             }
         }
         public Entry[] entries = new Entry[10];
@@ -86,6 +74,8 @@ namespace Hashtable
 
         public void Add(TKey key, TValue value)
         {
+            if (ContainsKey(key))
+                throw new ArgumentException();
             int index = key.GetHashCode() % buckets.Length;
             if (buckets[index] >= 0)
             {
@@ -104,9 +94,13 @@ namespace Hashtable
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            int i = item.Key.GetHashCode();
-            if (item.Key.Equals(entries[i].key) && (item.Value.Equals(entries[i].value)))
-                return true;
+            int index = item.Key.GetHashCode() % buckets.Length;
+            if (buckets[index] > -1)
+            {
+                if (entries[buckets[index]].value.Equals(item.Value))
+                    return true;
+            }
+
             return false;
         }
 
@@ -114,7 +108,11 @@ namespace Hashtable
         {
             int index = key.GetHashCode() % buckets.Length;
             if (buckets[index] > -1)
-                return true;
+            {
+                if (entries[buckets[index]].key.Equals(key))
+                    return true;
+            }
+                
             return false;
         }
 
@@ -146,6 +144,20 @@ namespace Hashtable
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        public struct Entry
+        {
+            public TKey key;
+            public TValue value;
+            public int next;
+
+            public Entry(TKey key, TValue value, int next)
+            {
+                this.key = key;
+                this.value = value;
+                this.next = next;
+            }
         }
     }
 }

@@ -18,19 +18,27 @@ namespace Dictionary
         [Fact]
         public void NewElementsCanBeAdded()
         {
-            table.Add(1, "abecedar");
-            table.Add(2, "roman");
-            table.Add(3, "nuvela");
-            table.Add(1, "balada");
-            table.Add(2, "poezie");
-            table.Add(5, "drama");
-            table.Add(3, "thriller");
-            table.Add(3, "politist");
-            table.Add(4, "SF");
-            table.Add(5, "electronica");
+            table.Add(1, "Alpha");
+            table.Add(2, "Bravo");
+            table.Add(3, "Charlie");
+            table.Add(11, "Delta");
+            table.Add(22, "Echo");
+            table.Add(5, "Foxtrot");
+            table.Add(33, "Golf");
+            table.Add(23, "Hotel");
+            table.Add(4, "India");
+            table.Add(15, "Juliet");
             Assert.Equal(10, table.Count);
             Assert.True(table.ContainsKey(4));
             Assert.False(table.ContainsKey(8));
+        }
+        [Fact]
+        public void SameKey()
+        {
+            table.Add(4, "Alpha");
+            table.Add(2, "Bravo");
+            Assert.Throws<ArgumentException>(() => table.Add(4, "Charlie"));
+            Assert.Throws<ArgumentException>(() => table.Add(2, "Juliet"));
         }
     }
 }
